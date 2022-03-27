@@ -6,7 +6,7 @@ const Header = () => {
     <section className="header">
       <div className="header__banner"></div>
       <div className="header__bottom">
-        <Link className="header__logo" to="/">BrainFeed</Link>
+        <Link className="header__logo" to="/">Lost&FOUND</Link>
         <nav className="header__nav">
           <NavLink
             className="header__nav-link"
@@ -27,10 +27,10 @@ const Header = () => {
           <NavLink
             className="header__nav-link"
             activeClassName="header__nav-link--active"
-            to="/posts"
+            to="/dashboard"
             exact
           >
-            Posts
+            Dashboard
           </NavLink>
         </nav>
       </div>

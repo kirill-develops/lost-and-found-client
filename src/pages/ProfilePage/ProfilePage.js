@@ -39,8 +39,8 @@ class ProfilePage extends Component {
             isLoggedIn: false
           });
         } else {
-          console.log('Error authenticating', err, this.props);
-          this.props.history.push('/');
+          console.log('Error authenticating', err);
+          this.setState({ isAuthenticating: false })
         }
       });
   }
@@ -54,6 +54,7 @@ class ProfilePage extends Component {
     return (
       <section className="profile-page">
         <h1>Profile Page</h1>
+
         {/* If user is logged in, render their profile information */}
         {isLoggedIn ? (
           profileData && (
