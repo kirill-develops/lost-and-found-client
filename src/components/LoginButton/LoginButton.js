@@ -1,6 +1,6 @@
 import GoogleLogo from '../../assets/icons/google-logo-32px.svg';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5050";
 console.log(SERVER_URL);
 
 

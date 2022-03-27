@@ -39,7 +39,8 @@ class ProfilePage extends Component {
             isLoggedIn: false
           });
         } else {
-          console.log('Error authenticating', err);
+          console.log('Error authenticating', err, this.props);
+          this.props.history.push('/');
         }
       });
   }
