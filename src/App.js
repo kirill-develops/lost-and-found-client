@@ -1,9 +1,11 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import Header from './components/Header/Header';
 import HomePage from './pages/Homepage/Homepage';
 import SignupPage from './pages/SignupPage/SignupPage';
-import ProfilePage from './pages/ProfilePage/ProfilePage'
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 import Dashboard from './pages/Dashboard/Dashboard';
+import AuthFailPage from './pages/AuthFailPage/AuthFailPage';
 import './styles/App.scss';
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
           <Route path="/profile" component={ProfilePage} />
           <Route path="/" exact component={HomePage} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/auth-fail" component={AuthFailPage} />
         </Switch>
       </div>
     </BrowserRouter>
