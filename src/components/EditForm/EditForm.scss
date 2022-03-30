@@ -24,10 +24,21 @@
   &__form {}
 
   &__label {
-    display: block;
+    width: 50%;
+    display: inline-block;
+
+    &--address {
+      width: 100%;
+    }
   }
 
-  &__field {}
+  &__field {
+    width: 100%;
+
+    &--error {
+      border: 1px solid red;
+    }
+  }
 
   &__input-block {}
 

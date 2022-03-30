@@ -40,21 +40,29 @@ class EditForm extends Component {
   }
 
   handleSubmit = (e) => {
-    console.log("🚀 ~ file: EditForm.js ~ line 41 ~ EditForm ~ e", e.target.first_name)
-    const { first_name, last_name, address, city, province, phone, email, voluntreer } = e.target;
-    if (!first_name || !last_name || !address || !city || !province || !phone || !email || !voluntreer) {
+    e.preventDefault();
+    const { first_name, last_name, address, city, province, phone, email, volunteer } = e.target;
+
+    if (!first_name.value || !last_name.value || !city.value || !province.value || !phone.value || !email.value || !volunteer.value) {
       this.setState({ clicked: true })
     } else {
 
+
+      // todo create axios POST req
       axios
-        .post(`${SERVER_URL}/auth/profile`, {
-          withCredentials: true, body: {
-
-          }
-        })
+        .put(`${SERVER_URL}/auth/profile`,
+          {
+            first_name: first_name.value,
+            last_name: last_name.value,
+            address: address.value,
+            city: city.value,
+            province: province.value,
+            phone: phone.value,
+            email: email.value,
+            volunteer: volunteer.value,
+          },
+          { withCredentials: true })
     }
-
-    e.preventDefault();
   }
 
   render() {
@@ -67,36 +75,36 @@ class EditForm extends Component {
             onSubmit={this.handleSubmit}
             className='edit-form__form'>
             <label className='edit-form__label'>
-              FIRST NAME
+              FIRST NAME*
               <input
                 name='first_name'
                 defaultValue={this.state.first_name}
                 onChange={this.handleChange}
-                className='edit-form__field' />
+                className={`edit-form__field ${!this.state.first_name && this.state.clicked ? "edit-form__field--error" : ""}`} />
             </label>
             <label className='edit-form__label'>
-              LAST NAME
+              LAST NAME*
               <input
                 name='last_name'
                 defaultValue={this.state.last_name}
                 onChange={this.handleChange}
-                className='edit-form__field' />
+                className={`edit-form__field ${!this.state.last_name && this.state.clicked ? "edit-form__field--error" : ""}`} />
             </label>
-            <label className='edit-form__label'>
+            <label className='edit-form__label--address'>
               ADDRESS
               <input
                 name='address'
                 defaultValue={this.state.address}
                 onChange={this.handleChange}
-                className='edit-form__field' />
+                className={`edit-form__field ${!this.state.address && this.state.clicked ? "edit-form__field--error" : ""}`} />
             </label>
             <label className='edit-form__label'>
-              CITY
+              CITY*
               <input
                 name='city'
                 defaultValue={this.state.city}
                 onChange={this.handleChange}
-                className='edit-form__field' />
+                className={`edit-form__field ${!this.state.city && this.state.clicked ? "edit-form__field--error" : ""}`} />
             </label>
             <label className='edit-form__label'>
               PROVINCE
@@ -104,23 +112,23 @@ class EditForm extends Component {
                 name='province'
                 defaultValue={this.state.province}
                 onChange={this.handleChange}
-                className='edit-form__field' />
+                className={`edit-form__field ${!this.state.province && this.state.clicked ? "edit-form__field--error" : ""}`} />
             </label>
             <label className='edit-form__label'>
-              PHONE
+              PHONE*
               <input
                 name='phone'
                 defaultValue={this.state.phone}
                 onChange={this.handleChange}
-                className='edit-form__field' />
+                className={`edit-form__field ${!this.state.phone && this.state.clicked ? "edit-form__field--error" : ""}`} />
             </label>
             <label className='edit-form__label'>
-              EMAIL
+              EMAIL*
               <input
                 name='email'
                 defaultValue={this.state.email}
                 onChange={this.handleChange}
-                className='edit-form__field' />
+                className={`edit-form__field ${!this.state.email ? "edit-form__field--error" : ""}`} />
             </label>
             <div className='edit-form__input-block'>
               <h3 className='edit-form__label'>

@@ -11,7 +11,7 @@ class CreatePost extends Component {
   }
 
   isProfileComplete = (user) => {
-    if (!user.address || !city || !phone || !province || !volunteer) {
+    if (!user.city || !user.phone || !user.province || !user.volunteer) {
       return false;
     }
     return true;
@@ -27,7 +27,7 @@ class CreatePost extends Component {
           this.setState({
             isLoggedIn: true
           });
-        } else if (res.data && !this.isProfileComplete(res.data)) {
+        } else if (!this.isProfileComplete(res.data)) {
           this.props.history.push('/profile');
         }
       });

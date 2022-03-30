@@ -36,7 +36,7 @@ class ProfilePage extends Component {
 
         const { address, city, phone, province, volunteer, email, first_name, last_name } = this.state.profileData;
 
-        if (!address || !city || !email || !phone || !province || !volunteer || first_name || last_name) {
+        if (!city || !email || !phone || !province || !volunteer || !first_name || !last_name) {
           this.setState({
             isFormFilled: false
           })
