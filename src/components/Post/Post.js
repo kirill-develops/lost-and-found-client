@@ -1,3 +1,5 @@
+import React from "react";
+
 const Post = ({ post }) => {
   const formatTimestamp = timestamp => {
     // Return the post timestamp formatted as 'month/day/year, hr:min:sec'

@@ -1,7 +1,9 @@
-import { Component } from 'react';
+/* eslint-disable react/prop-types */
+import React, { Component } from 'react';
 import axios from 'axios';
 import LoginButton from '../../components/LoginButton/LoginButton';
 import LogoutButton from '../../components/LogoutButton/LogoutButton';
+import EditForm from '../../components/EditForm/EditForm';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -13,7 +15,8 @@ class ProfilePage extends Component {
   state = {
     isAuthenticating: true,
     isLoggedIn: false,
-    profileData: null
+    profileData: null,
+    isFormFilled: false
   }
 
   componentDidMount() {
@@ -27,10 +30,19 @@ class ProfilePage extends Component {
         this.setState({
           isAuthenticating: false,
           isLoggedIn: true,
-          profileData: res.data
+          profileData: res.data,
+          isFormFilled: true
         })
+
+        const { address, city, phone, province, volunteer, email, first_name, last_name } = this.state.profileData;
+
+        if (!address || !city || !email || !phone || !province || !volunteer || first_name || last_name) {
+          this.setState({
+            isFormFilled: false
+          })
+        };
       })
-      .catch((err) => {
+      .catch(err => {
         // If we are getting back 401 (Unauthorized) back from the server, means we need to log in
         if (err.response.status === 401) {
           // Update the state: done authenticating, user is not logged in
@@ -45,8 +57,13 @@ class ProfilePage extends Component {
       });
   }
 
+  formatDate = (date) => {
+    // Return date formatted as 'month/day/year'
+    return (new Date(date)).toLocaleDateString('en-US');
+  }
+
   render() {
-    const { isAuthenticating, isLoggedIn, profileData } = this.state;
+    const { isAuthenticating, isLoggedIn, profileData, isFormFilled } = this.state;
 
     // While the component is authenticating, do not render anything (alternatively, this can be a preloader)
     if (isAuthenticating) return null;
@@ -57,21 +74,28 @@ class ProfilePage extends Component {
 
         {/* If user is logged in, render their profile information */}
         {isLoggedIn ? (
-          profileData && (
-            <>
-              <h2>Hello, {profileData.username}</h2>
-              <h3>Registered since: {this.formatDate(profileData.updated_at)}</h3>
-              <img
-                className="profile-page__avatar"
-                src={profileData.avatar_url}
-                alt={`${profileData.username} avatar`}
-              />
-              <div className="profile-page__logout-wrapper">
-                {/* Render a logout button */}
-                <LogoutButton />
-              </div>
-            </>
-          )
+          isFormFilled ? (
+            profileData && (
+              <>
+                <h2>Hello, {profileData.username}</h2>
+                <h3>Registered since: {this.formatDate(profileData.updated_at)}</h3>
+                <img
+                  className="profile-page__avatar"
+                  src={profileData.avatar_url}
+                  alt={`${profileData.username} avatar`}
+                />
+                <div className="profile-page__logout-wrapper">
+                  {/* Render a logout button */}
+                  <LogoutButton />
+                </div>
+              </>
+            )
+
+          ) : (
+            // If user's form is not filled out, render EditForm Component
+            <EditForm
+              profileData={profileData}
+            />)
         ) : (
           // If user is not logged in, render a login button
           <>
@@ -81,11 +105,6 @@ class ProfilePage extends Component {
         )}
       </section>
     );
-  }
-
-  formatDate = (date) => {
-    // Return date formatted as 'month/day/year'
-    return (new Date(date)).toLocaleDateString('en-US');
   }
 }
 

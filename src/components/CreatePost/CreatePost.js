@@ -1,4 +1,5 @@
-import { Component } from 'react';
+/* eslint-disable react/prop-types */
+import React, { Component } from 'react';
 import axios from 'axios';
 import LoginButton from '../LoginButton/LoginButton';
 
@@ -9,15 +10,25 @@ class CreatePost extends Component {
     isLoggedIn: false
   }
 
+  isProfileComplete = (user) => {
+    if (!user.address || !city || !phone || !province || !volunteer) {
+      return false;
+    }
+    return true;
+  }
+
   componentDidMount() {
     // Check if user is currently logged in, so we can display a form or login button conditionally
     axios
       .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
       .then(res => {
-        if (res.data) {
+        if (res.data && this.isProfileComplete(res.data)) {
+          console.log(res.data);
           this.setState({
             isLoggedIn: true
           });
+        } else if (res.data && !this.isProfileComplete(res.data)) {
+          this.props.history.push('/profile');
         }
       });
   }
@@ -32,15 +43,34 @@ class CreatePost extends Component {
               <h3>Create New Post</h3>
               <div className="post-form__fields">
                 <div className="post-form__field">
-                  <label htmlFor="postTitle" className="post-form__label">Post Title</label>
-                  <input type="text" name="postTitle" id="postTitle" maxLength="75" required />
+                  <label
+                    htmlFor="postTitle"
+                    className="post-form__label">
+                    Post Title</label>
+                  <input
+                    type="text"
+                    name="postTitle"
+                    id="postTitle"
+                    maxLength="75"
+                    required
+                  />
                 </div>
                 <div className="post-form__field">
-                  <label htmlFor="postContent" className="post-form__label">Post Content</label>
-                  <textarea type="text" name="postContent" id="postContent" required />
+                  <label
+                    htmlFor="postContent"
+                    className="post-form__label">
+                    Post Content</label>
+                  <textarea
+                    type="text"
+                    name="postContent"
+                    id="postContent"
+                    required
+                  />
                 </div>
               </div>
-              <button type="submit" className="post-form__submit">🖋️&nbsp;&nbsp;Submit</button>
+              <button
+                type="submit"
+                className="post-form__submit">🖋️&nbsp;&nbsp;Submit</button>
             </form>
           ) : (
             // If user is not logged in, render login button
@@ -62,7 +92,7 @@ class CreatePost extends Component {
     // Post to API (remember to use `withCredentials`)
     axios
       .post(
-        `${SERVER_URL}/posts`,
+        `${SERVER_URL}/post`,
         {
           title: postTitle.value,
           content: postContent.value

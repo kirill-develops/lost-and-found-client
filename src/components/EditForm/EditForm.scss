@@ -1,0 +1,37 @@
+.edit-form {
+  background-color: #0000007c;
+  backdrop-filter: blur(4px);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &-block {
+    width: 80%;
+    box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    position: absolute;
+    background-color: white;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1.5rem;
+  }
+
+  &__title {}
+
+  &__form {}
+
+  &__label {
+    display: block;
+  }
+
+  &__field {}
+
+  &__input-block {}
+
+  &__radio {}
+
+  &__button {}
+}

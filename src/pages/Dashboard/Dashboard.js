@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import Post from '../../components/Post/Post';
 import CreatePost from '../../components/CreatePost/CreatePost';
@@ -12,23 +12,6 @@ class PostsPage extends Component {
 
   componentDidMount() {
     this.fetchPosts();
-  }
-
-  render() {
-    return (
-      <section className="posts-page">
-        <h1>Posts</h1>
-
-        {/*
-          Create new post component.
-          Note the passed prop that allows it to re-fetch the posts after new one is created
-        */}
-        <CreatePost onPostCreate={this.fetchPosts} />
-
-        {/* Render a list of individual Post components */}
-        {this.state.posts.map(post => <Post key={post.post_id} post={post} />)}
-      </section>
-    );
   }
 
   // Fetch posts from the DB
@@ -45,6 +28,26 @@ class PostsPage extends Component {
       .catch(err => {
         console.log('Error fetching posts:', err);
       });
+  }
+
+  render() {
+    return (
+      <section className="posts-page">
+        <h1>Posts</h1>
+
+        {/*
+          Create new post component.
+          Note the passed prop that allows it to re-fetch the posts after new one is created
+        */}
+        <CreatePost
+          onPostCreate={this.fetchPosts}
+          // eslint-disable-next-line react/prop-types
+          history={this.props.history} />
+
+        {/* Render a list of individual Post components */}
+        {this.state.posts.map(post => <Post key={post.post_id} post={post} />)}
+      </section>
+    );
   }
 }
 
