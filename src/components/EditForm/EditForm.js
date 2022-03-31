@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import axios from 'axios';
 import React, { Component } from 'react';
+import axios from 'axios';
 import './EditForm.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -24,7 +24,7 @@ class EditForm extends Component {
   };
 
   componentDidMount() {
-    const { address, city, email, first_name, last_name, phone, province, volunteer } = this.props.profileData;
+    const { address, city, first_name, last_name, phone, province, volunteer } = this.props.profileData;
 
     this.setState({
       first_name: first_name,
@@ -33,7 +33,6 @@ class EditForm extends Component {
       city: city,
       province: province,
       phone: phone,
-      email: email,
       volunteer: volunteer || 'false',
       clicked: false
     })
@@ -41,14 +40,14 @@ class EditForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { first_name, last_name, address, city, province, phone, email, volunteer } = e.target;
+    const { first_name, last_name, address, city, province, phone, volunteer } = e.target;
 
-    if (!first_name.value || !last_name.value || !city.value || !province.value || !phone.value || !email.value || !volunteer.value) {
+    if (!first_name.value || !last_name.value || !city.value || !province.value || !phone.value || !volunteer.value) {
       this.setState({ clicked: true })
     } else {
 
 
-      // todo create axios POST req
+      // // todo create axios POST req
       axios
         .put(`${SERVER_URL}/auth/profile`,
           {
@@ -58,13 +57,17 @@ class EditForm extends Component {
             city: city.value,
             province: province.value,
             phone: phone.value,
-            email: email.value,
             volunteer: volunteer.value,
           },
           { withCredentials: true })
+        .then((_res) => {
+          this.props.handleFormSubmit();
+        })
     }
   }
 
+
+  // todo create form validation messages on error state
   render() {
 
     return (
@@ -121,14 +124,6 @@ class EditForm extends Component {
                 defaultValue={this.state.phone}
                 onChange={this.handleChange}
                 className={`edit-form__field ${!this.state.phone && this.state.clicked ? "edit-form__field--error" : ""}`} />
-            </label>
-            <label className='edit-form__label'>
-              EMAIL*
-              <input
-                name='email'
-                defaultValue={this.state.email}
-                onChange={this.handleChange}
-                className={`edit-form__field ${!this.state.email ? "edit-form__field--error" : ""}`} />
             </label>
             <div className='edit-form__input-block'>
               <h3 className='edit-form__label'>
