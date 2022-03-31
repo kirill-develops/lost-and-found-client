@@ -1,4 +1,7 @@
+/* eslint-disable react/prop-types */
 import React from "react";
+import { Link } from 'react-router-dom';
+import './Post.scss';
 
 const Post = ({ post }) => {
   const formatTimestamp = timestamp => {
@@ -8,7 +11,9 @@ const Post = ({ post }) => {
 
   return (
     <article className="post">
-      <h2 className="post__title">{post.title}</h2>
+      <Link to={`/post/${post.post_id}`}>
+        <h2 className="post__title">{post.title}</h2>
+      </Link>
       <div className="post__details">
         <div className="post__author">
           <img

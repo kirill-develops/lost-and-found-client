@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import AuthFailPage from './pages/AuthFailPage/AuthFailPage';
 import './styles/App.scss';
+import PostDetails from './pages/PostDetails/PostDetails';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/profile" component={ProfilePage} />
           <Route path="/" exact component={HomePage} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/Post/:id" component={PostDetails} />
           <Route path="/auth-fail" component={AuthFailPage} />
         </Switch>
       </div>
