@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import axios from 'axios';
+import apiUtils from '../../utils/apiUtils';
 import Post from '../../components/Post/Post';
 import CreatePost from '../../components/CreatePost/CreatePost';
-import './Dashboard.scss'
+import './Dashboard.scss';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 class Dashboard extends Component {
   state = {
@@ -21,8 +20,8 @@ class Dashboard extends Component {
   // Fetch posts from the DB
   fetchPosts = () => {
     // Make sure to user `withCredentials` for a GET request, to pass the cookie to the server
-    axios
-      .get(`${SERVER_URL}/post`, { withCredentials: true })
+    apiUtils
+      .getAllPosts()
       .then(posts => {
         // Update state with fetched posts
         this.setState({
@@ -31,7 +30,7 @@ class Dashboard extends Component {
           seeking: posts.data.filter(post => post.offer === 0),
         });
 
-        axios.get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
+        apiUtils.getProfile()
           .then(user => {
             user.data.volunteer.toLowerCase() === 'true' ? this.setState({ volunteer: true }) : this.setState({ volunteer: false });
           })
@@ -60,8 +59,8 @@ class Dashboard extends Component {
 
         <div className='list-block'>
           <div className={` ${this.state.volunteer ? 'second' : 'first'}`}>
-            <h3 className=''>Offers</h3>
-            {/* Render a list of Post offers components */}
+            <h3 className=''>Currently Available:</h3>
+            {/* Render a list of offer's Post components specifically offering assistance */}
             {this.state.offers.map(post =>
               <Post
                 key={post.post_id}
@@ -69,8 +68,8 @@ class Dashboard extends Component {
               />)}
           </div>
           <div className={` ${this.state.volunteer ? 'first' : 'second'}`}>
-            <h3 className=''>Seeking</h3>
-            {/* Render a list of Post offers components */}
+            <h3 className=''>Seeking A Hand:</h3>
+            {/* Render a list of Post components specifically seeking assistance */}
             {this.state.seeking.map(post =>
               <Post
                 key={post.post_id}

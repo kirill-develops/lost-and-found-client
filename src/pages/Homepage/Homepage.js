@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-import axios from "axios";
 import React, { Component } from "react";
+import apiUtils from "../../utils/apiUtils";
 import LoginButton from "../../components/LoginButton/LoginButton";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
-
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 
 class HomePage extends Component {
@@ -14,12 +12,9 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get(`${SERVER_URL}/auth/profile`,
-        { withCredentials: true })
+    apiUtils
+      .getProfile()
       .then(_res => {
-        console.log("🚀 ~ file: Homepage.js ~ line 18 ~ HomePage ~ componentDidMount ~ _res", _res)
-
         this.props.history.push('/dashboard');
       })
       .catch(_err => {

@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import axios from 'axios';
 import './EditForm.scss';
-
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+import apiUtils from '../../utils/apiUtils';
 
 class EditForm extends Component {
   state = {
@@ -16,12 +14,6 @@ class EditForm extends Component {
     email: "",
     volunteer: "false",
   }
-  // Create a change handler for all inputs
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
 
   componentDidMount() {
     const { address, city, first_name, last_name, phone, province, volunteer } = this.props.profileData;
@@ -38,6 +30,14 @@ class EditForm extends Component {
     })
   }
 
+  // Create a change handler for all inputs
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+  // Handle the submission of the form by validating content and then doing an
+  // api PUT req
   handleSubmit = (e) => {
     e.preventDefault();
     const { first_name, last_name, address, city, province, phone, volunteer } = e.target;
@@ -46,20 +46,17 @@ class EditForm extends Component {
       this.setState({ clicked: true })
     } else {
 
+      const profileObj = {
+        first_name: first_name.value,
+        last_name: last_name.value,
+        address: address.value,
+        city: city.value,
+        province: province.value,
+        phone: phone.value,
+        volunteer: volunteer.value,
+      }
 
-      // // todo create axios POST req
-      axios
-        .put(`${SERVER_URL}/auth/profile`,
-          {
-            first_name: first_name.value,
-            last_name: last_name.value,
-            address: address.value,
-            city: city.value,
-            province: province.value,
-            phone: phone.value,
-            volunteer: volunteer.value,
-          },
-          { withCredentials: true })
+      apiUtils.editProfile(profileObj)
         .then((_res) => {
           this.props.handleFormSubmit();
         })

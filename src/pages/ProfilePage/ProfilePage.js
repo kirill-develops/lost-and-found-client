@@ -1,12 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import axios from 'axios';
+import apiUtils from '../../utils/apiUtils';
 import LoginButton from '../../components/LoginButton/LoginButton';
 import LogoutButton from '../../components/LogoutButton/LogoutButton';
 import EditForm from '../../components/EditForm/EditForm';
 import './ProfilePage.scss';
-
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 class ProfilePage extends Component {
   // Keep track of four things in state: 
@@ -29,9 +27,7 @@ class ProfilePage extends Component {
     // Send a GET request for profile information
     // If user is currently logged in, we will get profile data, if they are not logged in, we will get 401 (Unauthorized) that we can handle in `.catch`
     // Note that we need to use `withCredentials` in order to pass the cookie to a server
-    axios
-      .get(`${SERVER_URL}/auth/profile`,
-        { withCredentials: true })
+    apiUtils.getProfile()
       .then(res => {
         // Update the state: done authenticating, user is logged in, set the profile data
         this.setState({
@@ -71,8 +67,6 @@ class ProfilePage extends Component {
 
   render() {
     const { isAuthenticating, isLoggedIn, profileData, isFormFilled } = this.state;
-    console.log("🚀 ~ file: ProfilePage.js ~ line 72 ~ ProfilePage ~ render ~ profileData", profileData)
-
 
     // While the component is authenticating, do not render anything (alternatively, this can be a preloader)
     if (isAuthenticating) return null;

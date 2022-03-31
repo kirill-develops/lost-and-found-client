@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import axios from 'axios';
+import apiUtils from '../../utils/apiUtils';
 import LoginButton from '../LoginButton/LoginButton';
 import './CreatePost.scss';
-
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 class CreatePost extends Component {
   state = {
@@ -20,6 +18,8 @@ class CreatePost extends Component {
     });
   };
 
+  // check to see if the user has previously logged in by confirming they have
+  // the mandatory form fields filled out
   isProfileComplete = (user) => {
     if (!user.city || !user.phone || !user.province || !user.volunteer) {
       return false;
@@ -28,24 +28,23 @@ class CreatePost extends Component {
   }
 
   handleFormSubmit = e => {
+    // todo form validation
+    // prevent page reload
     e.preventDefault();
+    // Deconstruct Event Target's by attribute name
     const { title, description, category } = e.target;
-
-    // Post to API (remember to use `withCredentials`)
-    axios
-      .post(
-        `${SERVER_URL}/post`,
-        {
-          title: title.value,
-          description: description.value,
-          category: category.value,
-          offer: this.state.volunteer,
-        },
-        { withCredentials: true }
-      )
+    // Create a postObj with event target value's from each field
+    const postObj = {
+      title: title.value,
+      description: description.value,
+      category: category.value,
+      offer: this.state.volunteer,
+    }
+    apiUtils.addPost(postObj)
       .then(() => {
-        // Re-fetch the posts
+        // Re-fetch all posts
         this.props.onPostCreate();
+        // reset the form values
         e.target.reset();
       })
       .catch(err => {
@@ -55,9 +54,10 @@ class CreatePost extends Component {
 
   componentDidMount() {
     // Check if user is currently logged in, so we can display a form or login button conditionally
-    axios
-      .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
+    apiUtils
+      .getProfile()
       .then(res => {
+        // checks to see if user is a volunteer or not and change state accordingly
         if (res.data && this.isProfileComplete(res.data)) {
           res.data.volunteer.toLowerCase() === 'true' ?
             this.setState({
@@ -68,8 +68,9 @@ class CreatePost extends Component {
               isLoggedIn: true,
               volunteer: false
             })
-
-        } else if (!this.isProfileComplete(res.data)) {
+        }
+        // if the user's profile is incomplete, send them to the profile page
+        else if (!this.isProfileComplete(res.data)) {
           this.props.history.push('/profile');
         }
       });
@@ -82,6 +83,7 @@ class CreatePost extends Component {
           this.state.isLoggedIn ? (
             // If user is logged in, render form for creating a post
             <form className="post-form" onSubmit={this.handleFormSubmit}>
+              {/* check to see if user is volunteer and produce proper heading  */}
               {this.state.volunteer ? <h3>Create New Offer</h3> : <h3>What Can We Connect You With?</h3>}
               <div className="post-form__fields">
                 <div className="post-form__field">
