@@ -1,0 +1,16 @@
+
+@mixin button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 500;
+
+  >svg {
+    width: 1.5rem;
+  }
+}

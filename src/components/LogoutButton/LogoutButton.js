@@ -1,4 +1,5 @@
 import React from 'react';
+import './LogoutButton.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 

@@ -1,0 +1,17 @@
+.list-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.first {
+  order: 1
+}
+
+.second {
+  order: 2;
+}
+
+.posts-page {
+  position: relative;
+  padding-bottom: 175px;
+}

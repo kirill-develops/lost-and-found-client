@@ -1,0 +1,10 @@
+@use '../../styles/partials/mixins'as*;
+
+.login-button {
+  @include button;
+  background-color: #F1F8F3;
+
+  &:hover {
+    background-color: #E4F1E8;
+  }
+}

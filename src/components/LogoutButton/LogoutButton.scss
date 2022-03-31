@@ -1,0 +1,10 @@
+@use '../../styles/partials/mixins' as *;
+
+.logout-button {
+  @include button;
+  background-color: #FCF2EE;
+
+  &:hover {
+    background-color: #F9E4DC;
+  }
+}

@@ -1,8 +1,8 @@
 import GoogleLogo from '../../assets/icons/google-logo-32px.svg';
 import React from 'react';
+import './LoginButton.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5050";
-console.log(SERVER_URL);
 
 
 const LoginButton = () => {
