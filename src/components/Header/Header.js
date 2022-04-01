@@ -1,15 +1,30 @@
 // NavLink component allows us to define an active CSS class for the page we are currently on
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import Logo from '../../assets/images/site-logo.svg';
+import Hamburger from '../../assets/icons/menu-outline.svg'
 import './Header.scss';
+
+
 
 const Header = () => {
   return (
     <section className="header">
-      <div className="header__banner"></div>
-      <div className="header__bottom">
-        <Link className="header__logo" to="/">Lost&FOUND</Link>
+      <div className="header__block">
+        <Link className="header__link" to="/">
+          <img src={Logo}
+            alt='Lost & FOUND logo'
+            className='header__logo' />
+        </Link>
         <nav className="header__nav">
+          <div
+            onClick=''
+            className='header__menu-btn'
+          >
+            <img src={Hamburger} alt='menu icon' className="header__icon" />
+            Menu
+          </div>
+          {/*           
           <NavLink
             to="/"
             exact
@@ -33,7 +48,7 @@ const Header = () => {
             activeClassName="header__nav-link--active"
           >
             Dashboard
-          </NavLink>
+          </NavLink> */}
         </nav>
       </div>
     </section>
