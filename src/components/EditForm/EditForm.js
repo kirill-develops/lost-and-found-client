@@ -47,13 +47,13 @@ class EditForm extends Component {
     } else {
 
       const profileObj = {
-        first_name: first_name.value,
-        last_name: last_name.value,
-        address: address.value,
-        city: city.value,
-        province: province.value,
-        phone: phone.value,
-        volunteer: volunteer.value,
+        'first_name': first_name.value,
+        'last_name': last_name.value,
+        'address': address.value,
+        'city': city.value,
+        'province': province.value,
+        'phone': phone.value,
+        'volunteer': volunteer.value,
       }
 
       apiUtils.editProfile(profileObj)

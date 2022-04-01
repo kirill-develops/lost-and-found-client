@@ -123,7 +123,7 @@ class CreatePost extends Component {
                     <option>Please Select</option>
                     <option value='housing'>Housing</option>
                     <option value='jobs'>Jobs</option>
-                    <option value='employment Services'>Employment Services</option>
+                    <option value='employment_services'>Employment Services</option>
                     <option value='on-boarding'>On-boarding</option>
                     <option value='translations'>Translations</option>
                     <option value='goods'>Free Goods</option>

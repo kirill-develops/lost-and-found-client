@@ -32,10 +32,11 @@ class Dashboard extends Component {
 
         apiUtils.getProfile()
           .then(user => {
+            console.log("🚀 ~ file: Dashboard.js ~ line 35 ~ Dashboard ~ user", user)
             user.data.volunteer.toLowerCase() === 'true' ? this.setState({ volunteer: true }) : this.setState({ volunteer: false });
           })
           .catch(err => {
-            console.log('Error fetching posts:', err);
+            console.log('Error fetching user:', err);
           })
       })
       .catch(err => {
