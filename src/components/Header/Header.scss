@@ -31,28 +31,12 @@
     filter: invert(1);
   }
 
-  &__menu-btn {
+  &__menu-block {
+    display: inline-block;
+    position: relative;
+    width: 4.25rem;
     height: $nav-component-height;
-    padding: $nav-padding;
     border: 2px solid white;
     border-radius: 3px;
-    color: white;
-    display: flex;
-    align-items: center;
-    width: fit-content;
-  }
-
-  &__nav {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  &__nav-link--active {
-
-    &:link,
-    &:visited {
-      color: #E49273;
-      text-decoration: none;
-    }
   }
 }

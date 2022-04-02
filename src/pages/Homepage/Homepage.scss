@@ -1,0 +1,13 @@
+.homepage {
+  &__header {
+    background-color: #15a3dd;
+    height: 197px;
+    margin: 0rem 0 1rem;
+    background-image: url(https://files.ontario.ca/co-homepage-supergraphic.svg);
+    background-position-x: calc(34vw + 56%);
+    background-repeat: no-repeat;
+    padding: 2rem;
+  }
+
+  &__header-img {}
+}

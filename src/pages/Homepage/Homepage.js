@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import apiUtils from "../../utils/apiUtils";
 import LoginButton from "../../components/LoginButton/LoginButton";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
-
+import './Homepage.scss';
 
 class HomePage extends Component {
   state = {
@@ -28,10 +28,13 @@ class HomePage extends Component {
 
     return (
       <section>
-        <h1>Welcome to Lost&FOUND!</h1>
-        <p>Your go to source for all things dev related.</p>
-        <LoginButton />
-        <LogoutButton />
+        <div className="homepage__header">
+
+          <h1>Lost & FOUND</h1>
+          <h2>Global support, locally sourced</h2>
+          <LoginButton />
+          <LogoutButton />
+        </div>
       </section>
     );
   }
