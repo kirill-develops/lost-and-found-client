@@ -36,6 +36,8 @@ class Header extends Component {
           <nav className="header__menu-block">
             <Menu
               isOpen={this.state.menu}
+              over
+              disableOverlayClick={true}
               onStateChange={(state) => this.handleStateChange(state)}
               outerContainerId='menu-outer'
               pageWrapId='menu-wrapper'

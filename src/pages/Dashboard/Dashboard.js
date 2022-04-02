@@ -47,8 +47,19 @@ class Dashboard extends Component {
   render() {
     return (
       <section className="dashboard">
+        <div className="dashboard__nav">
+          <ul className="dashboard__nav-block">
+            <li className='dashboard__nav-label'>Housing</li>
+            <li className='dashboard__nav-label'>Jobs</li>
+            <li className='dashboard__nav-label'>Employment Services</li>
+            <li className='dashboard__nav-label'>On-Boarding</li>
+            <li className='dashboard__nav-label'>Translations</li>
+            <li className='dashboard__nav-label'>Free Goods</li>
+            <li className='dashboard__nav-label'>Transportation</li>
+          </ul>
+        </div>
         <div className="dashboard__block">
-          <h1>Posts</h1>
+          <h1 className='dashboard__title'>Posts</h1>
 
           {/*
           Create new post component.

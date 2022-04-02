@@ -25,6 +25,25 @@
     font-family: open sans;
   }
 
+  &__swiper {
+    height: 56vh;
+    display: flex;
+    align-items: center;
+  }
+
+  &__swiper-inner-block {
+    border-radius: 3px;
+    padding: 1rem;
+    border: 1px solid #b0acac;
+    background-color: #F2F4F3;
+  }
+
+  &__swiper-block {
+    margin: 0 auto;
+    max-width: $root-max-width;
+    padding: 2rem 2rem 0;
+  }
+
   &__intro {
     @include rootContainerInner;
     padding: 2rem $root-padding;
@@ -34,6 +53,109 @@
       padding: $root-padding $component-padding;
       border-left: 3px solid #156d96;
       border-radius: 1px;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &--left {
+        width: 55%;
+        padding-right: $component-padding;
+      }
+
+      &--right {
+        width: 45%;
+        padding: $root-padding 0;
+        margin: 0;
+
+        >p {
+          padding: $component-padding;
+          border-left: 3px solid #156d96;
+          border-top-left-radius: 2px;
+          border-bottom-left-radius: 2px;
+          background-color: #dfe1f137;
+        }
+      }
+    }
+  }
+}
+
+.swiper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  &--slide4 {
+    @extend .swiper;
+    justify-content: center;
+  }
+
+  &__title {
+    font-family: Raleway;
+    font-size: 2rem;
+    font-weight: 700;
+
+    &--slide2 {
+      @extend .swiper__title;
+      color: #E0D8DE;
+    }
+
+    &--slide4 {
+      @extend .swiper__title;
+      width: 45%;
+      color: #0A0908;
+      text-align: center;
+    }
+  }
+
+  &__block {
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--slide1 {
+      @extend .swiper__block;
+      background-color: #F2F4F3;
+      padding: 3rem;
+    }
+
+    &--slide2 {
+      @extend .swiper__block;
+      background-color: #1F01B9;
+    }
+
+    &--slide4 {
+      @extend .swiper__block;
+      background-image: url('../../assets/images/big_hug.jpeg');
+      padding: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      justify-content: center;
+
+      &-overlay {
+        height: 100%;
+        width: 100%;
+        background-color: #ffffff96;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  &__img {
+    width: 65%;
+    height: 100%;
+    object-fit: cover;
+
+    &--logo {
+      padding: 25% 0;
+      border-bottom: 4px solid #ab6612;
     }
   }
 }

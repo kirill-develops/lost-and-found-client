@@ -1,5 +1,5 @@
 /* eslint-disable object-curly-spacing */
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React from 'react';
 
 import Header from './components/Header/Header';
@@ -20,7 +20,6 @@ function App() {
         <Header />
         <div className="menu-wrapper" id='menu-wrapper'>
           <Switch >
-            {/* <Route path="/signup" component={SignupPage} /> */}
             <Route path="/profile" component={ProfilePage} />
             <Route path="/" exact component={HomePage} />
             <Route path="/dashboard" component={Dashboard} />

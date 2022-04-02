@@ -24,6 +24,7 @@ class PostDetails extends Component {
     apiUtils
       .getPostById(this.props.match.params.id)
       .then(post => {
+        console.log(post);
         // Update state with fetched post data
         this.setState({
           active: post.data.active,

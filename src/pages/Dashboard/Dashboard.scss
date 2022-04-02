@@ -17,4 +17,44 @@
 .dashboard {
   @include rootContainer;
   padding: 0 $root-padding;
+
+  &__nav {
+    background-color: #F2F4F3;
+    margin-left: -$root-padding;
+    margin-right: -$root-padding;
+    padding: $root-padding 0;
+    border-bottom: 2px solid #9C3848;
+    margin-bottom: 3rem;
+  }
+
+  &__nav-block {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__nav-label {
+    display: inline-block;
+    padding: 0 $component-padding;
+    text-align: center;
+    font-family: Raleway;
+    font-weight: 500;
+
+    &:hover {
+      color: #9C3848;
+      cursor: pointer;
+    }
+  }
+
+  &__title {
+    background-color: #22333B;
+    color: white;
+    padding-top: $component-padding;
+    padding-left: $component-padding;
+    padding-bottom: 0.5rem;
+    border-radius: 1px;
+  }
 }

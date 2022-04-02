@@ -19,6 +19,7 @@ code {
 *,
 *::before,
 *::after {
+  // color: #0A0908;
   text-rendering: optimizeLegibility;
   line-height: 1.4;
   box-sizing: border-box;
@@ -32,12 +33,12 @@ code {
 
 a:link,
 a:visited {
-  color: #227396;
+  color: #6D213C;
 }
 
 a:hover,
 a:active {
-  color: #2A8CB7;
+  color: #3B413C;
 }
 
 h1 {
@@ -106,7 +107,7 @@ textarea {
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #bdc3c7;
+  background: #091c29;
 
   /* Position and sizing of clickable cross button */
   &-button {
@@ -118,7 +119,7 @@ textarea {
 
 /* General sidebar styles */
 .bm-menu {
-  background: #2a2d37;
+  background: #C4CBCA;
   padding: 2.5rem 1.5rem 0;
   font-size: 1.15rem;
 
@@ -141,6 +142,7 @@ textarea {
 /* Individual item */
 .bm-item {
   display: inline-block;
+  margin: 1rem 0;
 
   /* Wrapper for item list */
   &-list {
