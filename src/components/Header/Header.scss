@@ -4,7 +4,6 @@
 .header {
   height: $nav-height;
   padding: $nav-padding $nav-padding;
-  border-bottom: 2px solid #E49273;
   background-color: black;
   display: flex;
   align-items: center;
@@ -39,5 +38,9 @@
     height: $nav-component-height;
     border: 2px solid white;
     border-radius: 3px;
+  }
+
+  &__menu-item {
+    text-decoration: none;
   }
 }

@@ -1,4 +1,8 @@
+@use '../../styles/partials/variables'as*;
+
 .profile-page {
+  min-height: $root-min-height;
+
   &__avatar {
     width: 12rem;
     padding: 0.5rem;

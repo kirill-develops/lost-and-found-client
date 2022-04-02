@@ -1,13 +1,39 @@
+@use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/variables'as*;
+
 .homepage {
+  min-height: $root-min-height;
+
   &__header {
     background-color: #15a3dd;
-    height: 197px;
-    margin: 0rem 0 1rem;
+    min-height: min-content;
+    margin: 0;
     background-image: url(https://files.ontario.ca/co-homepage-supergraphic.svg);
     background-position-x: calc(34vw + 56%);
     background-repeat: no-repeat;
-    padding: 2rem;
+    padding: 2rem $component-padding;
+
+
+    &-block {
+      padding: 0 $root-padding;
+      max-width: $root-max-width;
+      margin: 0 auto;
+    }
   }
 
-  &__header-img {}
+  &__subheader {
+    font-family: open sans;
+  }
+
+  &__intro {
+    @include rootContainerInner;
+    padding: 2rem $root-padding;
+
+    &-block {
+      background-color: #dcedf2;
+      padding: $root-padding $component-padding;
+      border-left: 3px solid #156d96;
+      border-radius: 1px;
+    }
+  }
 }

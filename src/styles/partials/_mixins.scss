@@ -25,3 +25,13 @@
     margin: 0 auto;
   }
 }
+
+@mixin rootContainerInner {
+  padding-left: $root-padding;
+  padding-right: $root-padding;
+
+  &-block {
+    max-width: $root-max-width;
+    margin: 0 auto;
+  }
+}

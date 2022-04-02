@@ -18,7 +18,7 @@ function App() {
     <BrowserRouter >
       <div className="app" id='menu-outer'>
         <Header />
-        <div id='menu-wrapper'>
+        <div className="menu-wrapper" id='menu-wrapper'>
           <Switch >
             {/* <Route path="/signup" component={SignupPage} /> */}
             <Route path="/profile" component={ProfilePage} />

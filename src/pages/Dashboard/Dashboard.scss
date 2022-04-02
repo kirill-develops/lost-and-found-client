@@ -16,6 +16,5 @@
 
 .dashboard {
   @include rootContainer;
-  position: relative;
   padding: 0 $root-padding;
 }
