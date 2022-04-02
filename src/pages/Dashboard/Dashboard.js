@@ -46,36 +46,38 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <section className="posts-page">
-        <h1>Posts</h1>
+      <section className="dashboard">
+        <div className="dashboard__block">
+          <h1>Posts</h1>
 
-        {/*
+          {/*
           Create new post component.
           Note the passed prop that allows it to re-fetch the posts after new one is created
         */}
 
-        <CreatePost
-          onPostCreate={this.fetchPosts}
-          history={this.props.history} />
+          <CreatePost
+            onPostCreate={this.fetchPosts}
+            history={this.props.history} />
 
-        <div className='list-block'>
-          <div className={` ${this.state.volunteer ? 'second' : 'first'}`}>
-            <h3 className=''>Currently Available:</h3>
-            {/* Render a list of offer's Post components specifically offering assistance */}
-            {this.state.offers.map(post =>
-              <Post
-                key={post.post_id}
-                post={post}
-              />)}
-          </div>
-          <div className={` ${this.state.volunteer ? 'first' : 'second'}`}>
-            <h3 className=''>Seeking A Hand:</h3>
-            {/* Render a list of Post components specifically seeking assistance */}
-            {this.state.seeking.map(post =>
-              <Post
-                key={post.post_id}
-                post={post}
-              />)}
+          <div className='list-block'>
+            <div className={` ${this.state.volunteer ? 'second' : 'first'}`}>
+              <h3 className=''>Currently Available:</h3>
+              {/* Render a list of offer's Post components specifically offering assistance */}
+              {this.state.offers.map(post =>
+                <Post
+                  key={post.post_id}
+                  post={post}
+                />)}
+            </div>
+            <div className={` ${this.state.volunteer ? 'first' : 'second'}`}>
+              <h3 className=''>Seeking A Hand:</h3>
+              {/* Render a list of Post components specifically seeking assistance */}
+              {this.state.seeking.map(post =>
+                <Post
+                  key={post.post_id}
+                  post={post}
+                />)}
+            </div>
           </div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+@use './variables'as*;
 
 @mixin button {
   display: inline-flex;
@@ -12,5 +13,15 @@
 
   >svg {
     width: 1.5rem;
+  }
+}
+
+@mixin rootContainer {
+  padding-left: $root-padding;
+  padding-right: $root-padding;
+
+  &__block {
+    max-width: $root-max-width;
+    margin: 0 auto;
   }
 }

@@ -1,0 +1,16 @@
+@use '../../styles/partials/variables'as*;
+@use '../../styles/partials/mixins'as*;
+
+.footer {
+  @include rootContainer;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  background-color: #e9e9e9;
+  padding: $component-padding $root-padding 4rem;
+
+
+  &__list {
+    margin: 0;
+  }
+}

@@ -65,7 +65,6 @@ textarea {
 .app {
   width: 100vw;
   margin: 0;
-  padding-bottom: 2rem;
 }
 
 .bm-burger {
@@ -91,38 +90,33 @@ textarea {
   }
 }
 
-
-
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
-}
-
 /* Color/shape of close button cross */
 .bm-cross {
   background: #bdc3c7;
+
+  /* Position and sizing of clickable cross button */
+  &-button {
+    height: 24px;
+    width: 24px;
+  }
 }
 
-/*
-Sidebar wrapper styles
-Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-*/
-.bm-menu-wrap {
-  position: fixed;
-  top: 0;
-  height: 100%;
-}
 
 /* General sidebar styles */
 .bm-menu {
   background: #373a47;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
-}
 
-.menu {
-  right: 1rem;
+  /*
+  Sidebar wrapper styles
+  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+  */
+  &-wrap {
+    position: fixed;
+    top: 0;
+    height: 100%;
+  }
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -130,15 +124,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
   fill: #373a47;
 }
 
-/* Wrapper for item list */
-.bm-item-list {
-  color: #b8b7ad;
-  padding: 0.8em;
-}
-
 /* Individual item */
 .bm-item {
   display: inline-block;
+
+  /* Wrapper for item list */
+  &-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+  }
 }
 
 /* Styling of overlay */
