@@ -21,10 +21,11 @@ function App() {
         <div className="menu-wrapper" id='menu-wrapper'>
           <Switch >
             <Route path="/profile" component={ProfilePage} />
-            <Route path="/" exact component={HomePage} />
+            <Route path="/user/:id" component={ProfilePage} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/post/:id" component={PostDetails} />
             <Route path="/auth-fail" component={AuthFailPage} />
+            <Route path="/" exact component={HomePage} />
           </Switch>
           <Footer />
         </div>

@@ -1,16 +1,40 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Keyboard, Navigation } from 'swiper';
 import apiUtils from '../../utils/apiUtils';
 import Post from '../../components/Post/Post';
 import CreatePost from '../../components/CreatePost/CreatePost';
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
 import './Dashboard.scss';
+import DashBoardNav from '../../components/DashboardNav/DashBoardNav';
 
+const breakpoints = {
+  // when window width is >= 320px
+  320: {
+    slidesPerView: 1,
+    spaceBetween: 24
+  },
+  720: {
+    slidesPerView: 2,
+    spaceBetween: 24
+  },
+  // when window width is >= 960px
+  960: {
+    slidesPerView: 3,
+    spaceBetween: 24
+
+  }
+};
 
 class Dashboard extends Component {
   state = {
     offers: [],
     seeking: [],
-    volunteer: false
+    volunteer: false,
+    filter: ""
   }
 
   componentDidMount() {
@@ -32,7 +56,6 @@ class Dashboard extends Component {
 
         apiUtils.getProfile()
           .then(user => {
-            console.log("🚀 ~ file: Dashboard.js ~ line 35 ~ Dashboard ~ user", user)
             user.data.volunteer.toLowerCase() === 'true' ? this.setState({ volunteer: true }) : this.setState({ volunteer: false });
           })
           .catch(err => {
@@ -44,20 +67,15 @@ class Dashboard extends Component {
       });
   }
 
+  handleFilter = (filterProp) => {
+    console.log(filterProp);
+    this.setState({ filter: filterProp });
+  }
+
   render() {
     return (
       <section className="dashboard">
-        <div className="dashboard__nav">
-          <ul className="dashboard__nav-block">
-            <li className='dashboard__nav-label'>Housing</li>
-            <li className='dashboard__nav-label'>Jobs</li>
-            <li className='dashboard__nav-label'>Employment Services</li>
-            <li className='dashboard__nav-label'>On-Boarding</li>
-            <li className='dashboard__nav-label'>Translations</li>
-            <li className='dashboard__nav-label'>Free Goods</li>
-            <li className='dashboard__nav-label'>Transportation</li>
-          </ul>
-        </div>
+        <DashBoardNav handleFilter={this.handleFilter} />
         <div className="dashboard__block">
           <h1 className='dashboard__title'>Posts</h1>
 
@@ -65,33 +83,75 @@ class Dashboard extends Component {
           Create new post component.
           Note the passed prop that allows it to re-fetch the posts after new one is created
         */}
-
           <CreatePost
             onPostCreate={this.fetchPosts}
             history={this.props.history} />
 
           <div className='list-block'>
             <div className={` ${this.state.volunteer ? 'second' : 'first'}`}>
-              <h3 className=''>Currently Available:</h3>
+              <h3 className=''>Offering a Hand</h3>
               {/* Render a list of offer's Post components specifically offering assistance */}
-              {this.state.offers.map(post =>
-                <Post
-                  key={post.post_id}
-                  post={post}
-                />)}
+              <Swiper
+                className='dashboard__swiper'
+                keyboard={{ enabled: true }}
+                rewind={true}
+                slidesPerView={1}
+                spaceBetween={24}
+                pagination={{ type: 'bullets', clickable: true, dynamicBullets: true }}
+                modules={[Pagination, Keyboard, Navigation]}
+                breakpoints={breakpoints}
+                grabCursor={true}
+              >
+                {this.state.offers
+                  .filter(post => {
+                    if (this.state.filter) {
+                      return post.category === this.state.filter
+                    }
+                    return post;
+                  })
+                  .map(post =>
+                    <SwiperSlide
+                      key={post.post_id}
+                    >
+                      <Post
+                        post={post}
+                      />
+                    </SwiperSlide>
+                  )}
+              </Swiper>
             </div>
+            {/* <div className='list-block__fill'></div> */}
+            <div className='list-block__fill'></div>
             <div className={` ${this.state.volunteer ? 'first' : 'second'}`}>
-              <h3 className=''>Seeking A Hand:</h3>
-              {/* Render a list of Post components specifically seeking assistance */}
-              {this.state.seeking.map(post =>
-                <Post
-                  key={post.post_id}
-                  post={post}
-                />)}
+              <h3 className=''>Seeking a Hand</h3>
+              <Swiper
+                className='dashboard__swiper'
+                keyboard={{ enabled: true }}
+                rewind={true}
+                slidesPerView={1}
+                spaceBetween={24}
+                grabCursor={true}
+                pagination={{ type: 'bullets', clickable: true, dynamicBullets: true }}
+                modules={[Pagination, Keyboard, Navigation]}
+                breakpoints={breakpoints}
+              >
+                {/* Render a list of Post components specifically seeking assistance */}
+                {this.state.seeking.filter(post => {
+                  if (this.state.filter) {
+                    return post.category === this.state.filter
+                  }
+                  return post;
+                }).map(post =>
+                  <SwiperSlide key={post.post_id}>
+                    <Post post={post} />
+                  </SwiperSlide>
+                )}
+              </Swiper>
+
             </div>
           </div>
         </div>
-      </section>
+      </section >
     );
   }
 }

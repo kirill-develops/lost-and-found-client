@@ -1,0 +1,7 @@
+@use '../../styles/partials/variables'as*;
+@use '../../styles/partials/mixins'as*;
+
+.post-details {
+  min-height: $root-min-height;
+  padding: $root-padding;
+}

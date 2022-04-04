@@ -1,0 +1,22 @@
+// Media Breakpoints
+$tablet-breakpoint: 48rem;
+$desktop-nav-menu-breakpoint: 73.75rem;
+$desktop-breakpoint: 80rem;
+
+@mixin tablet {
+    @media screen and (min-width: $tablet-breakpoint) {
+        @content;
+    }
+}
+
+@mixin nav-menu {
+    @media screen and (min-width: $desktop-nav-menu-breakpoint) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: $desktop-breakpoint) {
+        @content;
+    }
+}

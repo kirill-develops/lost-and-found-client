@@ -1,8 +1,54 @@
+@use '../../styles/partials/variables'as*;
+
 .post {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   border-bottom: 2px solid #FCF2EE;
+  padding: 1rem $root-padding 0.5rem;
+  background-color: white;
+  border-radius: 3px;
+  border-bottom: 5px solid #666;
+  box-shadow: 0px 8px 20px -8px #00000090;
+  height: 20.5rem;
+
+  &__link {
+    text-decoration: none;
+  }
+
+  &__block {
+    height: 80%;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 
   &__title {
+    margin-top: 0;
+    padding: 0.75rem 0 0.25rem $root-padding;
+    margin-right: -$root-padding;
+    color: white;
+    border-top-left-radius: 2.5px;
+    border-bottom-left-radius: 2.5px;
+
+
+    &--offer {
+      @extend .post__title;
+      background-color: #4E8098;
+      border-left: 3.5px solid #8dbed5;
+    }
+
+    &--seeking {
+      @extend .post__title;
+      border-left: 3.5px solid #c0acc1;
+      background-color: #462749;
+    }
+  }
+
+  &__subheading {
+    padding-left: $root-padding;
+    margin-top: 0;
     font-size: 1.2rem;
     color: #A37A74;
   }
@@ -11,6 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: $root-padding;
   }
 
   &__author {
@@ -41,5 +88,17 @@
     margin: 0;
     font-size: 0.8rem;
     color: #666;
+  }
+
+  &__content {
+    font-size: 0.85rem;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgb(145, 145, 145);
+    border-radius: 4px;
+    padding: 0.75rem 0.5rem;
+    box-shadow: inset 0px 0px 25px -15px #0000002e;
   }
 }

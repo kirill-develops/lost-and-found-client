@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { push as Menu } from 'react-burger-menu';
-import Logo from '../../assets/images/site-logo.svg';
+import Logo from '../../assets/images/Asset_36.svg';
 import LoginButton from '../LoginButton/LoginButton';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import './Header.scss';

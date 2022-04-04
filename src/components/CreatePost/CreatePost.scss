@@ -1,4 +1,4 @@
-@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/mixins'as *;
 
 .post-form {
   width: 100%;
@@ -60,4 +60,5 @@
   padding: 0.25rem 1rem 1rem 1rem;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
+  z-index: 10;
 }

@@ -121,12 +121,15 @@ class CreatePost extends Component {
                     value={this.state.category}
                     onChange={this.handleChange}>
                     <option>Please Select</option>
-                    <option value='housing'>Housing</option>
-                    <option value='jobs'>Jobs</option>
+                    <option
+                      value='housing'>Housing</option>
+                    <option
+                      value='jobs'>Jobs</option>
                     <option value='employment_services'>Employment Services</option>
                     <option value='on-boarding'>On-boarding</option>
                     <option value='translations'>Translations</option>
-                    <option value='goods'>Free Goods</option>
+                    <option
+                      value='goods'>Free Goods</option>
                     <option value='transportation'>Transportation</option>
                   </select>
                 </div>
