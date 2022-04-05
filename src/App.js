@@ -18,14 +18,14 @@ class App extends Component {
   state = {
     isAuthenticating: true,
     isLoggedIn: false,
-    userName: ""
+    userData: {}
   }
 
   componentDidMount() {
     apiUtils
       .getProfile()
       .then(res => {
-        this.setState({ isLoggedIn: true, userName: res.data.first_name });
+        this.setState({ isLoggedIn: true, userData: res.data });
       })
       .catch(_err => {
         this.setState({ isAuthenticating: false });
@@ -38,13 +38,17 @@ class App extends Component {
       <BrowserRouter >
         <div className="app" id='menu-outer'>
           <Header
-            userName={this.state.userName}
+            userName={this.state.userData.first_name}
           />
           <div className="menu-wrapper" id='menu-wrapper'>
             <Switch >
               <Route path="/profile" component={ProfilePage} />
               <Route path="/user/:id" component={ProfilePage} />
-              <Route path="/dashboard" render={() => <Dashboard isLoggedIn={this.state.isLoggedIn} />} />
+              <Route path="/dashboard" render={(routerProps) =>
+                <Dashboard
+                  isLoggedIn={this.state.isLoggedIn}
+                  userData={this.state.userData}
+                  {...routerProps} />} />
               <Route path="/post/:id" component={PostDetails} />
               <Route path="/auth-fail" component={AuthFailPage} />
               <Route path="/" exact component={HomePage} />

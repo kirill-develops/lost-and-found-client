@@ -23,26 +23,32 @@
     }
   }
 
-  &__title {
-    margin-top: 0;
-    padding: 0.75rem 0 0.25rem $root-padding;
+  &__title-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.75rem $root-padding 0.25rem;
     margin-right: -$root-padding;
-    color: white;
+    margin-bottom: $root-padding;
     border-top-left-radius: 2.5px;
     border-bottom-left-radius: 2.5px;
 
-
     &--offer {
-      @extend .post__title;
+      @extend .post__title-block;
       background-color: #4E8098;
       border-left: 3.5px solid #8dbed5;
     }
 
     &--seeking {
-      @extend .post__title;
+      @extend .post__title-block;
       background-color: #462749;
       border-left: 3.5px solid #c0acc1;
     }
+  }
+
+  &__title {
+    margin: 0;
+    color: white;
   }
 
   &__subheading {

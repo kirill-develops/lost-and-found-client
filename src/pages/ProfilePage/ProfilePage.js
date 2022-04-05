@@ -129,7 +129,7 @@ class ProfilePage extends Component {
                       <img
                         className="profile-card__avatar"
                         src={profileData.avatar_url}
-                        alt={`${profileData.username} avatar`}
+                        alt={`${profileData.first_name} avatar`}
                       />
                     </div>
                     <div className='profile-card__user-details'>

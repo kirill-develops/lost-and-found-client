@@ -33,7 +33,8 @@ class Dashboard extends Component {
     offers: [],
     seeking: [],
     volunteer: false,
-    filter: ""
+    filter: "",
+    isUserRegistered: true,
   }
 
   componentDidMount() {
@@ -72,20 +73,41 @@ class Dashboard extends Component {
   }
 
   render() {
+    console.log(this.props.userData);
+
+    // if (!this.state.isUserRegistered) this.history.push('/profile')
 
     return (
       <section className="dashboard">
         <DashBoardNav handleFilter={this.handleFilter} />
         <div className="dashboard__block">
           {/* if the user is logged in show their user metrics */}
-          {this.props.isLoggedIn &&
+          {this.props.userData.first_name &&
             (
               <>
                 <h1 className='dashboard__title'>Dashboard</h1>
                 <div className='dashboard__user-block'>
-                  <h3 className='dashboard__subheading user'>User Metrics</h3>
+                  <div className='list-block__filler--user'></div>
                   <div className='dashboard__user-frame'>
-
+                    <div className='dashboard__avatar-frame'>
+                      <img
+                        className="dashboard__avatar"
+                        src={this.props.userData.avatar_url}
+                        alt={`${this.props.userData.first_name} avatar`}
+                      />
+                    </div>
+                    <div className='profile-card__user-metrics'>
+                      <h3 className='profile-card__subheading'>Messenger</h3>
+                      <h3 className='profile-card__label'>New Contacts: 1</h3>
+                      <h3 className='profile-card__label'>Awaiting Replies: 3</h3>
+                      <h3 className='profile-card__label'>View All </h3>
+                    </div>
+                    <div className='profile-card__user-metrics'>
+                      <h3 className='profile-card__subheading'>User Metrics</h3>
+                      <h3 className='profile-card__label'>Open Offers: 3</h3>
+                      <h3 className='profile-card__label'>Open Seeking: 1</h3>
+                      <h3 className='profile-card__label'>User Posts</h3>
+                    </div>
                   </div>
                 </div>
               </>
@@ -135,7 +157,7 @@ class Dashboard extends Component {
               </Swiper>
             </div>
             {/* <div className='list-block__fill'></div> */}
-            <div className='list-block__filler'></div>
+            <div className='list-block__filler--seeking'></div>
             <div className={` ${this.state.volunteer ? 'first' : 'second'}`}>
               <h3 className='dashboard__subheading'>Seeking a Hand</h3>
               <Swiper

@@ -26,9 +26,13 @@ const Post = ({ post }) => {
   return (
     <article className="post">
       <Link to={`/post/${post.post_id}`} className='post__link'>
-
-        <h2 className={post.offer === 1 ? "post__title--offer" : "post__title--seeking"}>
-          {category[1]}</h2>
+        <div className={post.offer === 1 ? "post__title-block--offer" : "post__title-block--seeking"}>
+          <h2 className="post__title">
+            {category[1]}</h2>
+          {// Show a "Your Post" label for posts that have been created by currently logged in user
+            post.isCurrentUser &&
+            <div className="post__owned">Your Post</div>}
+        </div>
         <div className="post__block">
           <h3 className="post__subheading">{post.title}</h3>
           <div className="post__details">
@@ -39,11 +43,6 @@ const Post = ({ post }) => {
                 alt={`${post.first_name} avatar`}
               />
               <h3 className="post__username">{post.first_name}</h3>
-              {
-                // Show a "Your Post" label for posts that have been created by currently logged in user
-                post.isCurrentUser &&
-                <div className="post__owned">🔥&nbsp;&nbsp;Your Post</div>
-              }
               <p className="post__city">{post.city}, {post.province}</p>
             </div>
           </div>
