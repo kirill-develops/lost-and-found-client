@@ -94,113 +94,115 @@ class EditForm extends Component {
   render() {
 
     return (
-      <div className='edit-form slide-inelliptic-bottom-bck'>
-        <div className='edit-form-block'>
-          <img
-            onClick={this.props.handleCancel}
-            src={closeIco}
-            alt='close icon'
-            className='edit-form__close-ico' />
-          <h1 className='edit-form__title'>Edit Profile</h1>
-          <form
-            onSubmit={this.handleSubmit}
-            className='edit-form__form'>
-            <label className='edit-form__label'>
-              FIRST NAME*
-              <input
-                name='first_name'
-                defaultValue={this.state.first_name}
-                onChange={this.handleChange}
-                className={`edit-form__field ${!this.state.first_name && this.state.clicked ? "edit-form__field--error" : ""}`} />
-            </label>
-            <label className='edit-form__label'>
-              LAST NAME*
-              <input
-                name='last_name'
-                defaultValue={this.state.last_name}
-                onChange={this.handleChange}
-                className={`edit-form__field ${!this.state.last_name && this.state.clicked ? "edit-form__field--error" : ""}`} />
-            </label>
-            <label className='edit-form__label--address'>
-              ADDRESS
-              <input
-                name='address'
-                defaultValue={this.state.address}
-                onChange={this.handleChange}
-                className={`edit-form__field`} />
-            </label>
-            <label className='edit-form__label'>
-              CITY*
-              <input
-                name='city'
-                defaultValue={this.state.city}
-                onChange={this.handleChange}
-                className={`edit-form__field ${!this.state.city && this.state.clicked ? "edit-form__field--error" : ""}`} />
-            </label>
-            <div className='edit-form__label'>
+      <div className='edit-form'>
+        <div className='slide-inelliptic-bottom-bck'>
+          <div className='edit-form-block'>
+            <img
+              onClick={this.props.handleCancel}
+              src={closeIco}
+              alt='close icon'
+              className='edit-form__close-ico' />
+            <h1 className='edit-form__title'>Edit Profile</h1>
+            <form
+              onSubmit={this.handleSubmit}
+              className='edit-form__form'>
               <label className='edit-form__label'>
-                PROVINCE*
-                <Select
-                  name='province'
-                  value={this.state.province}
-                  placeholder={this.state.province}
-                  onChange={this.handleSelectMenu}
-                  options={dropdownOptions}
-                  className={`edit-form__field ${!this.state.province && this.state.clicked ? "edit-form__field--error" : ""}`}
-                />
-              </label>
-            </div>
-            <label className='edit-form__label'>
-              PHONE*
-              <input
-                name='phone'
-                defaultValue={this.state.phone}
-                onChange={this.handleChange}
-                className={`edit-form__field ${!this.state.phone && this.state.clicked ? "edit-form__field--error" : ""}`} />
-            </label>
-            <label className='edit-form__label'>
-              POSTAL CODE
-              <input
-                name='postal_code'
-                onChange={this.handleChange}
-                className={`edit-form__field`} />
-            </label>
-            <div className='edit-form__input-block'>
-              <h3 className='edit-form__label--volunteer'>
-                VOLUNTEER
-              </h3>
-              <label
-                className='edit-form__label'>
-                YES
+                FIRST NAME*
                 <input
-                  type="radio"
-                  name="volunteer"
-                  value='true'
-                  checked={this.state.volunteer === 'true'}
+                  name='first_name'
+                  defaultValue={this.state.first_name}
                   onChange={this.handleChange}
-                  className="edit-form__radio"
-                />
+                  className={`edit-form__field ${!this.state.first_name && this.state.clicked ? "edit-form__field--error" : ""}`} />
               </label>
-              <label
-                className='edit-form__label'>
-                NO
+              <label className='edit-form__label'>
+                LAST NAME*
                 <input
-                  type="radio"
-                  name="volunteer"
-                  value='false'
-                  checked={this.state.volunteer === 'false'}
+                  name='last_name'
+                  defaultValue={this.state.last_name}
                   onChange={this.handleChange}
-                  className="edit-form__radio"
-                />
+                  className={`edit-form__field ${!this.state.last_name && this.state.clicked ? "edit-form__field--error" : ""}`} />
               </label>
-            </div>
-            <div className='edit-form__button-block'>
-              <button className='edit-form__button--submit'>SUBMIT</button>
-              <button
-                onClick={this.props.handleCancel}
-                className='edit-form__button--cancel'>CANCEL</button>
-            </div>
-          </form>
+              <label className='edit-form__label--address'>
+                ADDRESS
+                <input
+                  name='address'
+                  defaultValue={this.state.address}
+                  onChange={this.handleChange}
+                  className={`edit-form__field`} />
+              </label>
+              <label className='edit-form__label'>
+                CITY*
+                <input
+                  name='city'
+                  defaultValue={this.state.city}
+                  onChange={this.handleChange}
+                  className={`edit-form__field ${!this.state.city && this.state.clicked ? "edit-form__field--error" : ""}`} />
+              </label>
+              <div className='edit-form__label'>
+                <label className='edit-form__label'>
+                  PROVINCE*
+                  <Select
+                    name='province'
+                    value={this.state.province}
+                    placeholder={this.state.province}
+                    onChange={this.handleSelectMenu}
+                    options={dropdownOptions}
+                    className={`edit-form__field ${!this.state.province && this.state.clicked ? "edit-form__field--error" : ""}`}
+                  />
+                </label>
+              </div>
+              <label className='edit-form__label'>
+                PHONE*
+                <input
+                  name='phone'
+                  defaultValue={this.state.phone}
+                  onChange={this.handleChange}
+                  className={`edit-form__field ${!this.state.phone && this.state.clicked ? "edit-form__field--error" : ""}`} />
+              </label>
+              <label className='edit-form__label'>
+                POSTAL CODE
+                <input
+                  name='postal_code'
+                  onChange={this.handleChange}
+                  className={`edit-form__field`} />
+              </label>
+              <div className='edit-form__input-block'>
+                <h3 className='edit-form__label--volunteer'>
+                  VOLUNTEER
+                </h3>
+                <label
+                  className='edit-form__label'>
+                  YES
+                  <input
+                    type="radio"
+                    name="volunteer"
+                    value='true'
+                    checked={this.state.volunteer === 'true'}
+                    onChange={this.handleChange}
+                    className="edit-form__radio"
+                  />
+                </label>
+                <label
+                  className='edit-form__label'>
+                  NO
+                  <input
+                    type="radio"
+                    name="volunteer"
+                    value='false'
+                    checked={this.state.volunteer === 'false'}
+                    onChange={this.handleChange}
+                    className="edit-form__radio"
+                  />
+                </label>
+              </div>
+              <div className='edit-form__button-block'>
+                <button className='edit-form__button--submit'>SUBMIT</button>
+                <button
+                  onClick={this.props.handleCancel}
+                  className='edit-form__button--cancel'>CANCEL</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div >
     )

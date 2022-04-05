@@ -14,37 +14,15 @@
  * animation slide-in-elliptic-bottom-bck
  * ----------------------------------------
  */
-@-webkit-keyframes slide-in-elliptic-bottom-bck {
-  0% {
-    -webkit-transform: translateY(600px) rotateX(-30deg) scale(6.5);
-    transform: translateY(600px) rotateX(-30deg) scale(6.5);
-    -webkit-transform-origin: 50% -100%;
-    transform-origin: 50% -100%;
-    opacity: 0;
-  }
-
-  100% {
-    -webkit-transform: translateY(0) rotateX(0) scale(1);
-    transform: translateY(0) rotateX(0) scale(1);
-    -webkit-transform-origin: 50% 500px;
-    transform-origin: 50% 500px;
-    opacity: 1;
-  }
-}
-
 @keyframes slide-in-elliptic-bottom-bck {
   0% {
-    -webkit-transform: translateY(600px) rotateX(-30deg) scale(6.5);
-    transform: translateY(600px) rotateX(-30deg) scale(6.5);
-    -webkit-transform-origin: 50% -100%;
+    transform: translateY(2600px) rotateX(-30deg) scale(6.5);
     transform-origin: 50% -100%;
     opacity: 0;
   }
 
   100% {
-    -webkit-transform: translateY(0) rotateX(0) scale(1);
-    transform: translateY(0) rotateX(0) scale(1);
-    -webkit-transform-origin: 50% -50%;
+    transform: translateY(18vh) rotateX(0) scale(1);
     transform-origin: 50% -50%;
     opacity: 1;
   }
@@ -52,8 +30,7 @@
 
 
 .slide-inelliptic-bottom-bck {
-  -webkit-animation: slide-in-elliptic-bottom-bck 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  animation: slide-in-elliptic-bottom-bck 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-elliptic-bottom-bck 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .edit-form {
@@ -72,9 +49,8 @@
     position: absolute;
     width: 90%;
     background-color: white;
-    top: 45%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     padding: 1.5rem;
   }
 
