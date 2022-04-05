@@ -25,7 +25,6 @@ const breakpoints = {
   960: {
     slidesPerView: 3,
     spaceBetween: 24
-
   }
 };
 
@@ -73,12 +72,27 @@ class Dashboard extends Component {
   }
 
   render() {
+
     return (
       <section className="dashboard">
         <DashBoardNav handleFilter={this.handleFilter} />
         <div className="dashboard__block">
-          <h1 className='dashboard__title'>Posts</h1>
+          {/* if the user is logged in show their user metrics */}
+          {this.props.isLoggedIn &&
+            (
+              <>
+                <h1 className='dashboard__title'>Dashboard</h1>
+                <div className='dashboard__user-block'>
+                  <h3 className='dashboard__subheading user'>User Metrics</h3>
+                  <div className='dashboard__user-frame'>
 
+                  </div>
+                </div>
+              </>
+            )
+          }
+
+          <h2 className='dashboard__title'>Posts</h2>
           {/*
           Create new post component.
           Note the passed prop that allows it to re-fetch the posts after new one is created
@@ -88,8 +102,8 @@ class Dashboard extends Component {
             history={this.props.history} />
 
           <div className='list-block'>
-            <div className={` ${this.state.volunteer ? 'second' : 'first'}`}>
-              <h3 className=''>Offering a Hand</h3>
+            <div className={`${this.state.volunteer ? 'second' : 'first'}`}>
+              <h3 className='dashboard__subheading'>Offering a Hand</h3>
               {/* Render a list of offer's Post components specifically offering assistance */}
               <Swiper
                 className='dashboard__swiper'
@@ -123,7 +137,7 @@ class Dashboard extends Component {
             {/* <div className='list-block__fill'></div> */}
             <div className='list-block__filler'></div>
             <div className={` ${this.state.volunteer ? 'first' : 'second'}`}>
-              <h3 className=''>Seeking a Hand</h3>
+              <h3 className='dashboard__subheading'>Seeking a Hand</h3>
               <Swiper
                 className='dashboard__swiper'
                 keyboard={{ enabled: true }}
