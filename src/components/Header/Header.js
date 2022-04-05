@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // NavLink component allows us to define an active CSS class for the page we are currently on
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -24,7 +25,6 @@ class Header extends Component {
   }
 
   render() {
-
     return (
       <section className="header">
         <div className="header__block">
@@ -33,36 +33,39 @@ class Header extends Component {
               alt='Lost & FOUND logo'
               className='header__logo' />
           </Link>
-          <nav className="header__menu-block">
-            <Menu
-              isOpen={this.state.menu}
-              over
-              disableOverlayClick={true}
-              onStateChange={(state) => this.handleStateChange(state)}
-              outerContainerId='menu-outer'
-              pageWrapId='menu-wrapper'
-              className='menu'
-              width={'320px'}
-              right >
-              <Link
-                to='/' id='home'
-                onClick={() => this.closeMenu()}
-                className='header__menu-item'>
-                Home</Link>
-              <Link
-                to='/dashboard'
-                onClick={() => this.closeMenu()}
-                className='header__menu-item'>
-                Dashboard</Link>
-              <Link
-                to='/profile'
-                onClick={() => this.closeMenu()}
-                className='header__menu-item'>
-                Profile</Link>
-              <LoginButton />
-              <LogoutButton />
-            </Menu >
-          </nav>
+          <div className='header__menu-block'>
+            {this.props.userName ? <h3>Welcome Back, {this.props.userName}</h3> : <LoginButton />}
+            <nav className="header__hamburger-block">
+              <Menu
+                isOpen={this.state.menu}
+                over
+                disableOverlayClick={true}
+                onStateChange={(state) => this.handleStateChange(state)}
+                outerContainerId='menu-outer'
+                pageWrapId='menu-wrapper'
+                className='menu'
+                width={'320px'}
+                right >
+                <Link
+                  to='/' id='home'
+                  onClick={() => this.closeMenu()}
+                  className='header__menu-item'>
+                  Home</Link>
+                <Link
+                  to='/dashboard'
+                  onClick={() => this.closeMenu()}
+                  className='header__menu-item'>
+                  Dashboard</Link>
+                <Link
+                  to='/profile'
+                  onClick={() => this.closeMenu()}
+                  className='header__menu-item'>
+                  Profile</Link>
+                <LoginButton />
+                <LogoutButton />
+              </Menu >
+            </nav>
+          </div>
         </div>
       </section >
     );

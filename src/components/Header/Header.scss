@@ -31,6 +31,12 @@
   }
 
   &__menu-block {
+    display: flex;
+    gap: $component-padding;
+    color: white;
+  }
+
+  &__hamburger-block {
     display: inline-block;
     position: relative;
     width: 4.25rem;

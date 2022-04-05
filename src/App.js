@@ -1,6 +1,7 @@
 /* eslint-disable object-curly-spacing */
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import React from 'react';
+import React, { Component } from 'react';
+import apiUtils from './utils/apiUtils';
 
 import Header from './components/Header/Header';
 import HomePage from './pages/Homepage/Homepage';
@@ -13,25 +14,47 @@ import Footer from './components/Footer/Footer';
 import './styles/App.scss';
 
 
-function App() {
-  return (
-    <BrowserRouter >
-      <div className="app" id='menu-outer'>
-        <Header />
-        <div className="menu-wrapper" id='menu-wrapper'>
-          <Switch >
-            <Route path="/profile" component={ProfilePage} />
-            <Route path="/user/:id" component={ProfilePage} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/post/:id" component={PostDetails} />
-            <Route path="/auth-fail" component={AuthFailPage} />
-            <Route path="/" exact component={HomePage} />
-          </Switch>
-          <Footer />
+class App extends Component {
+  state = {
+    isAuthenticating: true,
+    isLoggedIn: false,
+    userName: ""
+  }
+
+  componentDidMount() {
+    apiUtils
+      .getProfile()
+      .then(res => {
+        this.setState({ isLoggedIn: true, userName: res.data.first_name });
+      })
+      .catch(_err => {
+        this.setState({ isAuthenticating: false });
+      })
+  }
+
+  render() {
+
+    return (
+      <BrowserRouter >
+        <div className="app" id='menu-outer'>
+          <Header
+            userName={this.state.userName}
+          />
+          <div className="menu-wrapper" id='menu-wrapper'>
+            <Switch >
+              <Route path="/profile" component={ProfilePage} />
+              <Route path="/user/:id" component={ProfilePage} />
+              <Route path="/dashboard" render={() => <Dashboard isLoggedIn={this.state.isLoggedIn} />} />
+              <Route path="/post/:id" component={PostDetails} />
+              <Route path="/auth-fail" component={AuthFailPage} />
+              <Route path="/" exact component={HomePage} />
+            </Switch>
+            <Footer />
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
-  );
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
