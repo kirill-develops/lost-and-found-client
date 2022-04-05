@@ -6,6 +6,7 @@
   min-height: $root-min-height;
   background-color: #FFFFFF;
   padding: $component-padding;
+  z-index: 10;
 
   &__title {
     margin-top: 3rem;

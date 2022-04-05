@@ -1,8 +1,23 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
-import './EditForm.scss';
 import closeIco from '../../assets/icons/x_close.svg';
+import './EditForm.scss';
+
+const dropdownOptions = [
+  { value: 'Alberta', label: 'Alberta' },
+  { value: 'British Columbia', label: 'British Columbia' },
+  { value: 'Manitoba', label: 'Manitoba' }, { value: 'New Brunswick', label: 'New Brunswick' }, { value: 'Newfoundland', label: 'Newfoundland' },
+  { value: 'Nova Scotia', label: 'Nova Scotia' },
+  { value: 'Ontario', label: 'Ontario' },
+  { value: 'Prince Edward Island', label: 'Prince Edward Island' },
+  { value: 'Quebec', label: 'Quebec' },
+  { value: 'Saskatchewan', label: 'Saskatchewan' },
+  { value: 'Northern Territories', label: 'Northern Territories' },
+  { value: 'Nunavut', label: 'Nunavut' },
+  { value: 'Yukon', label: 'Yukon' },
+]
 
 class EditForm extends Component {
   state = {
@@ -35,6 +50,13 @@ class EditForm extends Component {
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
+    });
+  };
+
+  // Create a change handler for dropdown
+  handleSelectMenu = (e) => {
+    this.setState({
+      province: e.value,
     });
   };
 
@@ -114,14 +136,19 @@ class EditForm extends Component {
                 onChange={this.handleChange}
                 className={`edit-form__field ${!this.state.city && this.state.clicked ? "edit-form__field--error" : ""}`} />
             </label>
-            <label className='edit-form__label'>
-              PROVINCE*
-              <input
-                name='province'
-                defaultValue={this.state.province}
-                onChange={this.handleChange}
-                className={`edit-form__field ${!this.state.province && this.state.clicked ? "edit-form__field--error" : ""}`} />
-            </label>
+            <div className='edit-form__label'>
+              <label className='edit-form__label'>
+                PROVINCE*
+                <Select
+                  name='province'
+                  defaultValue={this.state.province}
+                  placeholder={this.state.province}
+                  onChange={this.handleSelectMenu}
+                  options={dropdownOptions}
+                  className={`edit-form__field ${!this.state.province && this.state.clicked ? "edit-form__field--error" : ""}`}
+                />
+              </label>
+            </div>
             <label className='edit-form__label'>
               PHONE*
               <input
@@ -130,8 +157,15 @@ class EditForm extends Component {
                 onChange={this.handleChange}
                 className={`edit-form__field ${!this.state.phone && this.state.clicked ? "edit-form__field--error" : ""}`} />
             </label>
+            <label className='edit-form__label'>
+              POSTAL CODE
+              <input
+                name='postal_code'
+                onChange={this.handleChange}
+                className={`edit-form__field`} />
+            </label>
             <div className='edit-form__input-block'>
-              <h3 className='edit-form__label'>
+              <h3 className='edit-form__label--volunteer'>
                 VOLUNTEER
               </h3>
               <label
@@ -159,7 +193,12 @@ class EditForm extends Component {
                 />
               </label>
             </div>
-            <button className='edit-form__button'>SUBMIT</button>
+            <div className='edit-form__button-block'>
+              <button className='edit-form__button--submit'>SUBMIT</button>
+              <button
+                onClick={this.props.handleCancel}
+                className='edit-form__button--cancel'>CANCEL</button>
+            </div>
           </form>
         </div>
       </div >

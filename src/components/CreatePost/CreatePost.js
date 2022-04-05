@@ -1,9 +1,19 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import LoginButton from '../LoginButton/LoginButton';
 import './CreatePost.scss';
 
+const dropdownOptions = [
+  { value: 'housing', label: 'Housing' },
+  { value: 'jobs', label: 'Jobs' },
+  { value: 'empoyment_services', label: 'Empoyment Services' },
+  { value: 'on-boarding', label: 'On-boarding' },
+  { value: 'translations', label: 'Translations' },
+  { value: 'goods', label: 'Free Goods' },
+  { value: 'transportation', label: 'Transportation' },
+]
 class CreatePost extends Component {
   state = {
     isLoggedIn: false,
@@ -116,22 +126,15 @@ class CreatePost extends Component {
                     htmlFor="postContent"
                     className="post-form__label">
                     Category</label>
-                  <select
+                  <Select
                     name='category'
                     value={this.state.category}
-                    onChange={this.handleChange}>
-                    <option>Please Select</option>
-                    <option
-                      value='housing'>Housing</option>
-                    <option
-                      value='jobs'>Jobs</option>
-                    <option value='employment_services'>Employment Services</option>
-                    <option value='on-boarding'>On-boarding</option>
-                    <option value='translations'>Translations</option>
-                    <option
-                      value='goods'>Free Goods</option>
-                    <option value='transportation'>Transportation</option>
-                  </select>
+                    placeholder='Please Select'
+                    options={dropdownOptions}
+                    menuPlacement="auto"
+                    onChange={this.handleChange}
+                    menuShouldBlockScroll={true}
+                  />
                 </div>
               </div>
               <button

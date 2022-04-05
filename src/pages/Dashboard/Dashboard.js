@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Keyboard, Navigation } from 'swiper';
 import apiUtils from '../../utils/apiUtils';
-import Post from '../../components/Post/Post';
+import DashBoardNav from '../../components/DashboardNav/DashBoardNav';
 import CreatePost from '../../components/CreatePost/CreatePost';
+import Post from '../../components/Post/Post';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import './Dashboard.scss';
-import DashBoardNav from '../../components/DashboardNav/DashBoardNav';
 
 const breakpoints = {
   // when window width is >= 320px

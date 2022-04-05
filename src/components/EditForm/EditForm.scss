@@ -1,7 +1,9 @@
 @use '../../styles/partials/variables'as*;
+@use '../../styles/partials/mixins'as*;
 
 
 .edit-form {
+  @include rootContainerInner;
   background-color: #0000007c;
   backdrop-filter: blur(4px);
   width: 100vw;
@@ -11,10 +13,10 @@
   left: 0;
 
   &-block {
-    width: 80%;
     box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.25);
     border-radius: 3px;
     position: absolute;
+    width: 90%;
     background-color: white;
     top: 45%;
     left: 50%;
@@ -24,20 +26,47 @@
 
   &__close-ico {
     height: 1rem;
+    filter: invert(1);
     position: absolute;
     right: $component-padding;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
-  &__title {}
+  &__title {
+    margin-top: -$component-padding;
+    margin-left: -$component-padding;
+    margin-right: -$component-padding;
+    margin-bottom: $component-padding;
+    background-color: #22333B;
+    color: white;
+    padding-top: $component-padding;
+    padding-left: $component-padding;
+    padding-bottom: 0.5rem;
+    border-radius: 1px;
+    font-size: 1.35rem;
+    font-weight: 500;
+    font-family: sans-serif;
+  }
 
-  &__form {}
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $component-padding 2%;
+  }
 
   &__label {
-    width: 50%;
-    display: inline-block;
+    width: 49%;
 
     &--address {
       width: 100%;
+    }
+
+    &--volunteer {
+      margin: 0;
     }
   }
 
@@ -49,9 +78,32 @@
     }
   }
 
-  &__input-block {}
+  &__input-block {
+    width: 49%;
+
+
+  }
 
   &__radio {}
 
-  &__button {}
+  &__button {
+    @include button;
+    padding: $root-padding $component-padding;
+
+
+    &--submit {
+      @extend .edit-form__button;
+      margin-right: $component-padding;
+    }
+
+    &--cancel {
+      @extend .edit-form__button;
+      color: #6D213C;
+      background-color: #FCF2EE;
+
+      &:hover {
+        background-color: #F9E4DC;
+      }
+    }
+  }
 }
