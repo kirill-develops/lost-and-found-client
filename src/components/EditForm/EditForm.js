@@ -64,21 +64,22 @@ class EditForm extends Component {
   // api PUT req
   handleSubmit = (e) => {
     e.preventDefault();
-    const { first_name, last_name, address, city, province, phone, volunteer } = e.target;
+    const { first_name, last_name, address, city, province, phone, volunteer } = this.state;
 
-    if (!first_name.value || !last_name.value || !city.value || !province.value || !phone.value || !volunteer.value) {
+    if (!first_name || !last_name || !city || !province || !phone || !volunteer) {
       this.setState({ clicked: true })
     } else {
 
       const profileObj = {
-        'first_name': first_name.value,
-        'last_name': last_name.value,
-        'address': address.value,
-        'city': city.value,
-        'province': province.value,
-        'phone': phone.value,
-        'volunteer': volunteer.value,
+        'first_name': first_name,
+        'last_name': last_name,
+        'address': address,
+        'city': city,
+        'province': province,
+        'phone': phone,
+        'volunteer': volunteer,
       }
+      console.log("🚀 ~ file: EditForm.js ~ line 82 ~ EditForm ~ profileObj", profileObj);
 
       apiUtils.editProfile(profileObj)
         .then((_res) => {
@@ -93,7 +94,7 @@ class EditForm extends Component {
   render() {
 
     return (
-      <div className='edit-form'>
+      <div className='edit-form slide-inelliptic-bottom-bck'>
         <div className='edit-form-block'>
           <img
             onClick={this.props.handleCancel}
@@ -126,7 +127,7 @@ class EditForm extends Component {
                 name='address'
                 defaultValue={this.state.address}
                 onChange={this.handleChange}
-                className={`edit-form__field ${!this.state.address && this.state.clicked ? "edit-form__field--error" : ""}`} />
+                className={`edit-form__field`} />
             </label>
             <label className='edit-form__label'>
               CITY*
@@ -141,7 +142,7 @@ class EditForm extends Component {
                 PROVINCE*
                 <Select
                   name='province'
-                  defaultValue={this.state.province}
+                  value={this.state.province}
                   placeholder={this.state.province}
                   onChange={this.handleSelectMenu}
                   options={dropdownOptions}

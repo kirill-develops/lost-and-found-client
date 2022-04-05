@@ -101,9 +101,16 @@ class ProfilePage extends Component {
 
           {/* If user is logged in, render their profile information */}
           {isLoggedIn ? (
-            !editProfile ? (
-              profileData && (
-                <div className='profile-card'>
+            profileData && (
+              editProfile ?
+                // If user's form is not filled out, render EditForm Component
+                <EditForm
+                  profileData={profileData}
+                  handleFormSubmit={this.handleFormSubmit}
+                  handleCancel={this.handleCancel}
+                />
+                :
+                < div className='profile-card'>
                   <h2 className='profile-card__title'>
                     <span>
                       Hello, {profileData.first_name} {profileData.last_name}
@@ -141,15 +148,8 @@ class ProfilePage extends Component {
                     </div>
                   </div>
                 </div>
-              )
+            )
 
-            ) : (
-              // If user's form is not filled out, render EditForm Component
-              <EditForm
-                profileData={profileData}
-                handleFormSubmit={this.handleFormSubmit}
-                handleCancel={this.handleCancel}
-              />)
           ) : (
             // If user is not logged in, render a login button
             <>
