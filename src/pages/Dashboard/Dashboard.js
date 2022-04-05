@@ -121,7 +121,7 @@ class Dashboard extends Component {
               </Swiper>
             </div>
             {/* <div className='list-block__fill'></div> */}
-            <div className='list-block__fill'></div>
+            <div className='list-block__filler'></div>
             <div className={` ${this.state.volunteer ? 'first' : 'second'}`}>
               <h3 className=''>Seeking a Hand</h3>
               <Swiper

@@ -15,6 +15,10 @@
   >svg {
     width: 1.5rem;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 @mixin rootContainer {
@@ -36,3 +40,14 @@
     margin: 0 auto;
   }
 }
+
+@mixin cardFrameInner {
+  background-color: #F2F4F3;
+  padding: $component-padding;
+  border-radius: 2px;
+  box-shadow: inset 0px 0px 13px -8px #000000;
+}
+
+@mixin innerCa {}
+
+;

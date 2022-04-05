@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import './EditForm.scss';
 import apiUtils from '../../utils/apiUtils';
+import './EditForm.scss';
+import closeIco from '../../assets/icons/x_close.svg';
 
 class EditForm extends Component {
   state = {
@@ -36,6 +37,7 @@ class EditForm extends Component {
       [e.target.name]: e.target.value,
     });
   };
+
   // Handle the submission of the form by validating content and then doing an
   // api PUT req
   handleSubmit = (e) => {
@@ -64,12 +66,18 @@ class EditForm extends Component {
   }
 
 
+
   // todo create form validation messages on error state
   render() {
 
     return (
       <div className='edit-form'>
         <div className='edit-form-block'>
+          <img
+            onClick={this.props.handleCancel}
+            src={closeIco}
+            alt='close icon'
+            className='edit-form__close-ico' />
           <h1 className='edit-form__title'>Edit Profile</h1>
           <form
             onSubmit={this.handleSubmit}
@@ -107,7 +115,7 @@ class EditForm extends Component {
                 className={`edit-form__field ${!this.state.city && this.state.clicked ? "edit-form__field--error" : ""}`} />
             </label>
             <label className='edit-form__label'>
-              PROVINCE
+              PROVINCE*
               <input
                 name='province'
                 defaultValue={this.state.province}

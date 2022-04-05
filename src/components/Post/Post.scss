@@ -2,7 +2,6 @@
 
 .post {
   margin-bottom: 2rem;
-  border-bottom: 2px solid #FCF2EE;
   padding: 1rem $root-padding 0.5rem;
   background-color: white;
   border-radius: 3px;
@@ -41,8 +40,8 @@
 
     &--seeking {
       @extend .post__title;
-      border-left: 3.5px solid #c0acc1;
       background-color: #462749;
+      border-left: 3.5px solid #c0acc1;
     }
   }
 
