@@ -34,11 +34,33 @@
     }
   }
 
+  &__filler {
+    height: 1.25rem;
+
+    &--offer {
+      @extend .post-form__filler;
+      background-color: #123794;
+      margin-top: 0.5rem;
+      margin-bottom: $component-padding;
+      margin-left: -$component-padding;
+      margin-right: -$component-padding;
+    }
+
+    &--seeking {
+      @extend .post-form__filler;
+      background-color: #462749;
+      margin-top: 0.5rem;
+      margin-bottom: $component-padding;
+      margin-left: -$component-padding;
+      margin-right: -$component-padding;
+    }
+  }
+
   &__title {
     margin-top: -$component-padding;
     margin-left: -$component-padding;
     margin-right: -$component-padding;
-    margin-bottom: $component-padding;
+    margin-bottom: 0;
     background-color: #22333B;
     color: white;
     padding-top: $component-padding;
@@ -130,15 +152,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 25%;
+  width: fit-content;
   left: 50%;
   transform: translatex(-50%);
   position: fixed;
   bottom: 0;
-  background-color: #fff;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 0.25rem 1rem 1rem 1rem;
+  background-color: #b7d6ff;
+  box-shadow: rgba(100, 100, 111, 0.471) 0px 7px 29px 0px;
+  padding: 1rem;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
   z-index: 10;
+
+  &__button {
+    @include button;
+    font-size: 1.15rem;
+    background-color: #daeaff;
+    display: flex;
+    justify-content: center;
+    color: #22333B;
+
+    &:hover {
+      background-color: #5da3ff;
+      color: #FFFFFF;
+    }
+  }
+
+  &__button-label {
+    margin-top: 0;
+  }
 }

@@ -9,7 +9,7 @@ import './CreatePost.scss';
 const dropdownOptions = [
   { value: 'housing', label: 'Housing' },
   { value: 'jobs', label: 'Jobs' },
-  { value: 'employment_services', label: 'EmpLoyment Services' },
+  { value: 'employment_services', label: 'Employment Services' },
   { value: 'on-boarding', label: 'On-boarding' },
   { value: 'translations', label: 'Translations' },
   { value: 'goods', label: 'Free Goods' },
@@ -116,12 +116,12 @@ class CreatePost extends Component {
                 onClick={this.handleCancel}
                 src={closeIco}
                 alt='close icon'
-                className='edit-form__close-ico' />
-              {/* check to see if user is volunteer and produce proper heading  */}
+                className='post-form__close-ico' />
               <h3 className='post-form__title'>
-                {/* changes depnding on User's volunteer status */}
+                {/* check to see if user is volunteer and produce proper heading  */}
                 {this.state.volunteer ? 'Create New Offer' : 'What Can We Connect You With?'}
               </h3>
+              <div className={this.props.isOffer ? 'post-form__filler--offer' : 'post-form__filler--seeking'}></div>
               <form className="post-form__fields" onSubmit={this.handleFormSubmit}>
                 <div className="post-form__fields-block">
                   <div className="post-form__field">
@@ -181,12 +181,12 @@ class CreatePost extends Component {
           this.state.isLoggedIn ? (
             <>
               {/* If user is logged in, render form for creating a post */}
-              <p onClick={this.toggleNewPost}>click here to post</p>
+              <button className='create-post__button' onClick={this.toggleNewPost}>create post</button>
             </>
           ) : (
             // If user is not logged in, render login button
             <>
-              <p><strong>Login to create your own posts.</strong></p>
+              <p className='create-post__button-label'><strong>Login to create your own posts.</strong></p>
               <LoginButton />
             </>
           )
