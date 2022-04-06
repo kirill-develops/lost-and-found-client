@@ -53,10 +53,6 @@ const HomePage = () => {
             </SwiperSlide>
             <SwiperSlide className="swiper">
               <iframe
-                width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/UE89_hkMoBU" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-            </SwiperSlide>
-            <SwiperSlide className="swiper">
-              <iframe
                 height="100%" width='100%' src="https://www.youtube-nocookie.com/embed/ap8aTm73baI" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </SwiperSlide>
             <SwiperSlide className="swiper--slide4">
@@ -70,6 +66,10 @@ const HomePage = () => {
                   </h2>
                 </div>
               </div>
+            </SwiperSlide>
+            <SwiperSlide className="swiper">
+              <iframe
+                width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/UE89_hkMoBU" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </SwiperSlide>
           </Swiper>
         </div>
