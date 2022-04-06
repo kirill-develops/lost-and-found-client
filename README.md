@@ -15,7 +15,7 @@ the repo and instruction.
 
  -Kirill (06-04-2022)
 
-![Screenshot of Lost&Found app](./src/assets/images/big_hug.jpeg)
+![Screenshot of Lost&Found app](./src/assets/images/Desktop_1.png)
 
 # Installation
  Follow these steps to run a local instance of Lost&Found:
@@ -30,6 +30,10 @@ the repo and instruction.
 
         $ cd lost-and-found-client
         $ npm install
-4. Start the React app:
+4. Set environment variables:
+      >#### Rename `.env_sample` to `.env` and change placeholder `<values>` with your own.
+        
+        REACT_APP_SERVER_URL=<YOUR_SERVER_ADDRESS>
+5. Start the React app:
 
         $ npm start
