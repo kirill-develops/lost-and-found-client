@@ -10,6 +10,8 @@ import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
 import './Homepage.scss';
 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5050";
+
 const HomePage = () => {
 
   return (
