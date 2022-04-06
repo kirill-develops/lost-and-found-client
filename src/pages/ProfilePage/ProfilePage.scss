@@ -29,7 +29,7 @@
   &__title {
     margin-left: -$component-padding;
     margin-right: -$component-padding;
-    background-color: #d57a66;
+    background-color: #a72615;
     color: #FFFFFF;
     padding: $root-padding $component-padding 0.5rem;
     font-size: 1.35rem;
@@ -63,11 +63,9 @@
     margin-top: 0;
     padding: 0.75rem 0 0.25rem $root-padding;
     color: white;
-    border-top-left-radius: 2.5px;
-    border-bottom-left-radius: 2.5px;
-    background-color: #d57a66;
+    background-color: #a72615;
     margin-right: -$component-padding;
-    border-left: 3.5px solid rgb(255, 201, 188);
+    border-left: 3.5px solid #e5beb9;
     font-weight: 500;
     font-size: 1.25rem;
   }

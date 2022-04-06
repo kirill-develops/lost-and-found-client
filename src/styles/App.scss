@@ -22,7 +22,7 @@ code {
 *,
 *::before,
 *::after {
-  // color: #0A0908;
+  transition: 0.3s;
   text-rendering: optimizeLegibility;
   line-height: 1.4;
   box-sizing: border-box;
@@ -34,15 +34,10 @@ code {
     sans-serif;
 }
 
-// a:link,
-// a:visited {
-//   color: #6D213C;
-// }
-
-// a:hover,
-// a:active {
-//   color: #3B413C;
-// }
+a:hover,
+a:active {
+  color: #3B413C;
+}
 
 h1 {
   margin: 0;

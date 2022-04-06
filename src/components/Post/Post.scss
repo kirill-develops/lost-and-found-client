@@ -31,19 +31,17 @@
     padding: 0.75rem $root-padding 0.25rem;
     margin-right: -$root-padding;
     margin-bottom: $root-padding;
-    border-top-left-radius: 2.5px;
-    border-bottom-left-radius: 2.5px;
 
     &--offer {
       @extend .post__title-block;
-      background-color: #4E8098;
-      border-left: 3.5px solid #8dbed5;
+      background-color: #123794;
+      border-left: 3.5px solid #b8c3df;
     }
 
     &--seeking {
       @extend .post__title-block;
       background-color: #462749;
-      border-left: 3.5px solid #c0acc1;
+      border-left: 3.5px solid #c8bec8;
     }
   }
 

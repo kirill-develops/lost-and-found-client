@@ -80,7 +80,7 @@ class PostDetails extends Component {
             </Link>
             <h2>{description}</h2>
           </div>
-          <p>{timestamp}</p>
+          <p>posted: {timestamp}</p>
         </div>
       </div>
     )
