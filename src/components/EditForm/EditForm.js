@@ -103,6 +103,7 @@ class EditForm extends Component {
               alt='close icon'
               className='edit-form__close-ico' />
             <h1 className='edit-form__title'>Edit Profile</h1>
+            <div className={'edit-form__filler'}></div>
             <form
               onSubmit={this.handleSubmit}
               className='edit-form__form'>

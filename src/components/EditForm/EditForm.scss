@@ -54,6 +54,16 @@
     padding: 1.5rem;
   }
 
+  &__filler {
+    height: 1.25rem;
+    border-radius: 1px;
+    background-color: #a72615;
+    margin-top: 0.5rem;
+    margin-bottom: $component-padding;
+    margin-left: -$component-padding;
+    margin-right: -$component-padding;
+  }
+
   &__close-ico {
     height: 1rem;
     filter: invert(1);
@@ -69,7 +79,6 @@
     margin-top: -$component-padding;
     margin-left: -$component-padding;
     margin-right: -$component-padding;
-    margin-bottom: $component-padding;
     background-color: #22333B;
     color: white;
     padding-top: $component-padding;

@@ -127,12 +127,13 @@ class Dashboard extends Component {
           Note the passed prop that allows it to re-fetch the posts after new one is created
         */}
           <CreatePost
+            isOffer={this.state.volunteer}
             onPostCreate={this.fetchPosts}
             history={this.props.history} />
 
           <div className='list-block'>
-            <div className={`${this.state.volunteer ? 'second' : 'first'}`}>
-              <h3 className='dashboard__subheading'>Offering a Hand</h3>
+            <div className={`${this.state.volunteer ? 'list-block__second' : 'list-block__first'}`}>
+              <h3 className='dashboard__subheading--offer'>Offering a Hand</h3>
               {/* Render a list of offer's Post components specifically offering assistance */}
               <Swiper
                 className='dashboard__swiper'
@@ -164,9 +165,9 @@ class Dashboard extends Component {
               </Swiper>
             </div>
             {/* <div className='list-block__fill'></div> */}
-            <div className='list-block__filler--seeking'></div>
-            <div className={` ${this.state.volunteer ? 'first' : 'second'}`}>
-              <h3 className='dashboard__subheading'>Seeking a Hand</h3>
+            <div className='list-block__filler--second'></div>
+            <div className={` ${this.state.volunteer ? 'list-block__first' : 'list-block__second'}`}>
+              <h3 className='dashboard__subheading--seeking'>Seeking a Hand</h3>
               <Swiper
                 className='dashboard__swiper'
                 keyboard={{ enabled: true }}
