@@ -62,7 +62,7 @@ class PostDetails extends Component {
 
   render() {
 
-    const { active, avatar_url, category, description, first_name, offer, title, timestamp, isLoading, users_id } = this.state;
+    const { avatar_url, category, description, first_name, offer, title, timestamp, isLoading, users_id } = this.state;
 
     if (isLoading === true) return null;
 

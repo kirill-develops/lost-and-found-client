@@ -191,7 +191,6 @@ class Dashboard extends Component {
                   </SwiperSlide>
                 )}
               </Swiper>
-
             </div>
           </div>
         </div>

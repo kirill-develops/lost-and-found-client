@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from "react";
-import apiUtils from "../../utils/apiUtils";
+import React from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Keyboard } from 'swiper';
 import HandsPhoto from '../../assets/images/helping_out.jpg';
@@ -10,8 +9,6 @@ import 'swiper/scss';
 import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
 import './Homepage.scss';
-
-const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5050";
 
 const HomePage = () => {
 

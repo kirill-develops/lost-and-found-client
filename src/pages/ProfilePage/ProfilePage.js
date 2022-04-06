@@ -149,7 +149,6 @@ class ProfilePage extends Component {
                   </div>
                 </div>
             )
-
           ) : (
             // If user is not logged in, render a login button
             <>

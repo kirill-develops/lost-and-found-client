@@ -10,7 +10,6 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import AuthFailPage from './pages/AuthFailPage/AuthFailPage';
 import PostDetails from './pages/PostDetails/PostDetails';
 import Footer from './components/Footer/Footer';
-// import SignupPage from './pages/SignupPage/SignupPage';
 import './styles/App.scss';
 
 
