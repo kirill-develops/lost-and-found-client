@@ -5,6 +5,7 @@
 .footer {
   @include rootContainer;
   border-top: 1px solid #d1d1d1;
+  min-height: 7.5rem;
   bottom: 0;
   width: 100%;
   margin: 0;
@@ -12,6 +13,7 @@
   padding: $component-padding $root-padding 1.5rem;
 
   &__block {
+    align-self: flex-end;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,10 +25,11 @@
   }
 
   &__list {
-    margin: $root-padding 0 0;
+    margin: $root-padding auto 0;
     width: fit-content;
     padding-left: 0;
     display: flex;
+    justify-content: center;
     align-items: baseline;
     gap: $root-padding
   }
@@ -36,6 +39,14 @@
   }
 
   &__logo {
+    box-sizing: content-box;
+    padding: 0.5rem;
+    border-radius: 22px;
     height: 2rem;
+    border: 2.5px solid rgba(0, 0, 0, 0);
+
+    &:hover {
+      border: 2px solid #a7adb1;
+    }
   }
 }

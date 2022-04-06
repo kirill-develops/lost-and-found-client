@@ -6,6 +6,9 @@ import { push as Menu } from 'react-burger-menu';
 import Logo from '../../assets/images/Asset_36.svg';
 import LoginButton from '../LoginButton/LoginButton';
 import LogoutButton from '../LogoutButton/LogoutButton';
+import GitHubLogo from '../../assets/icons/logo-github.svg';
+import LinkedinLogo from '../../assets/icons/logo-linkedin.svg';
+import GmailLogo from '../../assets/icons/gmail_icon.svg';
 import './Header.scss';
 
 class Header extends Component {
@@ -46,35 +49,60 @@ class Header extends Component {
                 className='menu'
                 width={'320px'}
                 right >
-                <div className=''>
-                  {!this.props.userName ?
-                    <LoginButton /> :
-                    <LogoutButton />}
+                <div>
+                  <div className='bm-item-block'>
+
+                    <div className=''>
+                      {!this.props.userName ?
+                        <LoginButton /> :
+                        <LogoutButton />}
+                    </div>
+                    <Link
+                      to='/' id='home'
+                      onClick={() => this.closeMenu()}
+                      className='header__menu-item bm-item'>
+                      HOME</Link>
+                    <Link
+                      to='/dashboard'
+                      onClick={() => this.closeMenu()}
+                      className='header__menu-item bm-item'>
+                      DASHBOARD</Link>
+                    <Link
+                      to='/profile'
+                      onClick={() => this.closeMenu()}
+                      className='header__menu-item bm-item'>
+                      PROFILE</Link>
+                    <p className='bm-item'>MAP (Coming Soon)</p>
+                    <p className='bm-item'>MESSENGER (Coming Soon)</p>
+                  </div>
                 </div>
-                <Link
-                  to='/' id='home'
-                  onClick={() => this.closeMenu()}
-                  className='header__menu-item'>
-                  HOME</Link>
-                <Link
-                  to='/dashboard'
-                  onClick={() => this.closeMenu()}
-                  className='header__menu-item'>
-                  DASHBOARD</Link>
-                <Link
-                  to='/profile'
-                  onClick={() => this.closeMenu()}
-                  className='header__menu-item'>
-                  PROFILE</Link>
-                <p>MAP (Coming Soon)</p>
-                <p>MESSENGER (Coming Soon)</p>
+                <div className='bm-custom__block'>
+                  <label className='bm-custom__label'>Developer Details</label>
+                  <ul className='bm-custom__list'>
+                    <li className='bm-custom__list-item bm-item'>
+                      <a href='https://github.com/kirill-develops/' className='bm-custom__link'>
+                        <img src={GitHubLogo} alt='GitHub logo' className='bm-custom__logo' />
+                      </a>
+                    </li>
+                    <li className='bm-custom__list-item bm-item'>
+                      <a href='mailto:kirill.develops@gmail.com' className='bm-custom__link'>
+                        <img src={GmailLogo} alt='LinkedIn logo' className='bm-custom__logo' />
+                      </a>
+                    </li>
+                    <li className='bm-custom__list-item bm-item'>
+                      <a href='https://www.linkedin.com/in/kirill-tchentsov/' className='bm-custom__link'>
+                        <img src={LinkedinLogo} alt='LinkedIn logo' className='bm-custom__logo' />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </Menu >
             </nav>
           </div>
         </div>
       </section >
     );
-  }
+  };
 };
 
 export default Header;

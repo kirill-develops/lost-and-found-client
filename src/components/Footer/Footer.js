@@ -10,25 +10,8 @@ const Footer = () => {
   return (
     <div className='footer'>
       <div className='footer__block'>
-        <label to='/aboutDev' className='footer__label'>Developer Details</label>
-        <ul className='footer__list'>
-          <li className='footer__list-item'>
-            <a href='https://github.com/kirill-develops/' className='footer__link'>
-              <img src={GitHubLogo} alt='GitHub logo' className='footer__logo' />
-            </a>
-          </li>
-          <li className='footer__list-item'>
-            <a href='mailto:kirill.develops@gmail.com' className='footer__link'>
-              <img src={GmailLogo} alt='LinkedIn logo' className='footer__logo' />
-            </a>
-          </li>
-          <li className='footer__list-item'>
-            <a href='https://www.linkedin.com/in/kirill-tchentsov/' className='footer__link'>
-              <img src={LinkedinLogo} alt='LinkedIn logo' className='footer__logo' />
-            </a>
-          </li>
-        </ul>
-      </div>
+
+      </div >
     </div >
   )
 }
