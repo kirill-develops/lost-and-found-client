@@ -28,6 +28,17 @@ const breakpoints = {
   }
 };
 
+const filterOptions = [
+  { value: 'housing', label: 'Housing' },
+  { value: 'jobs', label: 'Jobs' },
+  { value: 'employment_services', label: 'Employment Services' },
+  { value: 'on-boarding', label: 'On-boarding' },
+  { value: 'translations', label: 'Translations' },
+  { value: 'goods', label: 'Free Goods' },
+  { value: 'transportation', label: 'Transportation' },
+  { value: '', label: 'All' },
+]
+
 class Dashboard extends Component {
   state = {
     offers: [],
@@ -68,14 +79,10 @@ class Dashboard extends Component {
   }
 
   handleFilter = (filterProp) => {
-    console.log(filterProp);
     this.setState({ filter: filterProp });
   }
 
   render() {
-    console.log(this.props.userData);
-
-    // if (!this.state.isUserRegistered) this.history.push('/profile')
 
     return (
       <section className="dashboard">
@@ -96,16 +103,16 @@ class Dashboard extends Component {
                         alt={`${this.props.userData.first_name} avatar`}
                       />
                     </div>
-                    <div className='profile-card__user-metrics'>
+                    <div className='dashboard__user-metrics'>
                       <h3 className='profile-card__subheading'>Messenger</h3>
-                      <h3 className='profile-card__label'>New Contacts: 1</h3>
-                      <h3 className='profile-card__label'>Awaiting Replies: 3</h3>
+                      <h3 className='profile-card__label'>New Contacts: <strong>1</strong></h3>
+                      <h3 className='profile-card__label'>Awaiting Replies: <strong>3</strong></h3>
                       <h3 className='profile-card__label'>View All </h3>
                     </div>
-                    <div className='profile-card__user-metrics'>
+                    <div className='dashboard__user-metrics'>
                       <h3 className='profile-card__subheading'>User Metrics</h3>
-                      <h3 className='profile-card__label'>Open Offers: 3</h3>
-                      <h3 className='profile-card__label'>Open Seeking: 1</h3>
+                      <h3 className='profile-card__label'>Open Offers: <strong>3</strong></h3>
+                      <h3 className='profile-card__label'>Open Seeking: <strong>1</strong></h3>
                       <h3 className='profile-card__label'>User Posts</h3>
                     </div>
                   </div>
@@ -114,7 +121,7 @@ class Dashboard extends Component {
             )
           }
 
-          <h2 className='dashboard__title'>Posts</h2>
+          <h2 className='dashboard__title'>{filterOptions.find(filter => filter.value === this.state.filter).label} Posts</h2>
           {/*
           Create new post component.
           Note the passed prop that allows it to re-fetch the posts after new one is created

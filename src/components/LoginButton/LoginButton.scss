@@ -2,7 +2,10 @@
 
 .login-button {
   @include button;
+  width: 100%;
   background-color: #F1F8F3;
+  display: flex;
+  justify-content: center;
 
   &:hover {
     background-color: #E4F1E8;

@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import LoginButton from '../LoginButton/LoginButton';
+import closeIco from '../../assets/icons/x_close.svg';
 import './CreatePost.scss';
 
 const dropdownOptions = [
   { value: 'housing', label: 'Housing' },
   { value: 'jobs', label: 'Jobs' },
-  { value: 'empoyment_services', label: 'Empoyment Services' },
+  { value: 'employment_services', label: 'EmpLoyment Services' },
   { value: 'on-boarding', label: 'On-boarding' },
   { value: 'translations', label: 'Translations' },
   { value: 'goods', label: 'Free Goods' },
@@ -19,6 +20,7 @@ class CreatePost extends Component {
     isLoggedIn: false,
     category: "",
     volunteer: false,
+    makePost: false,
   }
 
   // Create a change handler for all inputs
@@ -27,6 +29,17 @@ class CreatePost extends Component {
       [e.target.name]: e.target.value,
     });
   };
+
+  // Create a change handler for dropdown
+  handleSelectMenu = (e) => {
+    this.setState({
+      category: e.value,
+    });
+  };
+
+  handleCancel = () => {
+    this.setState({ makePost: false });
+  }
 
   // check to see if the user has previously logged in by confirming they have
   // the mandatory form fields filled out
@@ -56,6 +69,7 @@ class CreatePost extends Component {
         this.props.onPostCreate();
         // reset the form values
         e.target.reset();
+        this.setState({ makePost: false })
       })
       .catch(err => {
         console.log('Error creating a new post:', err);
@@ -86,61 +100,89 @@ class CreatePost extends Component {
       });
   }
 
+  toggleNewPost = () => {
+    const newState = !this.state.makePost;
+    this.setState({ makePost: newState })
+  }
+
   render() {
+
+    if (this.state.makePost)
+      return (
+        <div className='post-form'>
+          <div className='slide-inelliptic-bottom-bck'>
+            <div className="post-form__block">
+              <img
+                onClick={this.handleCancel}
+                src={closeIco}
+                alt='close icon'
+                className='edit-form__close-ico' />
+              {/* check to see if user is volunteer and produce proper heading  */}
+              <h3 className='post-form__title'>
+                {/* changes depnding on User's volunteer status */}
+                {this.state.volunteer ? 'Create New Offer' : 'What Can We Connect You With?'}
+              </h3>
+              <form className="post-form__fields" onSubmit={this.handleFormSubmit}>
+                <div className="post-form__fields-block">
+                  <div className="post-form__field">
+                    <label
+                      htmlFor="title"
+                      className="post-form__label">
+                      Brief Title</label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      maxLength="75"
+                      required
+                    />
+                  </div>
+                  <div className="post-form__field">
+                    <label
+                      htmlFor="postContent"
+                      className="post-form__label">
+                      Category</label>
+                    <Select
+                      name='category'
+                      onChange={this.handleSelectMenu}
+                      options={dropdownOptions}
+                      menuPlacement="auto"
+                      menuShouldBlockScroll={true}
+                    />
+                  </div>
+                  <div className="post-form__field">
+                    <label
+                      htmlFor="description"
+                      className="post-form__label">
+                      Description</label>
+                    <textarea
+                      type="text"
+                      name="description"
+                      id="description"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className='post-form__button-block'>
+                  <button className='post-form__button--submit'>SUBMIT</button>
+                  <button
+                    onClick={this.handleCancel}
+                    className='post-form__button--cancel'>CANCEL</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      );
+
     return (
       <section className="create-post">
         {
           this.state.isLoggedIn ? (
-            // If user is logged in, render form for creating a post
-            <form className="post-form" onSubmit={this.handleFormSubmit}>
-              {/* check to see if user is volunteer and produce proper heading  */}
-              {this.state.volunteer ? <h3>Create New Offer</h3> : <h3>What Can We Connect You With?</h3>}
-              <div className="post-form__fields">
-                <div className="post-form__field">
-                  <label
-                    htmlFor="title"
-                    className="post-form__label">
-                    Brief Title</label>
-                  <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    maxLength="75"
-                    required
-                  />
-                </div>
-                <div className="post-form__field">
-                  <label
-                    htmlFor="description"
-                    className="post-form__label">
-                    Description</label>
-                  <textarea
-                    type="text"
-                    name="description"
-                    id="description"
-                    required
-                  />
-                </div>
-                <div className="post-form__field">
-                  <label
-                    htmlFor="postContent"
-                    className="post-form__label">
-                    Category</label>
-                  <Select
-                    name='category'
-                    value={this.state.category}
-                    placeholder='Please Select'
-                    options={dropdownOptions}
-                    menuPlacement="auto"
-                    onChange={this.handleChange}
-                    menuShouldBlockScroll={true}
-                  />
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="post-form__submit">🖋️&nbsp;&nbsp;Submit</button>
-            </form>
+            <>
+              {/* If user is logged in, render form for creating a post */}
+              <p onClick={this.toggleNewPost}>click here to post</p>
+            </>
           ) : (
             // If user is not logged in, render login button
             <>

@@ -46,23 +46,28 @@ class Header extends Component {
                 className='menu'
                 width={'320px'}
                 right >
+                <div className=''>
+                  {!this.props.userName ?
+                    <LoginButton /> :
+                    <LogoutButton />}
+                </div>
                 <Link
                   to='/' id='home'
                   onClick={() => this.closeMenu()}
                   className='header__menu-item'>
-                  Home</Link>
+                  HOME</Link>
                 <Link
                   to='/dashboard'
                   onClick={() => this.closeMenu()}
                   className='header__menu-item'>
-                  Dashboard</Link>
+                  DASHBOARD</Link>
                 <Link
                   to='/profile'
                   onClick={() => this.closeMenu()}
                   className='header__menu-item'>
-                  Profile</Link>
-                <LoginButton />
-                <LogoutButton />
+                  PROFILE</Link>
+                <p>MAP (Coming Soon)</p>
+                <p>MESSENGER (Coming Soon)</p>
               </Menu >
             </nav>
           </div>

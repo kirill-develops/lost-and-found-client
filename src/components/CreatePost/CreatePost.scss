@@ -1,31 +1,89 @@
 @use '../../styles/partials/mixins'as *;
+@use '../../styles/partials/variables'as *;
 
 .post-form {
-  width: 100%;
-  position: relative;
-  margin-bottom: -0.5rem;
+  @include rootContainerInner;
+  background-color: #0000007c;
+  backdrop-filter: blur(4px);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  &__block {
+    box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    position: absolute;
+    width: 65%;
+    background-color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1.5rem;
+  }
+
+  &__close-ico {
+    height: 1rem;
+    filter: invert(1);
+    position: absolute;
+    right: $component-padding;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__title {
+    margin-top: -$component-padding;
+    margin-left: -$component-padding;
+    margin-right: -$component-padding;
+    margin-bottom: $component-padding;
+    background-color: #22333B;
+    color: white;
+    padding-top: $component-padding;
+    padding-left: $component-padding;
+    padding-bottom: 0.5rem;
+    border-radius: 1px;
+    font-size: 1.35rem;
+    font-weight: 500;
+    font-family: sans-serif;
+  }
 
   &__fields {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    flex-direction: column;
+    gap: $component-padding;
     width: 100%;
+  }
+
+  &__fields-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $component-padding;
+    width: 80%;
   }
 
   &__field {
     margin-bottom: 1rem;
-    width: 50%;
-  }
-
-  #postTitle,
-  #postContent {
     width: 100%;
   }
 
-  #postContent {
+  #title,
+  #description {
+    width: 100%;
+  }
+
+  #description {
     height: 6rem;
+    resize: none;
+
   }
 
   &__label {
+    width: 100%;
     display: block;
     margin-bottom: 0.25rem;
     color: #666;
@@ -33,16 +91,37 @@
     font-weight: 500;
   }
 
-  &__submit {
-    @include button;
-    position: absolute;
-    bottom: 1.3rem;
-    cursor: pointer;
-    background-color: #F1F8F3;
-    color: #227396;
+  &__button-block {
+    display: flex;
+    flex-wrap: nowrap;
+    align-self: flex-end;
+  }
 
-    &:hover {
-      background-color: #E4F1E8;
+  &__button {
+    @include button;
+    padding: $root-padding $component-padding;
+    cursor: pointer;
+
+
+    &--submit {
+      @extend .post-form__button;
+      margin-right: $component-padding;
+      background-color: #F1F8F3;
+      color: #227396;
+
+      &:hover {
+        background-color: #E4F1E8;
+      }
+    }
+
+    &--cancel {
+      @extend .post-form__button;
+      color: #6D213C;
+      background-color: #FCF2EE;
+
+      &:hover {
+        background-color: #F9E4DC;
+      }
     }
   }
 }
@@ -51,8 +130,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 75%;
-  left: 12.5%;
+  width: 25%;
+  left: 50%;
+  transform: translatex(-50%);
   position: fixed;
   bottom: 0;
   background-color: #fff;

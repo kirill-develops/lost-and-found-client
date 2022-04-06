@@ -15,19 +15,16 @@ const Footer = () => {
           <li className='footer__list-item'>
             <a href='https://github.com/kirill-develops/' className='footer__link'>
               <img src={GitHubLogo} alt='GitHub logo' className='footer__logo' />
-              GitHub
-            </a>
-          </li>
-          <li className='footer__list-item'>
-            <a href='https://www.linkedin.com/in/kirill-tchentsov/' className='footer__link'>
-              <img src={LinkedinLogo} alt='LinkedIn logo' className='footer__logo' />
-              LinkedIn
             </a>
           </li>
           <li className='footer__list-item'>
             <a href='mailto:kirill.develops@gmail.com' className='footer__link'>
               <img src={GmailLogo} alt='LinkedIn logo' className='footer__logo' />
-              kirill.develops@gmail.com
+            </a>
+          </li>
+          <li className='footer__list-item'>
+            <a href='https://www.linkedin.com/in/kirill-tchentsov/' className='footer__link'>
+              <img src={LinkedinLogo} alt='LinkedIn logo' className='footer__logo' />
             </a>
           </li>
         </ul>

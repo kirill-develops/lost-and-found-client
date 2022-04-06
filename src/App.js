@@ -40,7 +40,7 @@ class App extends Component {
           <Header
             userName={this.state.userData.first_name}
           />
-          <div className="menu-wrapper" id='menu-wrapper'>
+          <div className="menu-wrapper">
             <Switch >
               <Route path="/profile" component={ProfilePage} />
               <Route path="/user/:id" component={ProfilePage} />

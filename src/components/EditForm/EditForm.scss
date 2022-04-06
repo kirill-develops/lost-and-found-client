@@ -117,10 +117,18 @@
   &__button {
     @include button;
     padding: $root-padding $component-padding;
+    cursor: pointer;
+
 
     &--submit {
       @extend .edit-form__button;
       margin-right: $component-padding;
+      background-color: #F1F8F3;
+      color: #227396;
+
+      &:hover {
+        background-color: #E4F1E8;
+      }
     }
 
     &--cancel {

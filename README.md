@@ -6,10 +6,10 @@ It's also my capstone project for BrainStation's full-stack bootcamp. We were ta
 
 Below are instructions on how to install the React.js front-end app. If you
 haven't already, please install the back-end Node/Express API server first.
-[click here](https://github.com/kirill-develops/lost-and-found-server) to find
+[Click here](https://github.com/kirill-develops/lost-and-found-server) to find
 the repo and instruction.
 
- [Click here ](http://linktomyvideo.com)to watch my demo presentation.
+ [Click here](http://linktomyvideo.com) to watch my demo presentation.
 
  Thanks for stopping by. 💫 
 

@@ -35,6 +35,7 @@ const Post = ({ post }) => {
         </div>
         <div className="post__block">
           <h3 className="post__subheading">{post.title}</h3>
+          <p className="post__city">{post.city}, {post.province}</p>
           <div className="post__details">
             <div className="post__author">
               <img
@@ -42,11 +43,10 @@ const Post = ({ post }) => {
                 src={post.avatar_url}
                 alt={`${post.first_name} avatar`}
               />
-              <h3 className="post__username">{post.first_name}</h3>
-              <p className="post__city">{post.city}, {post.province}</p>
+              <h3 className="post__username">{post.first_name} {post.last_name}</h3>
             </div>
+            <p className="post__published">posted: {formatTimestamp(post.updated_at)}</p>
           </div>
-          <p className="post__published">{formatTimestamp(post.updated_at)}</p>
           <p className="post__content">{post.description}</p>
         </div>
       </Link>

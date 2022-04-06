@@ -15,6 +15,7 @@
 
   &__block {
     height: 80%;
+    padding-left: $root-padding;
     box-sizing: border-box;
     overflow: hidden;
 
@@ -52,17 +53,22 @@
   }
 
   &__subheading {
-    padding-left: $root-padding;
-    margin-top: 0;
-    font-size: 1.2rem;
-    color: #A37A74;
+    margin: 0 auto 0.25rem;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: #373F51;
   }
 
   &__details {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
     padding-bottom: $root-padding;
+  }
+
+  &__city {
+    color: #0A0908;
+    margin-top: 0.25rem;
   }
 
   &__author {
@@ -73,12 +79,12 @@
   }
 
   &__avatar {
-    height: 1.5rem;
+    height: 2rem;
   }
 
   &__username {
     margin: 0;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   &__owned {
