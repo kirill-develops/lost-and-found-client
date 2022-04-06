@@ -2,6 +2,58 @@
 @use '../../styles/partials/mixins'as*;
 
 .post-details {
+  @include rootContainer;
   min-height: $root-min-height;
-  padding: $root-padding;
+  background-color: #FFFFFF;
+  padding: $component-padding;
+
+  &__title {
+    margin-top: 3rem;
+    background-color: #22333B;
+    color: white;
+    padding-top: $component-padding;
+    padding-left: $component-padding;
+    margin-left: -$component-padding;
+    margin-right: -$component-padding;
+    padding-bottom: 0.5rem;
+    border-radius: 1px;
+  }
+
+  &__block {
+    box-shadow: 0px 10px 13px -7px #000000,
+      0px -10px 13px -7px rgba(0, 0, 0, 0);
+    margin: 0 auto 4.5rem;
+    border-radius: 2px;
+    padding: 0 $component-padding $component-padding;
+  }
+
+  &__subheading {
+    margin-left: -$component-padding;
+    margin-right: -$component-padding;
+    margin-top: 0.5rem;
+    background-color: #d57a66;
+    color: #FFFFFF;
+    padding: $root-padding $component-padding 0.5rem;
+    font-size: 1.35rem;
+    font-weight: 500;
+    font-family: sans-serif;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    &--offer {
+      @extend .post-details__subheading;
+      background-color: #4E8098;
+    }
+
+    &--seeking {
+      @extend .post-details__subheading;
+      background-color: #462749;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    gap: 2rem;
+  }
 }

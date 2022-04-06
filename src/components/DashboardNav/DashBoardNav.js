@@ -8,7 +8,6 @@ const DashBoardNav = ({ handleFilter }) => {
 
   // on mobile aspect ratio 
   const expandNav = () => {
-    console.log(active);
     setActive(!active);
   }
 

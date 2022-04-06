@@ -4,6 +4,17 @@ import { Link } from 'react-router-dom';
 import apiUtils from '../../utils/apiUtils';
 import './PostDetails.scss';
 
+const filterOptions = [
+  { value: 'housing', label: 'Housing' },
+  { value: 'jobs', label: 'Jobs' },
+  { value: 'employment_services', label: 'Employment Services' },
+  { value: 'on-boarding', label: 'On-boarding' },
+  { value: 'translations', label: 'Translations' },
+  { value: 'goods', label: 'Free Goods' },
+  { value: 'transportation', label: 'Transportation' },
+  { value: '', label: 'All' },
+];
+
 class PostDetails extends Component {
   state = {
     active: 0,
@@ -28,7 +39,6 @@ class PostDetails extends Component {
     apiUtils
       .getPostById(this.props.match.params.id)
       .then(post => {
-        console.log(post);
         // Update state with fetched post data
         this.setState({
           active: post.data.active,
@@ -41,7 +51,7 @@ class PostDetails extends Component {
           pic_url: post.data.pic_url,
           title: post.data.title,
           users_id: post.data.users_id,
-          timestamp: post.data.timestamp,
+          timestamp: post.data.updated_at,
           isLoading: false
         });
       })
@@ -52,25 +62,26 @@ class PostDetails extends Component {
 
   render() {
 
-    const { active, avatar_url, category, description, first_name, isCurrentUser, offer, pic_url, title, timestamp, isLoading, users_id } = this.state;
+    const { active, avatar_url, category, description, first_name, offer, title, timestamp, isLoading, users_id } = this.state;
 
     if (isLoading === true) return null;
 
     return (
       <div className='post-details'>
-        <h1>{active}</h1>
-        <img src={avatar_url} alt='user avatar' className='' />
-        <h2>{category}</h2>
-        <h2>{description}</h2>
-        <Link to={`user/${users_id}`}>
-          <h2>{first_name}</h2>
-        </Link>
-        <h2>{isCurrentUser}</h2>
-        <h2>{offer}</h2>
-        <h2>{pic_url}</h2>
-        <h2>{title}</h2>
-        <h2>{timestamp}</h2>
-        <h2>{isLoading}</h2>
+        <div className='post-details__block'>
+          <h1 className="post-details__title">{title}</h1>
+          <h2 className={offer ? 'post-details__subheading--offer' : 'post-details__subheading--seeking'}>
+            {filterOptions.find(filter => filter.value === category).label}
+          </h2>
+          <div className='post-details__bottom'>
+            <Link to={`user/${users_id}`}>
+              <img src={avatar_url} alt='user avatar' className='' />
+              <h2>{first_name}</h2>
+            </Link>
+            <h2>{description}</h2>
+          </div>
+          <p>{timestamp}</p>
+        </div>
       </div>
     )
   }
