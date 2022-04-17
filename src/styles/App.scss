@@ -1,5 +1,7 @@
 @use './partials/breakpoints'as*;
 @use './partials/variables'as*;
+@use './partials/keyframes'as*;
+@use './partials/mixins'as*;
 
 html {
   height: 100%;

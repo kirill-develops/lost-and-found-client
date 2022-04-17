@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import LoginButton from '../LoginButton/LoginButton';
 import closeIco from '../../assets/icons/x_close.svg';
+import isProfileComplete from '../../utils/isProfileComplete';
 import './CreatePost.scss';
 
 const dropdownOptions = [
@@ -15,185 +16,162 @@ const dropdownOptions = [
   { value: 'goods', label: 'Free Goods' },
   { value: 'transportation', label: 'Transportation' },
 ]
-class CreatePost extends Component {
-  state = {
-    isLoggedIn: false,
-    category: "",
-    volunteer: false,
-    makePost: false,
-  }
 
-  // Create a change handler for all inputs
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
+const CreatePost = ({ isOffer, onPostCreate, history }) => {
 
-  // Create a change handler for dropdown
-  handleSelectMenu = (e) => {
-    this.setState({
-      category: e.value,
-    });
-  };
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [category, setCategory] = useState("");
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [volunteer, setVolunteer] = useState(isOffer);
+  const [makePost, toggleNewPost] = useReducer(
+    (checked) => !checked,
+    false
+  );
 
-  handleCancel = () => {
-    this.setState({ makePost: false });
-  }
-
-  // check to see if the user has previously logged in by confirming they have
-  // the mandatory form fields filled out
-  isProfileComplete = (user) => {
-    if (!user.city || !user.phone || !user.province || !user.volunteer) {
-      return false;
-    }
-    return true;
-  }
-
-  handleFormSubmit = e => {
+  const handleFormSubmit = e => {
     // todo form validation
     // prevent page reload
     e.preventDefault();
-    // Deconstruct Event Target's by attribute name
-    const { title, description, category } = e.target;
-    // Create a postObj with event target value's from each field
+    // Create a postObj with state value's from each field
     const postObj = {
-      title: title.value,
-      description: description.value,
-      category: category.value,
-      offer: this.state.volunteer,
+      title: title,
+      description: description,
+      category: category,
+      offer: volunteer,
     }
     apiUtils.addPost(postObj)
       .then(() => {
         // Re-fetch all posts
-        this.props.onPostCreate();
+        onPostCreate();
         // reset the form values
         e.target.reset();
-        this.setState({ makePost: false })
+        setMakePost(false);
       })
       .catch(err => {
         console.log('Error creating a new post:', err);
       })
   }
 
-  componentDidMount() {
+  useEffect(() => {
     // Check if user is currently logged in, so we can display a form or login button conditionally
     apiUtils
       .getProfile()
       .then(res => {
-        // checks to see if user is a volunteer or not and change state accordingly
-        if (res.data && this.isProfileComplete(res.data)) {
-          res.data.volunteer.toLowerCase() === 'true' ?
-            this.setState({
-              isLoggedIn: true,
-              volunteer: true
-            })
-            : this.setState({
-              isLoggedIn: true,
-              volunteer: false
-            })
-        }
+        // checks to see if user's profile is complete
         // if the user's profile is incomplete, send them to the profile page
-        else if (!this.isProfileComplete(res.data)) {
-          this.props.history.push('/profile');
-        }
+        (res.data && !isProfileComplete(res.data)) ? history.push('/profile') : setLoggedIn(true);
+        // check to see if user is a volunteer and change state accordingly
+        res.data.volunteer.toLowerCase() === 'true' ? setVolunteer(true) : setVolunteer(false);
       });
-  }
+  }, [isLoggedIn])
 
-  toggleNewPost = () => {
-    const newState = !this.state.makePost;
-    this.setState({ makePost: newState })
-  }
-
-  render() {
-
-    if (this.state.makePost)
-      return (
-        <div className='post-form'>
-          <div className='slide-inelliptic-bottom-bck'>
-            <div className="post-form__block">
-              <img
-                onClick={this.handleCancel}
-                src={closeIco}
-                alt='close icon'
-                className='post-form__close-ico' />
-              <h3 className='post-form__title'>
-                {/* check to see if user is volunteer and produce proper heading  */}
-                {this.state.volunteer ? 'Create New Offer' : 'What Can We Connect You With?'}
-              </h3>
-              <div className={this.props.isOffer ? 'post-form__filler--offer' : 'post-form__filler--seeking'}></div>
-              <form className="post-form__fields" onSubmit={this.handleFormSubmit}>
-                <div className="post-form__fields-block">
-                  <div className="post-form__field">
-                    <label
-                      htmlFor="title"
-                      className="post-form__label">
-                      Brief Title</label>
-                    <input
-                      type="text"
-                      name="title"
-                      id="title"
-                      maxLength="75"
-                      required
-                    />
-                  </div>
-                  <div className="post-form__field">
-                    <label
-                      htmlFor="postContent"
-                      className="post-form__label">
-                      Category</label>
-                    <Select
-                      name='category'
-                      onChange={this.handleSelectMenu}
-                      options={dropdownOptions}
-                      menuPlacement="auto"
-                      menuShouldBlockScroll={true}
-                    />
-                  </div>
-                  <div className="post-form__field">
-                    <label
-                      htmlFor="description"
-                      className="post-form__label">
-                      Description</label>
-                    <textarea
-                      type="text"
-                      name="description"
-                      id="description"
-                      required
-                    />
-                  </div>
+  if (makePost)
+    return (
+      <div className='post-form'>
+        <div className='slide-inelliptic-bottom-bck'>
+          <div className="post-form__block">
+            <img
+              onClick={() => toggleNewPost}
+              src={closeIco}
+              alt='close icon'
+              className='post-form__close-ico' />
+            <h3 className='post-form__title'>
+              {/* check to see if user is volunteer and produce proper heading  */}
+              {volunteer ? 'Create New Offer' : 'What Can We Connect You With?'}
+            </h3>
+            <div className={isOffer ? 'post-form__filler--offer' : 'post-form__filler--seeking'}></div>
+            <form className="post-form__fields" onSubmit={handleFormSubmit}>
+              <div className="post-form__fields-block">
+                <div className="post-form__field">
+                  <label
+                    htmlFor="title"
+                    className="post-form__label">
+                    Brief Title
+                  </label>
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    id="title"
+                    maxLength="75"
+                    required
+                  />
                 </div>
-                <div className='post-form__button-block'>
-                  <button className='post-form__button--submit'>SUBMIT</button>
-                  <button
-                    onClick={this.handleCancel}
-                    className='post-form__button--cancel'>CANCEL</button>
+                <div className="post-form__field">
+                  <label
+                    htmlFor="category"
+                    className="post-form__label">
+                    Category
+                  </label>
+                  <Select
+                    onChange={(e) => setCategory(e.value)}
+                    options={dropdownOptions}
+                    menuPlacement="auto"
+                    menuShouldBlockScroll={true}
+                    required
+                  />
                 </div>
-              </form>
-            </div>
+                <div className="post-form__field">
+                  <label
+                    htmlFor="description"
+                    className="post-form__label">
+                    Description
+                  </label>
+                  <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    id="description"
+                    required
+                  />
+                </div>
+              </div>
+              <div className='post-form__button-block'>
+                <button className='post-form__button--submit'>
+                  SUBMIT
+                </button>
+                <button
+                  onClick={toggleNewPost}
+                  className='post-form__button--cancel'>
+                  CANCEL
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      );
+      </div>
+    );
 
-    return (
-      <section className="create-post">
-        {
-          this.state.isLoggedIn ? (
+  return (
+    <section className="create-post">
+      {
+        isLoggedIn ?
+          (
             <>
               {/* If user is logged in, render form for creating a post */}
-              <button className='create-post__button' onClick={this.toggleNewPost}>create post</button>
+              <button
+                onClick={toggleNewPost}
+                className='create-post__button'
+              >
+                create post
+              </button>
             </>
+
           ) : (
+
             // If user is not logged in, render login button
             <>
-              <p className='create-post__button-label'><strong>Login to create your own posts.</strong></p>
+              <p className='create-post__button-label'>
+                <strong>
+                  Login to create your own posts.
+                </strong>
+              </p>
               <LoginButton />
             </>
           )
-        }
-      </section>
-    );
-  }
+      }
+    </section>
+  );
 }
 
 export default CreatePost;

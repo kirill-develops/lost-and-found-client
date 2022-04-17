@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Keyboard } from 'swiper';
+import ContactOverlay from "../../components/ContactOverlay/ContactOverlay";
 import HandsPhoto from '../../assets/images/helping_out.jpg';
 import FistBump from '../../assets/images/fist_bump.jpg';
 import Logo from '../../assets/images/Asset_37.svg';
@@ -13,6 +14,10 @@ import './Homepage.scss';
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5050";
 
 const HomePage = () => {
+  const [contact, setContact] = useState(false);
+
+  if (contact === true)
+    return <ContactOverlay setContact={setContact} contactState={contact} />
 
   return (
     <section className="homepage">
@@ -26,7 +31,9 @@ const HomePage = () => {
         <div className="homepage__swiper-inner-block">
           <div className="homepage__swiper-block--highlight1"></div>
           <div className="homepage__swiper-block--highlight2"></div>
-          <div className="homepage__swiper-block--highlight3"></div>
+          <div
+            onClick={() => setContact(!contact)}
+            className="homepage__swiper-block--highlight3"></div>
 
           <Swiper
             keyboard={{ enabled: true }}

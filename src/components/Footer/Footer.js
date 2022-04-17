@@ -1,7 +1,5 @@
 import React from 'react';
-import GitHubLogo from '../../assets/icons/logo-github.svg';
-import LinkedinLogo from '../../assets/icons/logo-linkedin.svg';
-import GmailLogo from '../../assets/icons/gmail_icon.svg';
+import Icon from '../../assets/icons/favicon.svg';
 import './Footer.scss';
 
 
@@ -10,7 +8,8 @@ const Footer = () => {
   return (
     <div className='footer'>
       <div className='footer__block'>
-
+        <p className='footer__body'>© Lost & Found, All rights reserved.</p>
+        <img src={Icon} alt='Lost & Found Icon' className='footer__ico' />
       </div >
     </div >
   )

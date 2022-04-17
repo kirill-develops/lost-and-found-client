@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-spacing */
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import apiUtils from './utils/apiUtils';
 
 import Header from './components/Header/Header';
@@ -13,51 +13,48 @@ import Footer from './components/Footer/Footer';
 import './styles/App.scss';
 
 
-class App extends Component {
-  state = {
-    isAuthenticating: true,
-    isLoggedIn: false,
-    userData: {}
-  }
+const App = () => {
 
-  componentDidMount() {
+  const [isAuthenticating, setAuthenticating] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
     apiUtils
       .getProfile()
       .then(res => {
-        this.setState({ isLoggedIn: true, userData: res.data });
+        setLoggedIn(true);
+        setUserData(res.data);
       })
       .catch(_err => {
-        this.setState({ isAuthenticating: false });
+        setAuthenticating(false);
       })
-  }
+  }, [isLoggedIn]);
 
-  render() {
-
-    return (
-      <BrowserRouter >
-        <div className="app" id='menu-outer'>
-          <Header
-            userName={this.state.userData.first_name}
-          />
-          <div className="menu-wrapper">
-            <Switch >
-              <Route path="/profile" component={ProfilePage} />
-              <Route path="/user/:id" component={ProfilePage} />
-              <Route path="/dashboard" render={(routerProps) =>
-                <Dashboard
-                  isLoggedIn={this.state.isLoggedIn}
-                  userData={this.state.userData}
-                  {...routerProps} />} />
-              <Route path="/post/:id" component={PostDetails} />
-              <Route path="/auth-fail" component={AuthFailPage} />
-              <Route path="/" exact component={HomePage} />
-            </Switch>
-            <Footer />
-          </div>
+  return (
+    <BrowserRouter >
+      <div className="app" id='menu-outer'>
+        <Header
+          userName={userData.first_name}
+        />
+        <div className="menu-wrapper" id='menu-wrapper'>
+          <Switch >
+            <Route path="/profile" component={ProfilePage} />
+            <Route path="/user/:id" component={ProfilePage} />
+            <Route path="/dashboard" render={(routerProps) =>
+              <Dashboard
+                isLoggedIn={isLoggedIn}
+                userData={userData}
+                {...routerProps} />} />
+            <Route path="/post/:id" component={PostDetails} />
+            <Route path="/auth-fail" component={AuthFailPage} />
+            <Route path="/" exact component={HomePage} />
+          </Switch>
+          <Footer />
         </div>
-      </BrowserRouter>
-    );
-  }
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;

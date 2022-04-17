@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apiUtils from '../../utils/apiUtils';
 import './PostDetails.scss';
@@ -15,76 +15,69 @@ const filterOptions = [
   { value: '', label: 'All' },
 ];
 
-class PostDetails extends Component {
-  state = {
-    active: 0,
-    avatar_url: '',
-    category: '',
-    description: '',
-    first_name: '',
-    isCurrentUser: '',
-    offer: '',
-    pic_url: '',
-    title: '',
-    timestamp: '',
-    users_id: '',
-    isLoading: true,
-  }
+const PostDetails = ({ match }) => {
 
-  componentDidMount() {
-    this.fetchPost();
-  }
+  const [active, setActive] = useState(0);
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [category, setCategory] = useState('');
+  const [description, setDescription] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [isCurrentUser, setCurrentUser] = useState('');
+  const [offer, setOffer] = useState('');
+  const [picUrl, setPicUrl] = useState('');
+  const [title, setTitle] = useState('');
+  const [timestamp, setTimestamp] = useState('');
+  const [usersId, setUsersId] = useState('');
+  const [isLoading, setLoading] = useState(true);
 
-  fetchPost = () => {
+  const fetchPost = () => {
     apiUtils
-      .getPostById(this.props.match.params.id)
+      .getPostById(match.params.id)
       .then(post => {
         // Update state with fetched post data
-        this.setState({
-          active: post.data.active,
-          avatar_url: post.data.avatar_url,
-          category: post.data.category,
-          description: post.data.description,
-          first_name: post.data.first_name,
-          isCurrentUser: post.data.isCurrentUser,
-          offer: post.data.offer,
-          pic_url: post.data.pic_url,
-          title: post.data.title,
-          users_id: post.data.users_id,
-          timestamp: post.data.updated_at,
-          isLoading: false
-        });
+        setActive(post.data.active);
+        setAvatarUrl(post.data.avatar_url);
+        setCategory(post.data.category);
+        setDescription(post.data.description);
+        setFirstName(post.data.first_name);
+        setCurrentUser(post.data.isCurrentUser);
+        setOffer(post.data.offer);
+        setPicUrl(post.data.pic_url);
+        setTitle(post.data.title);
+        setUsersId(post.data.users_id);
+        setTimestamp(post.data.updated_at);
+        setLoading(false);
       })
       .catch(err => {
         console.log('Error fetching posts:', err);
       });
   }
 
-  render() {
+  useEffect(() => {
+    fetchPost();
+  });
 
-    const { avatar_url, category, description, first_name, offer, title, timestamp, isLoading, users_id } = this.state;
+  if (isLoading === true) return null;
 
-    if (isLoading === true) return null;
-
-    return (
-      <div className='post-details'>
-        <div className='post-details__block'>
-          <h1 className="post-details__title">{title}</h1>
-          <h2 className={offer ? 'post-details__subheading--offer' : 'post-details__subheading--seeking'}>
-            {filterOptions.find(filter => filter.value === category).label}
-          </h2>
-          <div className='post-details__bottom'>
-            <Link to={`user/${users_id}`}>
-              <img src={avatar_url} alt='user avatar' className='' />
-              <h2>{first_name}</h2>
-            </Link>
-            <h2>{description}</h2>
-          </div>
-          <p>posted: {timestamp}</p>
+  return (
+    <div className='post-details'>
+      <div className='post-details__block'>
+        <h1 className="post-details__title">{title}</h1>
+        <h2 className={offer ? 'post-details__subheading--offer' : 'post-details__subheading--seeking'}>
+          {filterOptions.find(filter => filter.value === category).label}
+        </h2>
+        <div className='post-details__bottom'>
+          <Link to={`user/${usersId}`}>
+            <img src={avatarUrl} alt='user avatar' className='' />
+            <h2>{firstName}</h2>
+          </Link>
+          <h2>{description}</h2>
         </div>
+        <p>posted: {timestamp}</p>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
 
 export default PostDetails;

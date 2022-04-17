@@ -1,0 +1,85 @@
+@use '../../styles/partials/variables'as*;
+@use '../../styles/partials/mixins'as*;
+
+
+.edit-form {
+  @include overlay;
+
+  &-block {
+    @include overlayBlock;
+  }
+
+  &__filler {
+    @include cardFiller;
+    background-color: #a72615;
+  }
+
+  &__close-ico {
+    @include closeIco;
+  }
+
+  &__title {
+    @include cardTitle;
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $component-padding 2%;
+  }
+
+  &__label {
+    width: 49%;
+
+    &--address {
+      width: 100%;
+    }
+
+    &--volunteer {
+      margin: 0;
+    }
+  }
+
+  &__field {
+    width: 100%;
+
+    &--error {
+      border: 1px solid red;
+    }
+  }
+
+  &__input-block {
+    width: 49%;
+  }
+
+  &__radio {}
+
+  &__button {
+    @include button;
+    padding: $root-padding $component-padding;
+    cursor: pointer;
+
+
+    &--submit {
+      @extend .edit-form__button;
+      margin-right: $component-padding;
+      background-color: #F1F8F3;
+      color: #227396;
+
+      &:hover {
+        background-color: #E4F1E8;
+      }
+    }
+
+    &--cancel {
+      @extend .edit-form__button;
+      color: #6D213C;
+      background-color: #FCF2EE;
+
+      &:hover {
+        background-color: #F9E4DC;
+      }
+    }
+  }
+}

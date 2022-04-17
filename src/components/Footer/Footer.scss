@@ -49,4 +49,14 @@
       border: 2px solid #a7adb1;
     }
   }
+
+  &__body {
+    color: #a7adb1;
+    text-align: center;
+  }
+
+  &__ico {
+    height: 1.5rem;
+    filter: grayscale(1);
+  }
 }

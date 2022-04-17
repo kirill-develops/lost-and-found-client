@@ -104,7 +104,7 @@
     font-weight: 500;
   }
 
-  &__user-frame {
+  &__user-wrapper {
     @include cardFrameInner;
     display: flex;
     gap: $component-padding;
@@ -112,7 +112,7 @@
     padding-bottom: 3rem;
   }
 
-  &__user-metrics {
+  &__user-frame {
     flex: 1;
     background-color: #FFFFFF;
     padding: $component-padding;
@@ -123,17 +123,10 @@
 
   &__avatar-frame {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    padding: $component-padding;
-    background-color: #FFF;
-    box-shadow: 0px 8px 20px -8px #00000090;
-    border-radius: 3px;
-    border-bottom: 5px solid #666;
+    @include swiperAvatarFrame
   }
 
   &__avatar {
-    height: 100%;
-    border-radius: 50%;
+    @include swiperAvatar;
   }
 }

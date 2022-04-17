@@ -4,6 +4,7 @@
 .profile-page {
   @include rootContainer;
   min-height: $root-min-height;
+  height: 100%;
   background-color: #FFFFFF;
   padding: $component-padding;
   z-index: 10;
@@ -78,16 +79,7 @@
     padding-bottom: 3rem;
   }
 
-  &__user-details {
-    flex: 1;
-    background-color: #FFFFFF;
-    padding: $component-padding;
-    border-radius: 3px;
-    border-bottom: 5px solid #666;
-    box-shadow: 0px 8px 20px -8px #00000090;
-  }
-
-  &__user-metrics {
+  &__user-frame {
     flex: 1;
     background-color: #FFFFFF;
     padding: $component-padding;
@@ -98,23 +90,19 @@
 
   &__avatar-frame {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    padding: $component-padding;
-    background-color: #FFF;
-    box-shadow: 0px 8px 20px -8px #00000090;
-    border-radius: 3px;
-    border-bottom: 5px solid #666;
+    @include swiperAvatarFrame;
   }
 
   &__avatar {
-    height: 100%;
-    border-radius: 50%;
+    @include swiperAvatar
   }
 
   &__label {
     margin-left: $root-padding;
-    color: #373F51;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serifs;
+    @include formLabel
+  }
+
+  &__body {
+    @include formBody;
   }
 }
