@@ -1,5 +1,6 @@
 @use './variables'as*;
 @use './breakpoints'as*;
+@use './colors'as*;
 
 //FONTS
 @mixin formLabel {
@@ -111,7 +112,7 @@
 }
 
 @mixin pageTitle {
-  background-color: #22333B;
+  background-color: $site-primary;
   color: white;
   font-weight: 700;
   font-size: 2rem;
@@ -218,6 +219,6 @@
   font-size: 1.35rem;
   font-weight: 500;
   font-family: sans-serif;
-  background-color: #22333B;
+  background-color: $site-primary;
   color: white;
 }
