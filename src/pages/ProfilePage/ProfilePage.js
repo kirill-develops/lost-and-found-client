@@ -31,22 +31,21 @@ const ProfilePage = () => {
       .catch(err => {
         // If we are getting back 401 (Unauthorized) back from the server, means
         // we need to log in
-        if (err.response.status === 401) {
+        err.response.status === 401 ? (
           // Update the state: done authenticating, user is not logged in
-          setAuthenticating(false);
-          setLoggedIn(false);
-        } else {
-          console.log('Error authenticating', err);
-          setAuthenticating(false);
-        }
+          setAuthenticating(false),
+          setLoggedIn(false)
+        ) : (
+          console.log('Error authenticating', err),
+          setAuthenticating(false)
+        )
       });
   }, [editProfile]);
 
   // While the component is authenticating, do not render anything (alternatively, this can be a preloader)
-  if (isAuthenticating) return null;
-
-  return (
-
+  return isAuthenticating ? (
+    null
+  ) : (
     <section className="profile-page">
       <div className="profile-page__block">
         <h1 className="profile-page__title">Profile Page</h1>

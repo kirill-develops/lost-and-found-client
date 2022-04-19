@@ -16,9 +16,6 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5050";
 const HomePage = () => {
   const [contact, setContact] = useState(false);
 
-  if (contact === true)
-    return <ContactOverlay setContact={setContact} contactState={contact} />
-
   return (
     <section className="homepage">
       <div className="homepage__header">
@@ -104,7 +101,10 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-    </section >
+      {contact === true &&
+        <ContactOverlay setContact={setContact} contactState={contact} />
+      }
+    </section>
   );
 };
 

@@ -44,10 +44,7 @@ const DashboardSwiper = ({ postData, filterBy }) => {
       {
         postData
           .filter(post => {
-            if (filterBy) {
-              return post.category === filterBy
-            }
-            return post;
+            return filterBy ? post.category === filterBy : post;
           })
           .map(post =>
             <SwiperSlide key={post.post_id}>

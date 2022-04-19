@@ -45,8 +45,10 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
         // Re-fetch all posts
         onPostCreate();
         // reset the form values
-        e.target.reset();
-        setMakePost(false);
+        toggleNewPost(e => !e);
+        setTitle('');
+        setCategory('');
+        setDescription('');
       })
       .catch(err => {
         console.log('Error creating a new post:', err);
@@ -66,109 +68,103 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
       });
   }, [isLoggedIn])
 
-  if (makePost)
-    return (
-      <div className='post-form'>
-        <div className='slide-inelliptic-bottom-bck'>
-          <div className="post-form__block">
-            <img
-              onClick={() => toggleNewPost}
-              src={closeIco}
-              alt='close icon'
-              className='post-form__close-ico' />
-            <h3 className='post-form__title'>
-              {/* check to see if user is volunteer and produce proper heading  */}
-              {volunteer ? 'Create New Offer' : 'What Can We Connect You With?'}
-            </h3>
-            <div className={isOffer ? 'post-form__filler--offer' : 'post-form__filler--seeking'}></div>
-            <form className="post-form__fields" onSubmit={handleFormSubmit}>
-              <div className="post-form__fields-block">
-                <div className="post-form__field">
-                  <label
-                    htmlFor="title"
-                    className="post-form__label">
-                    Brief Title
-                  </label>
-                  <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    id="title"
-                    maxLength="75"
-                    required
-                  />
-                </div>
-                <div className="post-form__field">
-                  <label
-                    htmlFor="category"
-                    className="post-form__label">
-                    Category
-                  </label>
-                  <Select
-                    onChange={(e) => setCategory(e.value)}
-                    options={dropdownOptions}
-                    menuPlacement="auto"
-                    menuShouldBlockScroll={true}
-                    required
-                  />
-                </div>
-                <div className="post-form__field">
-                  <label
-                    htmlFor="description"
-                    className="post-form__label">
-                    Description
-                  </label>
-                  <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    id="description"
-                    required
-                  />
-                </div>
-              </div>
-              <div className='post-form__button-block'>
-                <button className='post-form__button--submit'>
-                  SUBMIT
-                </button>
-                <button
-                  onClick={toggleNewPost}
-                  className='post-form__button--cancel'>
-                  CANCEL
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    );
 
-  return (
-    <section className="create-post">
-      {
-        isLoggedIn ?
-          (
-            <>
-              {/* If user is logged in, render form for creating a post */}
+  return makePost ? (
+    <div className='post-form'>
+      <div className='slide-inelliptic-bottom-bck'>
+        <div className="post-form__block">
+          <img
+            onClick={toggleNewPost}
+            src={closeIco}
+            alt='close icon'
+            className='post-form__close-ico' />
+          <h3 className='post-form__title'>
+            {/* check to see if user is volunteer and produce proper heading  */}
+            {volunteer ? 'Create New Offer' : 'What Can We Connect You With?'}
+          </h3>
+          <div className={isOffer ? 'post-form__filler--offer' : 'post-form__filler--seeking'}></div>
+          <form className="post-form__fields" onSubmit={handleFormSubmit}>
+            <div className="post-form__fields-block">
+              <div className="post-form__field">
+                <label
+                  htmlFor="title"
+                  className="post-form__label">
+                  Brief Title
+                </label>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  id="title"
+                  maxLength="75"
+                  required
+                />
+              </div>
+              <div className="post-form__field">
+                <label
+                  htmlFor="category"
+                  className="post-form__label">
+                  Category
+                </label>
+                <Select
+                  onChange={(e) => setCategory(e.value)}
+                  options={dropdownOptions}
+                  menuPlacement="auto"
+                  menuShouldBlockScroll={true}
+                  required
+                />
+              </div>
+              <div className="post-form__field">
+                <label
+                  htmlFor="description"
+                  className="post-form__label">
+                  Description
+                </label>
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  id="description"
+                  required
+                />
+              </div>
+            </div>
+            <div className='post-form__button-block'>
+              <button className='post-form__button--submit'>
+                SUBMIT
+              </button>
               <button
                 onClick={toggleNewPost}
-                className='create-post__button'
-              >
-                create post
+                className='post-form__button--cancel'>
+                CANCEL
               </button>
-            </>
-
-          ) : (
-
-            // If user is not logged in, render login button
-            <>
-              <p className='create-post__button-label'>
-                <strong>
-                  Login to create your own posts.
-                </strong>
-              </p>
-              <LoginButton />
-            </>
-          )
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <section className="create-post">
+      {
+        isLoggedIn ? (
+          // If user is logged in, render form for creating a post
+          <>
+            <button
+              onClick={toggleNewPost}
+              className='create-post__button'>
+              create post
+            </button>
+          </>
+        ) : (
+          // If user is not logged in, render login button
+          <>
+            <p className='create-post__button-label'>
+              <strong>
+                Login to create your own posts.
+              </strong>
+            </p>
+            <LoginButton />
+          </>
+        )
       }
     </section>
   );

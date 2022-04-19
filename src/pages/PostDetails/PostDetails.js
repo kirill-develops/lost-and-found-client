@@ -57,9 +57,9 @@ const PostDetails = ({ match }) => {
     fetchPost();
   });
 
-  if (isLoading === true) return null;
-
-  return (
+  return isLoading === true ? (
+    null
+  ) : (
     <div className='post-details'>
       <div className='post-details__block'>
         <h1 className="post-details__title">{title}</h1>

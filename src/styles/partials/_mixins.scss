@@ -147,25 +147,25 @@
 @mixin swiperCard {
   @include cardStyle;
   flex: 1;
-  padding: $component-padding;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 
 @mixin cardStyle {
+  box-shadow: 0px 8px 20px -8px #00000090;
   background-color: white;
   border-radius: 3px;
-  border-bottom: 5px solid #666;
-  box-shadow: 0px 8px 20px -8px #00000090;
+  border-bottom: 3px solid #666;
+  padding: 1rem $root-padding 0.5rem;
 }
 
 @mixin swiperCardTitle {
   font-size: 1.25rem;
   font-weight: 500;
   margin-top: 0;
-  margin-right: -$component-padding;
-  padding: 0.75rem 0 0.25rem $root-padding;
+  margin-right: -$root-padding;
+  padding: 0.75rem $root-padding 0.25rem;
   border-left: 3.5px solid;
 }
 
