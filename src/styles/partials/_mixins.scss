@@ -1,111 +1,7 @@
 @use './variables'as*;
 @use './breakpoints'as*;
 
-@mixin button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 6px;
-  border: none;
-  font-size: 0.95rem;
-  text-decoration: none;
-  font-weight: 500;
-
-  >svg {
-    width: 1.5rem;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-@mixin rootContainer {
-  padding-left: $root-padding;
-  padding-right: $root-padding;
-
-  &__block {
-    max-width: $root-max-width;
-    margin: 0 auto;
-  }
-}
-
-@mixin rootContainerInner {
-  padding-left: $root-padding;
-  padding-right: $root-padding;
-
-  &-block {
-    max-width: $root-max-width;
-    margin: 0 auto;
-  }
-}
-
-@mixin cardFrameInner {
-  background-color: #F2F4F3;
-  padding: $component-padding;
-  border-radius: 2px;
-  box-shadow: inset 0px 0px 13px -8px #000000;
-}
-
-@mixin overlay {
-  @include rootContainerInner;
-  background-color: #0000007c;
-  backdrop-filter: blur(4px);
-  width: 100vw;
-  height: 150%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-}
-
-@mixin overlayBlock {
-  box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 3px;
-  position: absolute;
-  width: 60%;
-  background-color: white;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 1.5rem;
-}
-
-@mixin cardFiller {
-  height: 1.25rem;
-  border-radius: 1px;
-  margin-top: 0.5rem;
-  margin-bottom: $component-padding;
-  margin-left: -$component-padding;
-  margin-right: -$component-padding;
-}
-
-@mixin closeIco {
-  height: 1rem;
-  filter: invert(1);
-  position: absolute;
-  right: $component-padding;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-@mixin cardTitle {
-  margin-top: -$component-padding;
-  margin-left: -$component-padding;
-  margin-right: -$component-padding;
-  padding-top: $component-padding;
-  padding-left: $component-padding;
-  padding-bottom: 0.5rem;
-  border-radius: 1px;
-  font-size: 1.35rem;
-  font-weight: 500;
-  font-family: sans-serif;
-  background-color: #22333B;
-  color: white;
-}
-
+//FONTS
 @mixin formLabel {
   font-size: 0.75rem;
   color: #373F51;
@@ -137,14 +33,146 @@
     sans-serifs;
 }
 
-@mixin swiperAvatarFrame {
+//COMPONENTS
+@mixin button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.95rem;
+  text-decoration: none;
+  font-weight: 500;
+
+  >svg {
+    width: 1.5rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@mixin closeIco {
+  height: 1rem;
+  filter: invert(1);
+  position: absolute;
+  right: $component-padding;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// all parent level components have this to create site margins
+@mixin rootContainer {
+  padding-left: $root-padding;
+  padding-right: $root-padding;
+
+  &__block {
+    max-width: $root-max-width;
+    margin: 0 auto;
+  }
+}
+
+@mixin rootContainerInner {
+  padding-left: $root-padding;
+  padding-right: $root-padding;
+
+  &-block {
+    max-width: $root-max-width;
+    margin: 0 auto;
+  }
+}
+
+@mixin mainComponent {
+  box-shadow: 0px 10px 13px -7px #000000,
+    0px -10px 13px -7px rgba(0, 0, 0, 0);
+  border-radius: 2px;
+  padding: 0 $component-padding $component-padding;
+}
+
+@mixin frameInner {
+  @include swiperFrameInner;
   display: flex;
-  justify-content: center;
+  align-items: stretch;
+  gap: $component-padding;
+  padding-bottom: 3rem;
+}
+
+@mixin cardFiller {
+  height: 1.25rem;
+  border-radius: 1px;
+  margin-top: 0.5rem;
+  margin-bottom: $component-padding;
+  margin-left: -$component-padding;
+  margin-right: -$component-padding;
+}
+
+@mixin pageTitle {
+  background-color: #22333B;
+  color: white;
+  font-weight: 700;
+  font-size: 2rem;
+  border-radius: 1px;
+  padding-top: $component-padding;
+  padding-left: $component-padding;
+  padding-bottom: 0.5rem;
+
+  @include tablet {
+    font-size: 2.5rem;
+  }
+}
+
+@mixin pageSubheading {
+  color: #FFFFFF;
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-left: -$component-padding;
+  margin-right: -$component-padding;
+  padding: $root-padding $component-padding 0.5rem;
+  border-radius: 1px;
+}
+
+//SWIPER SPECIFIC
+@mixin swiperFrameInner {
+  box-shadow: inset 0px 0px 13px -8px #000000;
+  border-radius: 2px;
   padding: $component-padding;
-  background-color: #FFF;
-  box-shadow: 0px 8px 20px -8px #00000090;
+  background-color: #F2F4F3;
+}
+
+@mixin swiperCard {
+  @include cardStyle;
+  flex: 1;
+  padding: $component-padding;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@mixin cardStyle {
+  background-color: white;
   border-radius: 3px;
   border-bottom: 5px solid #666;
+  box-shadow: 0px 8px 20px -8px #00000090;
+}
+
+@mixin swiperCardTitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 0;
+  margin-right: -$component-padding;
+  padding: 0.75rem 0 0.25rem $root-padding;
+  border-left: 3.5px solid;
+}
+
+@mixin swiperAvatarCard {
+  @include swiperCard;
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
 }
 
 @mixin swiperAvatar {
@@ -153,4 +181,43 @@
   width: 100%;
   max-width: 10rem;
   border-radius: 50%;
+}
+
+//OVERLAY SPECIFIC
+@mixin overlay {
+  @include rootContainerInner;
+  background-color: #0000007c;
+  backdrop-filter: blur(4px);
+  width: 100vw;
+  height: 150%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+
+@mixin overlayBlock {
+  box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  position: absolute;
+  width: 60%;
+  background-color: white;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1.5rem;
+}
+
+@mixin overlayTitle {
+  margin-top: -$component-padding;
+  margin-left: -$component-padding;
+  margin-right: -$component-padding;
+  padding-top: $component-padding;
+  padding-left: $component-padding;
+  padding-bottom: 0.5rem;
+  border-radius: 1px;
+  font-size: 1.35rem;
+  font-weight: 500;
+  font-family: sans-serif;
+  background-color: #22333B;
+  color: white;
 }

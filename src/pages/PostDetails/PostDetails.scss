@@ -1,5 +1,6 @@
 @use '../../styles/partials/variables'as*;
 @use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/colors'as*;
 
 .post-details {
   @include rootContainer;
@@ -31,7 +32,7 @@
     margin-left: -$component-padding;
     margin-right: -$component-padding;
     margin-top: 0.5rem;
-    background-color: #a72615;
+    background-color: $user-primary;
     color: #FFFFFF;
     padding: $root-padding $component-padding 0.5rem;
     font-size: 1.35rem;

@@ -1,6 +1,6 @@
 @use '../../styles/partials/variables'as*;
 @use '../../styles/partials/mixins'as*;
-
+@use '../../styles/partials/colors'as*;
 
 .edit-form {
   @include overlay;
@@ -11,7 +11,7 @@
 
   &__filler {
     @include cardFiller;
-    background-color: #a72615;
+    background-color: $user-primary;
   }
 
   &__close-ico {
@@ -19,7 +19,7 @@
   }
 
   &__title {
-    @include cardTitle;
+    @include overlayTitle;
   }
 
   &__form {
@@ -74,11 +74,11 @@
 
     &--cancel {
       @extend .edit-form__button;
-      color: #6D213C;
-      background-color: #FCF2EE;
+      color: $user-triage;
+      background-color: $user-cta;
 
       &:hover {
-        background-color: #F9E4DC;
+        background-color: $user-hover;
       }
     }
   }

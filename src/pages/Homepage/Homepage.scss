@@ -127,6 +127,10 @@
   align-items: center;
   justify-content: flex-start;
 
+  &-slide {
+    height: auto;
+  }
+
   &--slide4 {
     @extend .swiper;
     justify-content: center;

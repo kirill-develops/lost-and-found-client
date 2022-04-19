@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './DashBoardNav.scss';
 
-const DashBoardNav = ({ handleFilter }) => {
+const DashBoardNav = ({ setFilterBy }) => {
   const [active, setActive] = useState(false);
 
 
@@ -13,7 +13,7 @@ const DashBoardNav = ({ handleFilter }) => {
 
   const handleClick = (category) => {
     setActive(false);
-    handleFilter(category);
+    setFilterBy(category);
   }
 
   return (
@@ -67,35 +67,35 @@ const DashBoardNav = ({ handleFilter }) => {
           className='dashboard-nav__label--first'>
           Filter By:</li>
         <li
-          onClick={() => handleFilter('housing')}
+          onClick={() => setFilterBy('housing')}
           className='dashboard-nav__label'>
           Housing</li>
         <li
-          onClick={() => handleFilter('jobs')}
+          onClick={() => setFilterBy('jobs')}
           className='dashboard-nav__label'>
           Jobs</li>
         <li
-          onClick={() => handleFilter('employment_services')}
+          onClick={() => setFilterBy('employment_services')}
           className='dashboard-nav__label'>
           Employment Services</li>
         <li
-          onClick={() => handleFilter('on-boarding')}
+          onClick={() => setFilterBy('on-boarding')}
           className='dashboard-nav__label'>
           On-Boarding</li>
         <li
-          onClick={() => handleFilter('translations')}
+          onClick={() => setFilterBy('translations')}
           className='dashboard-nav__label'>
           Translations</li>
         <li
-          onClick={() => handleFilter('goods')}
+          onClick={() => setFilterBy('goods')}
           className='dashboard-nav__label'>
           Free Goods</li>
         <li
-          onClick={() => handleFilter('transportation')}
+          onClick={() => setFilterBy('transportation')}
           className='dashboard-nav__label'>
           Transportation</li>
         <li
-          onClick={() => handleFilter('')}
+          onClick={() => setFilterBy('')}
           className='dashboard-nav__label--reset'>
           Reset</li>
       </ul>

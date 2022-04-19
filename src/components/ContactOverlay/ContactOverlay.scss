@@ -1,5 +1,6 @@
 @use '../../styles/partials/variables'as*;
 @use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/colors'as*;
 
 .contact {
   @include overlay;
@@ -9,7 +10,7 @@
   }
 
   &__title {
-    @include cardTitle;
+    @include overlayTitle;
   }
 
   &__close-ico {
@@ -18,7 +19,7 @@
 
   &__filler {
     @include cardFiller;
-    background-color: #a72615;
+    background-color: $user-primary;
   }
 
   &__form {
@@ -85,11 +86,11 @@
 
     &--cancel {
       @extend .contact__button;
-      color: #6D213C;
-      background-color: #FCF2EE;
+      color: $user-triage;
+      background-color: $user-cta;
 
       &:hover {
-        background-color: #F9E4DC;
+        background-color: $user-hover;
       }
     }
   }

@@ -1,13 +1,12 @@
 @use '../../styles/partials/variables'as*;
+@use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/colors'as*;
 
 .post {
+  @include cardStyle;
   margin-bottom: 2rem;
   padding: 1rem $root-padding 0.5rem;
-  background-color: white;
-  border-radius: 3px;
-  border-bottom: 5px solid #666;
-  box-shadow: 0px 8px 20px -8px #00000090;
-  height: 20.5rem;
+  height: 95%;
 
   &__link {
     text-decoration: none;
@@ -30,31 +29,37 @@
     align-items: flex-start;
     padding: 0.75rem $root-padding 0.25rem;
     margin-right: -$root-padding;
-    margin-bottom: $root-padding;
+    margin-bottom: calc($root-padding / 2);
+    border-left: 3.5px solid;
 
     &--offer {
       @extend .post__title-block;
-      background-color: #123794;
-      border-left: 3.5px solid #b8c3df;
+      background-color: $offer-secondary;
+      color: $offer-primary;
+      border-color: $offer-primary;
     }
 
     &--seeking {
       @extend .post__title-block;
-      background-color: #462749;
-      border-left: 3.5px solid #c8bec8;
+      background-color: $seeking-secondary;
+      color: $seeking-primary;
+      border-color: $seeking-primary;
     }
   }
 
   &__title {
     margin: 0;
-    color: white;
   }
 
   &__subheading {
-    margin: 0 auto 0.25rem;
+    margin: 0 auto 1.25rem;
+    text-align: center;
     font-weight: 600;
     font-size: 1.6rem;
     color: #373F51;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__details {
@@ -65,15 +70,40 @@
   }
 
   &__city {
-    color: #0A0908;
-    margin-top: 0.25rem;
+    // @include formLabel;
+    font-weight: 500;
+    margin: 0.25rem auto;
+
+    &--offer {
+      @extend .post__city;
+      color: $offer-primary;
+    }
+
+    &--seeking {
+      @extend .post__city;
+      color: $seeking-primary;
+    }
   }
 
   &__author {
+    margin-top: 0.25rem;
+    margin-left: -$root-padding;
+    padding: 0.25rem 0.5rem;
     display: flex;
     gap: 0.5rem;
     align-items: center;
     color: #666;
+    border-left: 3.5px solid;
+
+    &--offer {
+      @extend .post__author;
+      border-color: $offer-secondary;
+    }
+
+    &--seeking {
+      @extend .post__author;
+      border-color: $seeking-secondary;
+    }
   }
 
   &__avatar {
@@ -85,7 +115,7 @@
     font-size: 1rem;
   }
 
-  &__owned {
+  &__users {
     font-size: 0.75rem;
     margin-left: 1rem;
     padding: 0.25rem 0.5rem;
