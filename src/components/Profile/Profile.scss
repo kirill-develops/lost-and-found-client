@@ -45,19 +45,11 @@
     }
   }
 
-  &__card {
-    @include swiperCard;
-  }
-
   &__card-title {
     @include swiperCardTitle;
     color: $user-primary;
     background-color: $user-secondary;
     border-color: $user-primary;
-  }
-
-  &__avatar-frame {
-    @include swiperAvatarCard;
   }
 
   &__avatar {

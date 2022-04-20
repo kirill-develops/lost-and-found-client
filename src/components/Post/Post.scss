@@ -48,12 +48,45 @@
     margin: 0;
   }
 
+  &__button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  &__icon {
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__users {
     font-size: 0.75rem;
-    margin-left: 1rem;
     padding: 0.25rem 0.5rem;
     border-radius: 6px;
-    background-color: #E4F1E8;
+
+    &--offer {
+      @extend .post__users;
+      background-color: $offer-cta;
+      color: $offer-primary;
+
+      &:hover {
+        background-color: $offer-hover;
+        cursor: pointer;
+      }
+    }
+
+    &--seeking {
+      @extend .post__users;
+      background-color: $seeking-cta;
+      color: $seeking-primary;
+
+      &:hover {
+        background-color: $seeking-hover;
+        cursor: pointer;
+      }
+    }
   }
 
   &__author {

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { Link } from 'react-router-dom';
+import TrashIco from '../../assets/icons/trash-can-outline.svg';
 import './Post.scss';
 
 const Post = ({ post }) => {
@@ -30,8 +31,16 @@ const Post = ({ post }) => {
           {post.offer === 1 ? "post__title-block--offer" : "post__title-block--seeking"}>
           <h2 className="post__title">{category[1]}</h2>
           {/* Show a "Your Post" label for posts that have been created by currently logged in user */}
-          {post.isCurrentUser &&
-            <div className="post__users">Your Post</div>}
+          {post.isCurrentUser && <div className="post__button-wrapper">
+            <img
+              // onClick={deletePost}
+              src={TrashIco}
+              alt='trash icon'
+              className='post__icon' />
+            <div className={post.offer === 1 ? "post__users--offer" : "post__users--seeking"}>Your Post</div>
+
+          </div>
+          }
         </div>
 
         <div className="post__block">

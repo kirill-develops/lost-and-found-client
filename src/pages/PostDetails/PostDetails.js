@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apiUtils from '../../utils/apiUtils';
+import TrashIco from '../../assets/icons/trash-can-outline.svg';
 import './PostDetails.scss';
 
 const filterOptions = [
@@ -53,6 +54,8 @@ const PostDetails = ({ match }) => {
       });
   }
 
+  const deletePost = (id) => { }
+
   useEffect(() => {
     fetchPost();
   });
@@ -63,17 +66,38 @@ const PostDetails = ({ match }) => {
     <div className='post-details'>
       <div className='post-details__block'>
         <h1 className="post-details__title">{title}</h1>
-        <h2 className={offer ? 'post-details__subheading--offer' : 'post-details__subheading--seeking'}>
-          {filterOptions.find(filter => filter.value === category).label}
-        </h2>
-        <div className='post-details__bottom'>
-          <Link to={`user/${usersId}`}>
-            <img src={avatarUrl} alt='user avatar' className='' />
+        <div className={offer ? 'post-details__subheading-block--offer' : 'post-details__subheading-block--seeking'}>
+          <h2 className='post-details__subheading'>
+            {filterOptions.find(filter => filter.value === category).label}
+          </h2>
+          {isCurrentUser &&
+            <div className="post-details__button-wrapper">
+              <button className={offer === 1 ? "post-details__edit-button--offer" : "post__edit-button--seeking"}>
+                Edit Post
+              </button>
+              <img
+                // onClick={deletePost}
+                src={TrashIco}
+                alt='trash icon'
+                className={offer === 1 ? "post-details__icon--offer" : "post__icon--seeking"} />
+            </div>
+          }
+        </div>
+        <div className='post-details__frame'>
+          <Link
+            to={`user/${usersId}`}
+            className='post-details__card--avatar'>
+            <img
+              src={avatarUrl}
+              alt='user avatar'
+              className='post-details__avatar' />
             <h2>{firstName}</h2>
           </Link>
-          <h2>{description}</h2>
+          <div className='post-details__card'>
+            <h2 className='post-details__body'>{description}</h2>
+            <p className='post-details__label'>posted: {timestamp}</p>
+          </div>
         </div>
-        <p>posted: {timestamp}</p>
       </div>
     </div>
   )

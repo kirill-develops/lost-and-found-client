@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useReducer } from 'react';
 import apiUtils from '../../utils/apiUtils';
-import LoginButton from '../../components/LoginButton/LoginButton';
 import isProfileComplete from '../../utils/isProfileComplete';
-import './ProfilePage.scss';
 import Profile from '../../components/Profile/Profile';
+import LoginButton from '../../components/LoginButton/LoginButton';
+import './ProfilePage.scss';
 
 const ProfilePage = () => {
   // Keep track of four things in state: 

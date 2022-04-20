@@ -4,57 +4,132 @@
 
 .post-details {
   @include rootContainer;
-  min-height: $root-min-height;
   background-color: #FFFFFF;
+  height: 100%;
+  min-height: $root-min-height;
   padding: $component-padding;
-
-  &__title {
-    margin-top: 3rem;
-    background-color: $site-primary;
-    color: white;
-    padding-top: $component-padding;
-    padding-left: $component-padding;
-    margin-left: -$component-padding;
-    margin-right: -$component-padding;
-    padding-bottom: 0.5rem;
-    border-radius: 1px;
-  }
+  z-index: 10;
 
   &__block {
-    box-shadow: 0px 10px 13px -7px #000000,
-      0px -10px 13px -7px rgba(0, 0, 0, 0);
-    margin: 0 auto 4.5rem;
-    border-radius: 2px;
-    padding: 0 $component-padding $component-padding;
+    @include mainComponent;
   }
 
-  &__subheading {
+  &__title {
+    @include pageTitle;
+    margin-top: 3rem;
     margin-left: -$component-padding;
     margin-right: -$component-padding;
+  }
+
+  &__subheading-block {
+    @include pageSubheading;
     margin-top: 0.5rem;
-    background-color: $user-primary;
-    color: #FFFFFF;
-    padding: $root-padding $component-padding 0.5rem;
-    font-size: 1.35rem;
-    font-weight: 500;
-    font-family: sans-serif;
+    margin-bottom: $component-padding;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
 
     &--offer {
-      @extend .post-details__subheading;
+      @extend .post-details__subheading-block;
       background-color: #123794;
     }
 
     &--seeking {
-      @extend .post-details__subheading;
+      @extend .post-details__subheading-block;
       background-color: #462749;
     }
   }
 
-  &__bottom {
+  &__subheading {
+    color: white;
+    margin: 0;
+  }
+
+  &__button-wrapper {
+    margin-top: 0;
     display: flex;
-    gap: 2rem;
+    gap: $component-padding;
+    align-items: stretch;
+    align-self: flex-start;
+  }
+
+  &__icon {
+    @include button;
+
+    &--offer {
+      @extend .post-details__icon;
+      background-color: $offer-cta;
+      color: $offer-primary;
+
+      &:hover {
+        background-color: $offer-hover;
+        cursor: pointer;
+      }
+    }
+
+    &--seeking {
+      @extend .post-details__icon;
+      background-color: $seeking-cta;
+      color: $seeking-primary;
+
+      &:hover {
+        background-color: $seeking-hover;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__edit-button {
+    @include button;
+    width: 100%;
+
+    &--offer {
+      @extend .post-details__edit-button;
+      background-color: $offer-cta;
+      color: $offer-primary;
+
+      &:hover {
+        background-color: $offer-hover;
+        cursor: pointer;
+      }
+    }
+
+    &--seeking {
+      @extend .post-details__edit-button;
+      background-color: $seeking-cta;
+      color: $seeking-primary;
+
+      &:hover {
+        background-color: $seeking-hover;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__frame {
+    @include frameInner;
+  }
+
+  &__card {
+    @include swiperCard;
+    justify-content: space-between;
+
+    &--avatar {
+      @include swiperAvatarCard;
+      max-width: fit-content;
+      align-items: center;
+    }
+  }
+
+  &__avatar {
+    @include swiperAvatar;
+  }
+
+  &__label {
+    @include formLabel;
+  }
+
+  &__body {
+    @include formBody;
   }
 }
