@@ -4,6 +4,10 @@
 .homepage {
   min-height: $root-min-height;
 
+  &__disabled-link {
+    display: none;
+  }
+
   &__header {
     background-color: #15a3dd;
     min-height: min-content;
@@ -143,6 +147,7 @@
 
     &--slide2 {
       @extend .swiper__title;
+      font-size: 1.5vw;
       color: #E0D8DE;
     }
 

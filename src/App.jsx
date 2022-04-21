@@ -90,7 +90,11 @@ const App = () => {
             <Route
               path="/"
               exact
-              component={HomePage}
+              render={() => (
+                <HomePage
+                  isLoggedIn={isLoggedIn}
+                />
+              )}
             />
           </Switch>
           <Footer />
