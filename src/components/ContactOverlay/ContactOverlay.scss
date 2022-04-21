@@ -13,6 +13,10 @@
     @include overlayTitle;
   }
 
+  &__close-ico-wrapper {
+    @include closeIcoWrapper;
+  }
+
   &__close-ico {
     @include closeIco;
   }

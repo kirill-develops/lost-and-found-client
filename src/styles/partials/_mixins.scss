@@ -55,11 +55,25 @@
   }
 }
 
+@mixin closeIcoWrapper {
+  position: absolute;
+  right: $component-padding;
+  border: none;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0);
+  width: fit-content;
+  height: fit-content;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 @mixin closeIco {
   height: 1rem;
   filter: invert(1);
-  position: absolute;
-  right: $component-padding;
+  // position: absolute;
+  // right: $component-padding;
 
   &:hover {
     cursor: pointer;

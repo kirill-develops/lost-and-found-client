@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apiUtils from '../../utils/apiUtils';
@@ -16,8 +16,18 @@ const filterOptions = [
   { value: '', label: 'All' },
 ];
 
-const PostDetails = ({ match }) => {
+// type matchType = {
+//   match: {
+//     params: {
+//       id: string
+//     }
+//   }
+// }
 
+const PostDetails = ({
+  match,
+  history,
+}) => {
   const [active, setActive] = useState(0);
   const [avatarUrl, setAvatarUrl] = useState('');
   const [category, setCategory] = useState('');
@@ -34,7 +44,7 @@ const PostDetails = ({ match }) => {
   const fetchPost = () => {
     apiUtils
       .getPostById(match.params.id)
-      .then(post => {
+      .then((post) => {
         // Update state with fetched post data
         setActive(post.data.active);
         setAvatarUrl(post.data.avatar_url);
@@ -49,12 +59,17 @@ const PostDetails = ({ match }) => {
         setTimestamp(post.data.updated_at);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('Error fetching posts:', err);
       });
-  }
+  };
 
-  const deletePost = (id) => { }
+  const deletePost = (id) => {
+    apiUtils
+      .deletePostById(id)
+      .then(history.goBack())
+      .catch();
+  };
 
   useEffect(() => {
     fetchPost();
@@ -63,45 +78,59 @@ const PostDetails = ({ match }) => {
   return isLoading === true ? (
     null
   ) : (
-    <div className='post-details'>
-      <div className='post-details__block'>
+    <div className="post-details">
+      <div className="post-details__block">
         <h1 className="post-details__title">{title}</h1>
         <div className={offer ? 'post-details__subheading-block--offer' : 'post-details__subheading-block--seeking'}>
-          <h2 className='post-details__subheading'>
-            {filterOptions.find(filter => filter.value === category).label}
+          <h2 className="post-details__subheading">
+            {filterOptions.find((filter) => filter.value === category).label}
           </h2>
-          {isCurrentUser &&
+          {isCurrentUser && (
             <div className="post-details__button-wrapper">
-              <button className={offer === 1 ? "post-details__edit-button--offer" : "post__edit-button--seeking"}>
+              <button
+                type="button"
+                className={offer === 1 ? 'post-details__edit-button--offer' : 'post__edit-button--seeking'}
+              >
                 Edit Post
               </button>
-              <img
-                // onClick={deletePost}
-                src={TrashIco}
-                alt='trash icon'
-                className={offer === 1 ? "post-details__icon--offer" : "post__icon--seeking"} />
+              <button
+                type="button"
+                onClick={() => deletePost(match.params.id)}
+                className="post-details__icon-wrapper"
+              >
+                <img
+                  src={TrashIco}
+                  alt="trash icon"
+                  className={offer === 1 ? 'post-details__icon--offer' : 'post__icon--seeking'}
+                />
+              </button>
             </div>
-          }
+          )}
         </div>
-        <div className='post-details__frame'>
+        <div className="post-details__frame">
           <Link
             to={`user/${usersId}`}
-            className='post-details__card--avatar'>
+            className="post-details__card--avatar"
+          >
             <img
               src={avatarUrl}
-              alt='user avatar'
-              className='post-details__avatar' />
+              alt="user avatar"
+              className="post-details__avatar"
+            />
             <h2>{firstName}</h2>
           </Link>
-          <div className='post-details__card'>
-            <h2 className='post-details__body'>{description}</h2>
-            <p className='post-details__label'>posted: {timestamp}</p>
+          <div className="post-details__card">
+            <h2 className="post-details__body">{description}</h2>
+            <p className="post-details__label">
+              posted:
+              {' '}
+              {timestamp}
+            </p>
           </div>
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};
 
 export default PostDetails;
