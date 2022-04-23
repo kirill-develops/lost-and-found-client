@@ -3,7 +3,7 @@ import React from 'react';
 const DashboardTabletNav = ({ setFilterBy }) => (
   <nav className="dashboard-nav__tablet">
     <h4 className="dashboard-nav__label--first">
-      Filter By:
+      FILTER BY:
     </h4>
     <button
       type="button"

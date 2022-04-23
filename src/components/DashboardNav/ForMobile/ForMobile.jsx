@@ -35,42 +35,42 @@ const DashboardMobileNav = ({ setFilterBy }) => {
           </button>
           <button
             type="button"
-            onClick={() => selectMobileFilter('housing')}
+            onClick={() => selectMobileFilter('employment_services')}
             className="dashboard-nav__label"
           >
             Employment Services
           </button>
           <button
             type="button"
-            onClick={() => selectMobileFilter('housing')}
+            onClick={() => selectMobileFilter('on-boarding')}
             className="dashboard-nav__label"
           >
             On-Boarding
           </button>
           <button
             type="button"
-            onClick={() => selectMobileFilter('housing')}
+            onClick={() => selectMobileFilter('translations')}
             className="dashboard-nav__label"
           >
             Translations
           </button>
           <button
             type="button"
-            onClick={() => selectMobileFilter('housing')}
+            onClick={() => selectMobileFilter('goods')}
             className="dashboard-nav__label"
           >
             Free Goods
           </button>
           <button
             type="button"
-            onClick={() => selectMobileFilter('housing')}
+            onClick={() => selectMobileFilter('transportation')}
             className="dashboard-nav__label"
           >
             Transportation
           </button>
           <button
             type="button"
-            onClick={() => selectMobileFilter('housing')}
+            onClick={() => selectMobileFilter('')}
             className="dashboard-nav__label--reset"
           >
             Reset
