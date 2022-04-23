@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useReducer } from 'react';
+/* eslint-disable sort-imports */
+import './CreatePost.scss';
+import React, { useEffect, useReducer, useState } from 'react';
 import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
-import LoginButton from '../LoginButton/LoginButton';
 import closeIco from '../../assets/icons/x_close.svg';
 import isProfileComplete from '../../utils/isProfileComplete';
-import './CreatePost.scss';
+import LoginButton from '../LoginButton/LoginButton';
 
 const dropdownOptions = [
   { value: 'housing', label: 'Housing' },
@@ -66,7 +67,7 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
         res.data.volunteer.toLowerCase() === 'true'
           ? setVolunteer(true) : setVolunteer(false);
       });
-  }, [isLoggedIn]);
+  }, [isLoggedIn, history]);
 
   return makePost ? (
     <div className="post-form">
@@ -76,6 +77,7 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
             type="button"
             onClick={toggleNewPost}
             onKeyUp={(e) => e.key === 'Escape' && toggleNewPost}
+            className="post-form__close-ico-wrapper"
           >
             <img
               src={closeIco}
@@ -88,9 +90,10 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
             {volunteer ? 'Create New Offer' : 'What Can We Connect You With?'}
           </h3>
           <div className={isOffer
-            ? 'post-form__filler--offer' : 'post-form__filler--seeking'} />
-          <form className="post-form__fields" onSubmit={handleFormSubmit}>
-            <div className="post-form__fields-block">
+            ? 'post-form__filler--offer' : 'post-form__filler--seeking'}
+          />
+          <form className="post-form__form" onSubmit={handleFormSubmit}>
+            <div className="post-form__form-block">
               <div className="post-form__field">
                 <label
                   htmlFor="title"
@@ -184,4 +187,4 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
   );
 };
 
-export default CreatePost;
+export default React.memo(CreatePost);

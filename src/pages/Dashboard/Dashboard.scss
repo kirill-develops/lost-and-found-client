@@ -8,6 +8,10 @@
   @include rootContainer;
   padding: 0 $root-padding;
 
+  &__block {
+    padding-top: 3rem;
+  }
+
   &__title {
     @include pageTitle;
     margin-bottom: 0;
@@ -26,10 +30,6 @@
       @extend .dashboard__subheading;
       background-color: $seeking-primary;
     }
-  }
-
-  &__swiper {
-    @include swiperFrameInner;
   }
 }
 

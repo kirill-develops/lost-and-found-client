@@ -1,11 +1,12 @@
-/* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
-import apiUtils from '../../utils/apiUtils';
-import DashBoardNav from '../../components/DashboardNav/DashBoardNav';
+import './Dashboard.scss';
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import CreatePost from '../../components/CreatePost/CreatePost';
+import DashBoardNav from '../../components/DashboardNav/DashboardNav';
 import DashbaordUser from '../../components/DashboardUser/DashbaordUser';
 import DashboardSwiper from '../../components/DashboardSwiper/DashboardSwiper';
-import './Dashboard.scss';
+import apiUtils from '../../utils/apiUtils';
 
 // type userData = {
 //   userData: {
@@ -21,27 +22,27 @@ import './Dashboard.scss';
 //     updated_at: string
 //   }
 // }
+const filterPostOptions = [
+  { value: 'housing', label: 'Housing' },
+  { value: 'jobs', label: 'Jobs' },
+  { value: 'employment_services', label: 'Employment Services' },
+  { value: 'on-boarding', label: 'On-boarding' },
+  { value: 'translations', label: 'Translations' },
+  { value: 'goods', label: 'Free Goods' },
+  { value: 'transportation', label: 'Transportation' },
+  { value: '', label: 'All' },
+];
 
-const Dashboard = ({ history, isLoggedIn, userData }) => {
-  const filterOptions = [
-    { value: 'housing', label: 'Housing' },
-    { value: 'jobs', label: 'Jobs' },
-    { value: 'employment_services', label: 'Employment Services' },
-    { value: 'on-boarding', label: 'On-boarding' },
-    { value: 'translations', label: 'Translations' },
-    { value: 'goods', label: 'Free Goods' },
-    { value: 'transportation', label: 'Transportation' },
-    { value: '', label: 'All' },
-  ];
-
+const Dashboard = ({ history, userData }) => {
   const [offersData, setOffersData] = useState([]);
   const [seekingData, setSeekingData] = useState([]);
-  const [volunteer, setVolunteer] = useState(false);
+  const [volunteer, setVolunteer] = useState(userData.volunteer
+    && userData.volunteer.toLowerCase() === 'true');
   const [filterBy, setFilterBy] = useState('');
   // const [isUserRegistered, setIsUserRegistered] = useState(true);
-
+  console.log(userData);
   // Fetch posts from the DB
-  const fetchPosts = () => {
+  const fetchPosts = useCallback(() => {
     apiUtils
       .getAllPosts()
       .then((posts) => {
@@ -60,35 +61,42 @@ const Dashboard = ({ history, isLoggedIn, userData }) => {
       .catch((err) => {
         console.log('Error fetching posts:', err);
       });
-  };
+  }, []);
 
   useEffect(() => {
     fetchPosts();
-  }, [isLoggedIn]);
+  }, [fetchPosts]);
 
   return (
     <section className="dashboard">
-      <DashBoardNav setFilterBy={setFilterBy} />
+      <DashBoardNav
+        setFilterBy={setFilterBy}
+      />
       <div className="dashboard__block">
         {/* if the user is logged in show their user metrics */}
-        {userData.first_name
-          && <DashbaordUser userData={userData} />}
-        {/*
-          Create new post component.
-          Note the passed prop that allows it to re-fetch the posts after new one is created
-        */}
+        {userData.first_name && (
+          <DashbaordUser
+            userData={userData}
+          />
+        )}
+        {/* Create new post component.
+          Note the passed prop that allows it to re-fetch the posts after new one is created */}
         <CreatePost
           isOffer={volunteer}
-          onPostCreate={fetchPosts}
+          onPostCreate={() => fetchPosts}
           history={history}
         />
         {/* Dynamic Heading showing which posts, in the case they are filtered */}
         <h2 className="dashboard__title">
-          {filterOptions.find((option) => option.value === filterBy).label}
+          {useMemo(
+            () => filterPostOptions.find(
+              (option) => option.value === filterBy,
+            ).label,
+            [filterBy],
+          )}
           {' '}
           Posts
         </h2>
-
         <div className="list-block">
           <div className={`${volunteer ? 'list-block__second' : 'list-block__first'}`}>
             <h3 className="dashboard__subheading--offer">Offering a Hand</h3>
@@ -112,4 +120,4 @@ const Dashboard = ({ history, isLoggedIn, userData }) => {
   );
 };
 
-export default Dashboard;
+export default React.memo(Dashboard);

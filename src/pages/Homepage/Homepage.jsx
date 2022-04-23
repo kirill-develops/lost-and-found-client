@@ -1,17 +1,18 @@
-//! /* eslint-disable import/no-unresolved */
-//! /* eslint-disable max-len */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, Keyboard } from 'swiper';
-import ContactOverlay from '../../components/ContactOverlay/ContactOverlay';
-import HandsPhoto from '../../assets/images/helping_out.jpg';
-import FistBump from '../../assets/images/fist_bump.jpg';
-import Logo from '../../assets/images/Asset_37.svg';
+/* eslint-disable sort-imports */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable max-len */
 import 'swiper/scss';
 import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
 import './Homepage.scss';
+import { Keyboard, Navigation, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import ContactOverlay from '../../components/ContactOverlay/ContactOverlay';
+import FistBump from '../../assets/images/fist_bump.jpg';
+import HandsPhoto from '../../assets/images/helping_out.jpg';
+import Logo from '../../assets/images/Asset_37.svg';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5050';
 
@@ -45,17 +46,31 @@ const HomePage = ({ isLoggedIn }) => {
           >
 
             <SwiperSlide className="swiper">
-              <img src={FistBump} alt="fist bump" className="swiper__img" />
+              <img
+                src={FistBump}
+                alt="fist bump"
+                className="swiper__img"
+              />
               <div className="swiper__block--slide1">
-                <img src={Logo} alt="Lost & Found Logo" className="swiper__img--logo" />
+                <img
+                  src={Logo}
+                  alt="Lost & Found Logo"
+                  className="swiper__img--logo"
+                />
               </div>
             </SwiperSlide>
 
             <SwiperSlide className="swiper">
               <div className="swiper__block--slide2">
-                <h2 className="swiper__title--slide2">With a pay it forward mentality, our once in need become drivers of this initiative and in today&apos;s technological boom, it&apos;s never been easier to pool resources.</h2>
+                <h2 className="swiper__title--slide2">
+                  With a pay it forward mentality, our once in need become drivers of this initiative and in today&apos;s technological boom, it&apos;s never been easier to pool resources.
+                </h2>
               </div>
-              <img src={HandsPhoto} alt="Helping out" className="swiper__img" />
+              <img
+                src={HandsPhoto}
+                alt="Helping out"
+                className="swiper__img"
+              />
             </SwiperSlide>
             <SwiperSlide className="swiper">
               <iframe
@@ -118,12 +133,14 @@ const HomePage = ({ isLoggedIn }) => {
           <div className="homepage__intro-block--right">
             <p>
               At Lost & Found we take pride in directly connecting those who are motivated to help but may not know where to start or may have a concern of how far their contributions go through traditional channels. Through a direct connection, we can mitigate managment costs and focus on spending resources where it counts. You as a vollunteer will also benefit greatly with a deeper connection to those you will impact and be able to grow your network as new friends settle in and adapt with your guidance.
-              <span className={isLoggedIn ? 'homepage__disabled-link' : ''}>
+              <span className={isLoggedIn
+                ? 'homepage__link-disabled' : 'homepage__link'}
+              >
                 If you are ready to help, please
                 {' '}
                 <Link
                   disabled={!!isLoggedIn}
-                  href={`${SERVER_URL}/auth/google`}
+                  to={`${SERVER_URL}/auth/google`}
                 >
                   click here
                 </Link>
@@ -147,4 +164,4 @@ const HomePage = ({ isLoggedIn }) => {
   );
 };
 
-export default HomePage;
+export default React.memo(HomePage);
