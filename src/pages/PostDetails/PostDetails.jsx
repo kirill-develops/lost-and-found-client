@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+/* eslint-disable sort-imports */
+//! /* eslint-disable no-unused-vars */
+import './PostDetails.scss';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import apiUtils from '../../utils/apiUtils';
 import TrashIco from '../../assets/icons/trash-can-outline.svg';
-import './PostDetails.scss';
 
 const filterOptions = [
   { value: 'housing', label: 'Housing' },
@@ -24,10 +26,9 @@ const filterOptions = [
 //   }
 // }
 
-const PostDetails = ({
-  match,
-  history,
-}) => {
+const PostDetails = () => {
+  const { goBack } = useNavigate();
+  const { id } = useParams();
   const [active, setActive] = useState(0);
   const [avatarUrl, setAvatarUrl] = useState('');
   const [category, setCategory] = useState('');
@@ -41,9 +42,9 @@ const PostDetails = ({
   const [usersId, setUsersId] = useState('');
   const [isLoading, setLoading] = useState(true);
 
-  const fetchPost = () => {
+  const fetchPost = useCallback(() => {
     apiUtils
-      .getPostById(match.params.id)
+      .getPostById(id)
       .then((post) => {
         // Update state with fetched post data
         setActive(post.data.active);
@@ -62,18 +63,18 @@ const PostDetails = ({
       .catch((err) => {
         console.log('Error fetching posts:', err);
       });
-  };
+  }, [id]);
 
-  const deletePost = (id) => {
+  const deletePost = (byId) => {
     apiUtils
-      .deletePostById(id)
-      .then(history.goBack())
+      .deletePostById(byId)
+      .then(goBack())
       .catch();
   };
 
   useEffect(() => {
     fetchPost();
-  });
+  }, [fetchPost]);
 
   return isLoading === true ? (
     null
@@ -95,7 +96,7 @@ const PostDetails = ({
               </button>
               <button
                 type="button"
-                onClick={() => deletePost(match.params.id)}
+                onClick={() => deletePost(id)}
                 className="post-details__icon-wrapper"
               >
                 <img
@@ -133,4 +134,4 @@ const PostDetails = ({
   );
 };
 
-export default PostDetails;
+export default React.memo(PostDetails);
