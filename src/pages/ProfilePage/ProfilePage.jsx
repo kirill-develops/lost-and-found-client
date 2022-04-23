@@ -1,9 +1,10 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable sort-imports */
+//! /* eslint-disable react/prop-types */
+import './ProfilePage.scss';
 import React, { useState } from 'react';
 import isProfileComplete from '../../utils/isProfileComplete';
-import Profile from '../../components/Profile/Profile';
 import LoginButton from '../../components/LoginButton/LoginButton';
-import './ProfilePage.scss';
+import Profile from '../../components/Profile/Profile';
 
 // type userData = {
 //   userData: {
@@ -22,7 +23,7 @@ import './ProfilePage.scss';
 
 const ProfilePage = ({ userData }) => {
   const [editProfile, toggleEditProfile] = useState(false);
-  userData.id && !isProfileComplete(userData) ? toggleEditProfile(true) : '';
+  (userData.id && !isProfileComplete(userData)) && toggleEditProfile(true);
 
   // While the component is authenticating, do not render anything
   // (alternatively, this can be a preloader)
@@ -54,4 +55,4 @@ const ProfilePage = ({ userData }) => {
   );
 };
 
-export default ProfilePage;
+export default React.memo(ProfilePage);

@@ -1,5 +1,5 @@
-import React from 'react';
 import './LogoutButton.scss';
+import React from 'react';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -15,4 +15,4 @@ const LogoutButton = () => (
   </a>
 );
 
-export default LogoutButton;
+export default React.memo(LogoutButton);

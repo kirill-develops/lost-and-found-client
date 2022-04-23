@@ -1,5 +1,5 @@
-import React from 'react';
 import './DashboardUser.scss';
+import React from 'react';
 
 const dashboardUser = ({ userData }) => (
   <div className="dashboard-user">
@@ -43,4 +43,4 @@ const dashboardUser = ({ userData }) => (
   </div>
 );
 
-export default dashboardUser;
+export default React.memo(dashboardUser);

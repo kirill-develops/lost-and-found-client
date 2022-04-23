@@ -7,4 +7,4 @@ const AuthFailPage = () => (
   </div>
 );
 
-export default AuthFailPage;
+export default React.memo(AuthFailPage);

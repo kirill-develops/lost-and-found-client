@@ -1,16 +1,15 @@
+/* eslint-disable sort-imports */
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint react/prop-types: 0 */
-// NavLink component allows us to define an active CSS class for the page we are currently on
+import './Header.scss';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { push as Menu } from 'react-burger-menu';
-import Logo from '../../assets/images/Asset_36.svg';
-import LoginButton from '../LoginButton/LoginButton';
-import LogoutButton from '../LogoutButton/LogoutButton';
 import GitHubLogo from '../../assets/icons/logo-github.svg';
-import LinkedinLogo from '../../assets/icons/logo-linkedin.svg';
 import GmailLogo from '../../assets/icons/gmail_icon.svg';
-import './Header.scss';
+import LinkedinLogo from '../../assets/icons/logo-linkedin.svg';
+import LoginButton from '../LoginButton/LoginButton';
+import Logo from '../../assets/images/Asset_36.svg';
+import LogoutButton from '../LogoutButton/LogoutButton';
 
 const Header = ({ userName }) => {
   const [menu, setMenu] = useState(false);
@@ -63,21 +62,18 @@ const Header = ({ userName }) => {
                     {...menuLinkProps}
                   >
                     HOME
-
                   </Link>
                   <Link
                     to="/dashboard"
                     {...menuLinkProps}
                   >
                     DASHBOARD
-
                   </Link>
                   <Link
                     to="/profile"
                     {...menuLinkProps}
                   >
                     PROFILE
-
                   </Link>
                   <p className="bm-item">MAP (Coming Soon)</p>
                   <p className="bm-item">MESSENGER (Coming Soon)</p>
@@ -111,4 +107,4 @@ const Header = ({ userName }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

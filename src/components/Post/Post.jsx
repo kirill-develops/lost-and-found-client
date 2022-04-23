@@ -1,19 +1,18 @@
-/* eslint react/prop-types: 0 */
-import React from 'react';
-import { Link } from 'react-router-dom';
 import './Post.scss';
+import { Link } from 'react-router-dom';
+import React from 'react';
+
+const categoryArr = [
+  ['jobs', 'Jobs'],
+  ['employment_services', 'Employment Services'],
+  ['housing', 'Housing'],
+  ['on-boarding', 'On-boarding'],
+  ['translations', 'Translations'],
+  ['goods', 'Free Goods'],
+  ['transportation', 'Transportation'],
+];
 
 const Post = ({ post }) => {
-  const categoryArr = [
-    ['jobs', 'Jobs'],
-    ['employment_services', 'Employment Services'],
-    ['housing', 'Housing'],
-    ['on-boarding', 'On-boarding'],
-    ['translations', 'Translations'],
-    ['goods', 'Free Goods'],
-    ['transportation', 'Transportation'],
-  ];
-
   // convert post.category to nicely formated font
   const category = categoryArr.find((selection) => selection[0] === post.category);
 
@@ -75,4 +74,4 @@ const Post = ({ post }) => {
   );
 };
 
-export default Post;
+export default React.memo(Post);

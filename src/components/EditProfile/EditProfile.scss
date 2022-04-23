@@ -59,15 +59,17 @@
 
   &__radio {}
 
+  &__button-block {
+    display: flex;
+    gap: $component-padding;
+  }
+
   &__button {
     @include button;
     padding: $root-padding $component-padding;
-    cursor: pointer;
-
 
     &--submit {
       @extend .edit-form__button;
-      margin-right: $component-padding;
       background-color: #F1F8F3;
       color: #227396;
 
@@ -78,8 +80,8 @@
 
     &--cancel {
       @extend .edit-form__button;
-      color: $user-triage;
       background-color: $user-cta;
+      color: $user-triage;
 
       &:hover {
         background-color: $user-hover;

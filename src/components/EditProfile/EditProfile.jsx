@@ -1,8 +1,8 @@
+import './EditProfile.scss';
 import React, { useState } from 'react';
 import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import closeIco from '../../assets/icons/x_close.svg';
-import './EditProfile.scss';
 
 const dropdownOptions = [
   { value: 'Alberta', label: 'Alberta' },
@@ -35,7 +35,7 @@ const dropdownOptions = [
 //   }
 // }
 
-const editProfile = ({ userData, toggleEditProfile }) => {
+const EditProfile = ({ userData, toggleEditProfile }) => {
   const [firstName, setFirstName] = useState(userData.first_name);
   const [lastName, setLastName] = useState(userData.last_name);
   const [address, setAddress] = useState(userData.address);
@@ -221,4 +221,4 @@ const editProfile = ({ userData, toggleEditProfile }) => {
   );
 };
 
-export default editProfile;
+export default React.memo(EditProfile);

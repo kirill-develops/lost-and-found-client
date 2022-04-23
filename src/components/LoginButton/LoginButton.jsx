@@ -1,6 +1,7 @@
+/* eslint-disable sort-imports */
+import './LoginButton.scss';
 import React from 'react';
 import GoogleLogo from '../../assets/icons/google-logo-32px.svg';
-import './LoginButton.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5050';
 
@@ -15,4 +16,4 @@ const LoginButton = () => (
   </a>
 );
 
-export default LoginButton;
+export default React.memo(LoginButton);

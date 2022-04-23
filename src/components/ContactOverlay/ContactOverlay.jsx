@@ -1,7 +1,6 @@
-/* eslint react/prop-types: 0 */
+import './ContactOverlay.scss';
 import React from 'react';
 import closeIco from '../../assets/icons/x_close.svg';
-import './ContactOverlay.scss';
 
 const ContactOverlay = (
   {
@@ -69,4 +68,4 @@ const ContactOverlay = (
   </div>
 );
 
-export default ContactOverlay;
+export default React.memo(ContactOverlay);

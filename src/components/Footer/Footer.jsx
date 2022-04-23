@@ -1,6 +1,7 @@
+/* eslint-disable sort-imports */
+import './Footer.scss';
 import React from 'react';
 import Icon from '../../assets/icons/favicon.svg';
-import './Footer.scss';
 
 const Footer = () => (
   <div className="footer">
@@ -11,4 +12,4 @@ const Footer = () => (
   </div>
 );
 
-export default Footer;
+export default React.memo(Footer);
