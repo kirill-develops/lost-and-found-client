@@ -2,7 +2,7 @@
 /* eslint-disable sort-imports */
 import './styles/App.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import AuthFailPage from './pages/AuthFailPage/AuthFailPage';
 import apiUtils from './utils/apiUtils';
@@ -34,20 +34,32 @@ const App = () => {
       setLoggedIn(false)
     ));
 
-  useEffect(() => {
+  const getUser = useCallback(() => {
     apiUtils
       .getProfile()
-      .then((res) => {
-        setAuthenticating(false);
-        !isLoggedIn && setLoggedIn(true);
-        (res.data.id !== userData.id) && (setUserData(res.data));
-      })
-      .catch((err) => {
-        // If we are getting back 401 (Unauthorized) back from the server, means
-        // we need to log in
-        handleErr(err);
-      });
-  }, [isLoggedIn, userData]);
+      .then(
+        (res) => {
+          setAuthenticating(false);
+          !isLoggedIn && setLoggedIn(true);
+          (res.data.id !== userData.id) && setUserData(res.data);
+        },
+      )
+      .catch(
+        (err) => (err.response.status === 401 ? (
+          // Update the state: done authenticating, user is not logged in
+          setAuthenticating(false),
+          setLoggedIn(false)
+        ) : (
+          setAuthenticating(false),
+          setLoggedIn(false),
+          console.log('Error authenticating', err)
+        )),
+      );
+  }, [isLoggedIn, userData.id]);
+
+  useEffect(() => {
+    getUser();
+  }, [getUser]);
 
   // While the component is authenticating, do not render anything
   // (alternatively, this can be a preloader)
@@ -75,7 +87,11 @@ const App = () => {
             />
             <Route
               path="/profile"
-              element={<ProfilePage userData={userData} />}
+              element={(
+                <ProfilePage
+                  userData={userData}
+                />
+              )}
             />
             <Route
               path="/profile/:id"
@@ -87,7 +103,11 @@ const App = () => {
             />
             <Route
               path="/"
-              element={<HomePage isLoggedIn={isLoggedIn} />}
+              element={(
+                <HomePage
+                  isLoggedIn={isLoggedIn}
+                />
+              )}
             />
           </Routes>
           <Footer />
