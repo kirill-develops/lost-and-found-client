@@ -22,6 +22,7 @@ import apiUtils from '../../utils/apiUtils';
 //     updated_at: string
 //   }
 // }
+
 const filterPostOptions = [
   { value: 'housing', label: 'Housing' },
   { value: 'jobs', label: 'Jobs' },
@@ -40,7 +41,7 @@ const Dashboard = ({ history, userData }) => {
     && userData.volunteer.toLowerCase() === 'true');
   const [filterBy, setFilterBy] = useState('');
   // const [isUserRegistered, setIsUserRegistered] = useState(true);
-  console.log(userData);
+
   // Fetch posts from the DB
   const fetchPosts = useCallback(() => {
     apiUtils
@@ -50,18 +51,13 @@ const Dashboard = ({ history, userData }) => {
         setOffersData(posts.data.filter((post) => post.offer === 1));
         setSeekingData(posts.data.filter((post) => post.offer === 0));
 
-        apiUtils.getProfile()
-          .then((user) => {
-            user.data.volunteer.toLowerCase() === 'true' ? setVolunteer(true) : setVolunteer(false);
-          })
-          .catch((err) => {
-            console.log('Error fetching user:', err);
-          });
+        userData.volunteer && userData.volunteer.toLowerCase() === 'true'
+          ? setVolunteer(true) : setVolunteer(false);
       })
       .catch((err) => {
         console.log('Error fetching posts:', err);
       });
-  }, []);
+  }, [userData.volunteer]);
 
   useEffect(() => {
     fetchPosts();
@@ -83,7 +79,7 @@ const Dashboard = ({ history, userData }) => {
           Note the passed prop that allows it to re-fetch the posts after new one is created */}
         <CreatePost
           isOffer={volunteer}
-          onPostCreate={() => fetchPosts}
+          onPostCreate={fetchPosts}
           history={history}
         />
         {/* Dynamic Heading showing which posts, in the case they are filtered */}
