@@ -1,6 +1,7 @@
 /* eslint-disable sort-imports */
 import './CreatePost.scss';
 import React, { useEffect, useReducer, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import closeIco from '../../assets/icons/x_close.svg';
@@ -17,7 +18,8 @@ const dropdownOptions = [
   { value: 'transportation', label: 'Transportation' },
 ];
 
-const CreatePost = ({ isOffer, onPostCreate, history }) => {
+const CreatePost = ({ isOffer, onPostCreate }) => {
+  const navigateTo = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -44,10 +46,10 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
         // Re-fetch all posts
         onPostCreate();
         // reset the form values
-        toggleNewPost((e) => !e);
         setTitle('');
         setCategory('');
         setDescription('');
+        toggleNewPost((e) => !e);
       })
       .catch((err) => {
         console.log('Error creating a new post:', err);
@@ -62,12 +64,12 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
         // checks to see if user's profile is complete
         // if the user's profile is incomplete, send them to the profile page
         (res.data && !isProfileComplete(res.data))
-          ? history.push('/profile') : setLoggedIn(true);
+          ? navigateTo('/profile') : setLoggedIn(true);
         // check to see if user is a volunteer and change state accordingly
-        res.data.volunteer.toLowerCase() === 'true'
+        res.data && res.data.volunteer.toLowerCase() === 'true'
           ? setVolunteer(true) : setVolunteer(false);
       });
-  }, [isLoggedIn, history]);
+  }, [isLoggedIn, navigateTo]);
 
   return makePost ? (
     <div className="post-form">
@@ -92,7 +94,10 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
           <div className={isOffer
             ? 'post-form__filler--offer' : 'post-form__filler--seeking'}
           />
-          <form className="post-form__form" onSubmit={handleFormSubmit}>
+          <form
+            onSubmit={handleFormSubmit}
+            className="post-form__form"
+          >
             <div className="post-form__form-block">
               <div className="post-form__field">
                 <label
@@ -142,7 +147,7 @@ const CreatePost = ({ isOffer, onPostCreate, history }) => {
             </div>
             <div className="post-form__button-block">
               <button
-                type="button"
+                type="submit"
                 className="post-form__button--submit"
               >
                 SUBMIT
