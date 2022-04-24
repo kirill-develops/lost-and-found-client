@@ -34,14 +34,23 @@
   }
 
   &__label {
+    @include formLabel;
     width: 49%;
 
     &--address {
+      @extend .edit-form__label;
       width: 100%;
     }
 
     &--volunteer {
+      @extend .edit-form__label;
       margin: 0;
+    }
+
+    &--error {
+      @extend .edit-form__label;
+      color: $user-primary;
+
     }
   }
 
@@ -49,7 +58,7 @@
     width: 100%;
 
     &--error {
-      border: 1px solid red;
+      border: 1px solid $user-primary;
     }
   }
 

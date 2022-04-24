@@ -35,21 +35,26 @@ const dropdownOptions = [
 //   }
 // }
 
-const EditProfile = ({ userData, toggleEditProfile }) => {
-  const [firstName, setFirstName] = useState(userData.first_name);
-  const [lastName, setLastName] = useState(userData.last_name);
-  const [address, setAddress] = useState(userData.address);
-  const [city, setCity] = useState(userData.city);
-  const [province, setProvince] = useState(userData.province);
-  const [phone, setPhone] = useState(userData.phone);
+const EditProfile = ({
+  userData, toggleEditProfile, setUserData,
+}) => {
+  // STATE HOOKS
+  const [firstName, setFirstName] = useState(userData.first_name || '');
+  const [lastName, setLastName] = useState(userData.last_name || '');
+  const [address, setAddress] = useState(userData.address || '');
+  const [city, setCity] = useState(userData.city || '');
+  const [province, setProvince] = useState(userData.province || '');
+  const [phone, setPhone] = useState(userData.phone || '');
   const [volunteer, setVolunteer] = useState(userData.volunteer || 'false');
   const [postalCode, setPostalCode] = useState();
   const [hasSubmitted, toggleSubmitted] = useState(false);
+  // Function to set opopsite editProfile STATE
+  const toggleEdit = () => toggleEditProfile((event) => !event);
 
-  const toggleEdit = () => toggleEditProfile((e) => !e);
   // Handle the submission of the form by validating content and then doing an api PUT req
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let user = { ...userData };
 
     !firstName || !lastName || !city || !province || !phone || !volunteer ? (
       toggleSubmitted((checked) => !checked)
@@ -64,8 +69,20 @@ const EditProfile = ({ userData, toggleEditProfile }) => {
         volunteer,
       })
         .then(
-          toggleEdit,
-        )
+          user = {
+            ...{
+              first_name: firstName,
+              last_name: lastName,
+              address,
+              city,
+              province,
+              phone,
+              volunteer,
+            },
+          },
+          setUserData(user),
+          toggleEdit(),
+        ).catch()
     );
   };
 
@@ -97,22 +114,26 @@ const EditProfile = ({ userData, toggleEditProfile }) => {
           >
             <label className="edit-form__label">
               FIRST NAME*
-              {!firstName && hasSubmitted ? <span> Please enter your first name</span> : ''}
+              {!firstName && hasSubmitted
+                && <span className="edit-form__label--error"> Please enter your first name</span>}
               <input
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className={`edit-form__field ${!firstName && hasSubmitted ? 'edit-form__field--error' : ''}`}
+                className={`edit-form__field ${!firstName && hasSubmitted
+                  && 'edit-form__field--error'}`}
               />
             </label>
             <label className="edit-form__label">
               LAST NAME*
-              {!lastName && hasSubmitted ? <span> Please enter your last name</span> : ''}
+              {!lastName && hasSubmitted
+                && <span className="edit-form__label--error"> Please enter your last name</span>}
               <input
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className={`edit-form__field ${!lastName && hasSubmitted ? 'edit-form__field--error' : ''}`}
+                className={`edit-form__field ${!lastName && hasSubmitted
+                  && 'edit-form__field--error'}`}
               />
             </label>
             <label className="edit-form__label--address">
@@ -126,39 +147,43 @@ const EditProfile = ({ userData, toggleEditProfile }) => {
             </label>
             <label className="edit-form__label">
               CITY*
-              {!city && hasSubmitted ? <span> A city is required</span> : ''}
+              {!city && hasSubmitted
+                && <span className="edit-form__label--error"> A city is required</span>}
               <input
                 type="text"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                className={`edit-form__field ${!city && hasSubmitted ? 'edit-form__field--error' : ''}`}
+                className={`edit-form__field ${!city && hasSubmitted
+                  && 'edit-form__field--error'}`}
               />
             </label>
             <div className="edit-form__label">
               {/* eslint-disable-next-line jsx-a11y/label-has-for */}
-              <label
-                className="edit-form__label"
-              >
+              <label className="edit-form__label">
                 PROVINCE*
-                {!province && hasSubmitted ? <span> Your province is required</span> : ''}
+                {!province && hasSubmitted
+                  && <span className="edit-form__label--error"> Your province is required</span>}
                 <Select
                   value={province}
                   placeholder={province}
                   onChange={(e) => setProvince(e.value)}
                   options={dropdownOptions}
                   id="province"
-                  className={`edit-form__field ${!province && hasSubmitted ? 'edit-form__field--error' : ''}`}
+                  className={`edit-form__field ${!province && hasSubmitted
+                    && 'edit-form__field--error'}`}
                 />
               </label>
             </div>
             <label className="edit-form__label">
               PHONE*
-              {!phone && hasSubmitted ? <span> A phone number you can be reached is required</span> : ''}
+              {!phone && hasSubmitted
+                && <span className="edit-form__label--error"> A phone number you can be reached is required</span>}
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className={`edit-form__field ${!phone && hasSubmitted ? 'edit-form__field--error' : ''}`}
+                className={`edit-form__field ${!phone && hasSubmitted
+                  && 'edit-form__field--error'}`}
               />
             </label>
             <label className="edit-form__label">
@@ -174,9 +199,7 @@ const EditProfile = ({ userData, toggleEditProfile }) => {
               <h3 className="edit-form__label--volunteer">
                 VOLUNTEER
               </h3>
-              <label
-                className="edit-form__label"
-              >
+              <label className="edit-form__label">
                 YES
                 <input
                   type="radio"
@@ -186,9 +209,7 @@ const EditProfile = ({ userData, toggleEditProfile }) => {
                   className="edit-form__radio"
                 />
               </label>
-              <label
-                className="edit-form__label"
-              >
+              <label className="edit-form__label">
                 NO
                 <input
                   type="radio"

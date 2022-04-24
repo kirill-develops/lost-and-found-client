@@ -63,5 +63,12 @@
 
   &__body {
     @include formBody;
+    margin: 0;
+  }
+
+  &__address-block {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
   }
 }

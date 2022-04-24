@@ -22,7 +22,12 @@ import LogoutButton from '../LogoutButton/LogoutButton';
 // Return date formatted as 'month/day/year'
 const formatDate = (date) => (new Date(date)).toLocaleDateString('en-US');
 
-const Profile = ({ userData, editProfile, toggleEditProfile }) => (
+const Profile = ({
+  userData,
+  editProfile,
+  toggleEditProfile,
+  setUserData,
+}) => (
   <div className="profile">
     <h2 className="profile__subheading">
       <span>
@@ -54,28 +59,25 @@ const Profile = ({ userData, editProfile, toggleEditProfile }) => (
       </div>
       <div className="profile__card">
         <h3 className="profile__card-title">User Details</h3>
-        <div className="">
+        <div className="profile__address-block">
           <h3 className="profile__label">
             Address:
-            <span className="profile__body">
+          </h3>
+          <div className="profile__address-details">
+            <h4 className="profile__body">
               {' '}
               {userData.address}
-            </span>
-          </h3>
-          <h3 className="profile__label">
-            City:
+            </h4>
             <span className="profile__body">
               {' '}
               {userData.city}
+              ,
             </span>
-          </h3>
-          <h3 className="profile__label">
-            Province:
             <span className="profile__body">
               {' '}
               {userData.province}
             </span>
-          </h3>
+          </div>
         </div>
         <h3 className="profile__label">
           Phone:
@@ -106,10 +108,11 @@ const Profile = ({ userData, editProfile, toggleEditProfile }) => (
           userData={userData}
           // handleFormSubmit={handleFormSubmit}
           toggleEditProfile={toggleEditProfile}
+          setUserData={setUserData}
         />
       )
     }
   </div>
 );
 
-export default React.memo(Profile);
+export default Profile;

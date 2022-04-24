@@ -23,17 +23,6 @@ const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
 
-  const handleErr = (err) => (err.response.status === 401
-    ? (
-      // Update the state: done authenticating, user is not logged in
-      setAuthenticating(false),
-      setLoggedIn(false)
-    ) : (
-      console.log('Error authenticating', err),
-      setAuthenticating(false),
-      setLoggedIn(false)
-    ));
-
   const getUser = useCallback(() => {
     apiUtils
       .getProfile()
@@ -90,13 +79,16 @@ const App = () => {
               element={(
                 <ProfilePage
                   userData={userData}
+                  getUser={getUser}
+                  setUserData={setUserData}
                 />
               )}
-            />
-            <Route
-              path="/profile/:id"
-              element={<ProfilePage />}
-            />
+            >
+              <Route
+                path=":id"
+                element={<ProfilePage />}
+              />
+            </Route>
             <Route
               path="/auth-fail"
               element={<AuthFailPage />}
