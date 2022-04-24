@@ -134,7 +134,7 @@ const HomePage = ({ isLoggedIn }) => {
             <p>
               At Lost & Found we take pride in directly connecting those who are motivated to help but may not know where to start or may have a concern of how far their contributions go through traditional channels. Through a direct connection, we can mitigate managment costs and focus on spending resources where it counts. You as a vollunteer will also benefit greatly with a deeper connection to those you will impact and be able to grow your network as new friends settle in and adapt with your guidance.
               <span className={isLoggedIn
-                ? 'homepage__link-disabled' : 'homepage__link'}
+                ? 'homepage__link--disabled' : 'homepage__link'}
               >
                 If you are ready to help, please
                 {' '}

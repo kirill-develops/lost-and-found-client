@@ -1,5 +1,6 @@
 @use '../../styles/partials/mixins'as*;
 @use '../../styles/partials/variables'as*;
+@use '../../styles/partials/colors'as*;
 
 .homepage {
   min-height: $root-min-height;
@@ -162,7 +163,7 @@
     &--slide4 {
       @extend .swiper__title;
       width: 45%;
-      color: #0A0908;
+      color: $site-black;
       text-align: center;
       margin: 0.25rem auto;
     }

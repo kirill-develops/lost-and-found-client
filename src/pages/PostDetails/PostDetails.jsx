@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import apiUtils from '../../utils/apiUtils';
 import TrashIco from '../../assets/icons/trash-can-outline.svg';
+import BackButton from '../../components/BackButton/BackButton';
 
 const filterOptions = [
   { value: 'housing', label: 'Housing' },
@@ -27,7 +28,7 @@ const filterOptions = [
 // }
 
 const PostDetails = () => {
-  const { goBack } = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
   const [active, setActive] = useState(0);
   const [avatarUrl, setAvatarUrl] = useState('');
@@ -68,7 +69,7 @@ const PostDetails = () => {
   const deletePost = (byId) => {
     apiUtils
       .deletePostById(byId)
-      .then(goBack())
+      .then(navigate(-1))
       .catch();
   };
 
@@ -81,8 +82,13 @@ const PostDetails = () => {
   ) : (
     <div className="post-details">
       <div className="post-details__block">
-        <h1 className="post-details__title">{title}</h1>
-        <div className={offer ? 'post-details__subheading-block--offer' : 'post-details__subheading-block--seeking'}>
+        <div className="post-details__title-wrapper">
+          <BackButton />
+          <h1 className="post-details__title">{title}</h1>
+        </div>
+        <div className={offer
+          ? 'post-details__subheading-block--offer' : 'post-details__subheading-block--seeking'}
+        >
           <h2 className="post-details__subheading">
             {filterOptions.find((filter) => filter.value === category).label}
           </h2>
@@ -90,7 +96,8 @@ const PostDetails = () => {
             <div className="post-details__button-wrapper">
               <button
                 type="button"
-                className={offer === 1 ? 'post-details__edit-button--offer' : 'post__edit-button--seeking'}
+                className={offer === 1
+                  ? 'post-details__edit-button--offer' : 'post-details__edit-button--seeking'}
               >
                 Edit Post
               </button>
@@ -102,7 +109,8 @@ const PostDetails = () => {
                 <img
                   src={TrashIco}
                   alt="trash icon"
-                  className={offer === 1 ? 'post-details__icon--offer' : 'post__icon--seeking'}
+                  className={offer === 1
+                    ? 'post-details__icon--offer' : 'post-details__icon--seeking'}
                 />
               </button>
             </div>
@@ -110,7 +118,7 @@ const PostDetails = () => {
         </div>
         <div className="post-details__frame">
           <Link
-            to={`user/${usersId}`}
+            to={`../user/${usersId}`}
             className="post-details__card--avatar"
           >
             <img

@@ -14,11 +14,13 @@
     @include mainComponent;
   }
 
-  &__title {
+  &__title-wrapper {
     @include pageTitle;
     margin-top: 3rem;
     margin-left: -$component-padding;
     margin-right: -$component-padding;
+    display: flex;
+    align-items: center;
   }
 
   &__subheading-block {

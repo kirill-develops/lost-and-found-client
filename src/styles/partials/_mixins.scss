@@ -20,7 +20,7 @@
 
 @mixin formBody {
   font-size: 0.95rem;
-  color: #000000;
+  color: #0A0908;
   font-weight: 400;
   font-family: -apple-system,
     BlinkMacSystemFont,
@@ -67,12 +67,13 @@
 
 @mixin closeIcoWrapper {
   position: absolute;
-  right: $component-padding;
+  top: 0.5rem;
+  right: 0.5rem;
   border: none;
   padding: 0;
   background-color: rgba(255, 255, 255, 0);
   width: fit-content;
-  height: fit-content;
+  height: 1.4rem;
 
   &:hover {
     cursor: pointer;
@@ -80,7 +81,7 @@
 }
 
 @mixin closeIco {
-  height: 1rem;
+  height: 1.4rem;
   filter: invert(1);
   // position: absolute;
   // right: $component-padding;
