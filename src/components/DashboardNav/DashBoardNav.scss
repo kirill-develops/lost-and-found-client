@@ -8,11 +8,12 @@
   margin-left: -$root-padding;
   margin-right: -$root-padding;
   border-bottom: 2px solid $user-triage;
-  padding: $root-padding 0;
+  padding: calc($root-padding / 2) 0;
   min-height: 3.4rem;
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 
   &__tablet {
@@ -26,7 +27,7 @@
   }
 
   &__active {
-    margin: 2.525rem 0 0;
+    margin: .7525rem 0 0;
     padding-left: 0;
     display: flex;
     align-items: center;
@@ -38,6 +39,10 @@
     @include button;
     text-align: center;
     width: fit-content;
+    padding: 0.25rem 0.5rem;
+    background-color: #fee285;
+    color: black;
+    border: 2px solid $site-black;
 
     &:hover {
       color: $user-triage;
@@ -47,6 +52,8 @@
     &--first {
       @extend .dashboard-nav__label;
       color: #858d90;
+      background-color: inherit;
+      border: none;
       margin: 0;
 
       &:hover {
@@ -57,10 +64,11 @@
 
     &--first-mobile {
       @extend .dashboard-nav__label;
-      color: $user-triage;
+      background-color: $site-primary;
+      color: white;
 
       &:hover {
-        color: #858d90;
+        color: #9da2a4;
         cursor: pointer;
       }
     }

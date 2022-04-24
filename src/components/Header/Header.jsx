@@ -22,7 +22,10 @@ const Header = ({ userName }) => {
   return (
     <section className="header">
       <div className="header__block">
-        <Link className="header__link" to="/">
+        <Link
+          to="/"
+          className="header__link"
+        >
           <img
             src={Logo}
             alt="Lost & FOUND logo"
