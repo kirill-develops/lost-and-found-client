@@ -2,11 +2,14 @@
 /* eslint-disable sort-imports */
 //! /* eslint-disable no-unused-vars */
 import './PostDetails.scss';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useReducer, useState,
+} from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import apiUtils from '../../utils/apiUtils';
 import TrashIco from '../../assets/icons/trash-can-outline.svg';
 import BackButton from '../../components/BackButton/BackButton';
+import EditPost from '../../components/EditPost/EditPost';
 
 const filterOptions = [
   { value: 'housing', label: 'Housing' },
@@ -42,6 +45,15 @@ const PostDetails = () => {
   const [timestamp, setTimestamp] = useState('');
   const [usersId, setUsersId] = useState('');
   const [isLoading, setLoading] = useState(true);
+  const [editPost, toggleEditPost] = useReducer((checked) => !checked, false);
+
+  const setPostData = (postObj) => {
+    setTitle(postObj.title);
+    setDescription(postObj.description);
+    setCategory(postObj.category);
+  };
+
+  let postData = { title, description, category };
 
   const fetchPost = useCallback(() => {
     apiUtils
@@ -57,8 +69,8 @@ const PostDetails = () => {
         setOffer(post.data.offer);
         setPicUrl(post.data.pic_url);
         setTitle(post.data.title);
-        setUsersId(post.data.users_id);
         setTimestamp(post.data.updated_at);
+        setUsersId(post.data.users_id);
         setLoading(false);
       })
       .catch((err) => {
@@ -96,6 +108,7 @@ const PostDetails = () => {
             <div className="post-details__button-wrapper">
               <button
                 type="button"
+                onClick={toggleEditPost}
                 className={offer === 1
                   ? 'post-details__edit-button--offer' : 'post-details__edit-button--seeking'}
               >
@@ -138,6 +151,15 @@ const PostDetails = () => {
           </div>
         </div>
       </div>
+      {editPost && (
+        <EditPost
+          offer={offer}
+          postData={postData}
+          setPostData={setPostData}
+          toggleEditPost={toggleEditPost}
+          id={id}
+        />
+      )}
     </div>
   );
 };
