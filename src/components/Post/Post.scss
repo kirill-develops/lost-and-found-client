@@ -1,96 +1,123 @@
 @use '../../styles/partials/variables'as*;
+@use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/colors'as*;
 
 .post {
+  @include swiperCard;
   margin-bottom: 2rem;
-  padding: 1rem $root-padding 0.5rem;
-  background-color: white;
-  border-radius: 3px;
-  border-bottom: 5px solid #666;
-  box-shadow: 0px 8px 20px -8px #00000090;
-  height: 20.5rem;
 
   &__link {
     text-decoration: none;
-  }
-
-  &__block {
-    height: 80%;
-    padding-left: $root-padding;
-    box-sizing: border-box;
-    overflow: hidden;
 
     &:hover {
-      text-decoration: underline;
+      .post__details {
+        text-decoration: underline;
+      }
     }
   }
 
+  &__block {
+    // height: 80%;
+    padding-left: $component-padding;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
   &__title-block {
+    @include swiperCardTitle;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 0.75rem $root-padding 0.25rem;
-    margin-right: -$root-padding;
-    margin-bottom: $root-padding;
 
     &--offer {
       @extend .post__title-block;
-      background-color: #123794;
-      border-left: 3.5px solid #b8c3df;
+      background-color: $offer-secondary;
+      color: $offer-primary;
+      border-color: $offer-primary;
     }
 
     &--seeking {
       @extend .post__title-block;
-      background-color: #462749;
-      border-left: 3.5px solid #c8bec8;
+      background-color: $seeking-secondary;
+      color: $seeking-primary;
+      border-color: $seeking-primary;
     }
   }
 
   &__title {
     margin: 0;
-    color: white;
   }
 
-  &__subheading {
-    margin: 0 auto 0.25rem;
-    font-weight: 600;
-    font-size: 1.6rem;
-    color: #373F51;
-  }
-
-  &__details {
+  &__button-wrapper {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    padding-bottom: $root-padding;
+    gap: 0.5rem;
   }
 
-  &__city {
-    color: #0A0908;
-    margin-top: 0.25rem;
+  &__icon {
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__users {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    margin: 0;
+
+    &--offer {
+      @extend .post__users;
+      background-color: $offer-cta;
+      color: $offer-primary;
+
+      &:hover {
+        background-color: $offer-hover;
+        cursor: pointer;
+      }
+    }
+
+    &--seeking {
+      @extend .post__users;
+      background-color: $seeking-cta;
+      color: $seeking-primary;
+
+      &:hover {
+        background-color: $seeking-hover;
+        cursor: pointer;
+      }
+    }
   }
 
   &__author {
+    color: #666;
+    border-left: 3.5px solid;
+    margin-top: 0.25rem;
+    margin-left: -$component-padding;
+    padding: 0.25rem $root-padding;
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    color: #666;
+
+    &--offer {
+      @extend .post__author;
+      border-color: $offer-secondary;
+    }
+
+    &--seeking {
+      @extend .post__author;
+      border-color: $seeking-secondary;
+    }
   }
 
   &__avatar {
-    height: 2rem;
+    height: 2.5rem;
   }
 
   &__username {
     margin: 0;
     font-size: 1rem;
-  }
-
-  &__owned {
-    font-size: 0.75rem;
-    margin-left: 1rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-    background-color: #E4F1E8;
   }
 
   &__published {
@@ -99,15 +126,54 @@
     color: #666;
   }
 
-  &__content {
-    font-size: 0.85rem;
-    margin: 0;
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: -$component-padding;
+
+  }
+
+  &__subheading {
+    text-transform: uppercase;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #373F51;
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    margin: 2.5rem auto 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  }
+
+  &__city {
+    @include formLabel;
+    font-weight: 500;
+    margin: 0 auto;
+
+    &--offer {
+      @extend .post__city;
+      color: $offer-primary;
+    }
+
+    &--seeking {
+      @extend .post__city;
+      color: $seeking-primary;
+    }
+  }
+
+  &__body {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    box-shadow: inset 0 0 25px -15px #0000002e;
     color: rgb(145, 145, 145);
-    border-radius: 4px;
+    font-size: 0.85rem;
+    margin: 0.75rem auto 0;
+    border-radius: 3px;
     padding: 0.75rem 0.5rem;
-    box-shadow: inset 0px 0px 25px -15px #0000002e;
   }
 }

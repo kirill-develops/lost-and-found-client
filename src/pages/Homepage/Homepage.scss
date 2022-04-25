@@ -1,8 +1,17 @@
 @use '../../styles/partials/mixins'as*;
 @use '../../styles/partials/variables'as*;
+@use '../../styles/partials/colors'as*;
 
 .homepage {
   min-height: $root-min-height;
+
+  &__link {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    &--disabled {
+      display: none;
+    }
+  }
 
   &__header {
     background-color: #15a3dd;
@@ -32,19 +41,23 @@
 
   &__swiper-inner-block {
     border-radius: 3px;
-    padding: 1rem;
+    padding: $root-padding $component-padding;
     border-top: 25px solid #626060;
-    border-bottom: 6px solid #b0acac;
-    background-color: #F2F4F3;
+    border-bottom: 6px solid #626060;
+    background-color: #2e3033;
     position: relative;
-    box-shadow: 0px 10px 13px -7px #000000,
-      0px -10px 13px -7px rgba(0, 0, 0, 0);
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1),
+      0 3px 3px rgba(0, 0, 0, 0.15),
+      0 4px 8px rgba(0, 0, 0, 0.2),
+      0 8px 16px rgba(0, 0, 0, 0.25),
+      0 16px 32px rgba(0, 0, 0, 0.3),
+      0 32px 48px rgba(0, 0, 0, 0.35);
   }
 
   &__swiper-block {
-    margin: 0 auto;
+    margin: auto;
     max-width: $root-max-width;
-    padding: 2rem 2rem 0;
+    padding: $component-padding;
 
     &--highlight1 {
       width: 0.75rem;
@@ -53,7 +66,7 @@
       position: absolute;
       background-color: rgb(237, 106, 94);
       border: 2px solid rgb(223, 99, 87);
-      box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 0px 10px 13px -7px #000000, 0px -10px 13px -7px #000000, 0px -10px 13px -7px #000000;
+      box-shadow: -10px 0 13px -7px #000000, 10px 0 13px -7px #000000, 0 10px 13px -7px #000000, 0 -10px 13px -7px #000000, 0 -10px 13px -7px #000000;
       top: -1.15rem;
       left: 0.4rem;
     }
@@ -65,7 +78,7 @@
       position: absolute;
       background-color: rgb(245, 191, 79);
       border: 2px solid rgb(226, 174, 69);
-      box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 0px 10px 13px -7px #000000, 0px -10px 13px -7px #000000, 0px -10px 13px -7px #000000;
+      box-shadow: -10px 0 13px -7px #000000, 10px 0 13px -7px #000000, 0 10px 13px -7px #000000, 0 -10px 13px -7px #000000, 0 -10px 13px -7px #000000;
       top: -1.15rem;
       left: 1.6rem;
     }
@@ -77,7 +90,7 @@
       position: absolute;
       background-color: rgb(98, 197, 84);
       border: 2px solid rgb(83, 180, 70);
-      box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 0px 10px 13px -7px #000000, 0px -10px 13px -7px #000000, 0px -10px 13px -7px #000000;
+      box-shadow: -10px 0 13px -7px #000000, 10px 0 13px -7px #000000, 0 10px 13px -7px #000000, 0 -10px 13px -7px #000000, 0 -10px 13px -7px #000000;
       top: -1.15rem;
       left: 2.8rem;
     }
@@ -97,8 +110,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0px 10px 13px -7px #000000,
-        0px -10px 13px -7px rgba(0, 0, 0, 0);
+      box-shadow: 0 10px 13px -7px #000000,
+        0 -10px 13px -7px rgba(0, 0, 0, 0);
 
       &--left {
         width: 55%;
@@ -127,6 +140,10 @@
   align-items: center;
   justify-content: flex-start;
 
+  &-slide {
+    height: auto;
+  }
+
   &--slide4 {
     @extend .swiper;
     justify-content: center;
@@ -139,13 +156,14 @@
 
     &--slide2 {
       @extend .swiper__title;
+      font-size: 1.5vw;
       color: #E0D8DE;
     }
 
     &--slide4 {
       @extend .swiper__title;
       width: 45%;
-      color: #0A0908;
+      color: $site-black;
       text-align: center;
       margin: 0.25rem auto;
     }
@@ -161,7 +179,7 @@
 
     &--slide1 {
       @extend .swiper__block;
-      background-color: #F2F4F3;
+      background-color: #FFFFFA;
       padding: 3rem;
     }
 

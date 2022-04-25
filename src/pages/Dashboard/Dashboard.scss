@@ -1,139 +1,59 @@
 @use '../../styles/partials/variables'as*;
 @use '../../styles/partials/mixins'as*;
 @use '../../styles/partials/breakpoints'as*;
+@use '../../styles/partials/colors'as*;
+
+
+.dashboard {
+  @include rootContainer;
+  padding: 0 $root-padding;
+
+  &__block {
+    padding-top: 3rem;
+  }
+
+  &__title {
+    @include pageTitle;
+    margin-bottom: 0;
+  }
+
+  &__subheading {
+    margin-top: 0.5rem;
+    @include pageSubheading;
+
+    &--offer {
+      @extend .dashboard__subheading;
+      background-color: $offer-primary;
+    }
+
+    &--seeking {
+      @extend .dashboard__subheading;
+      background-color: $seeking-primary;
+    }
+  }
+}
 
 .list-block {
   display: flex;
   flex-direction: column;
 
   &__first {
+    @include mainComponent;
     order: 1;
-    box-shadow: 0px 10px 13px -7px #000000,
-      0px -10px 13px -7px rgba(0, 0, 0, 0);
     margin-bottom: 4.5rem;
-    border-radius: 2px;
-    padding: 0 $component-padding $component-padding;
   }
 
   &__second {
+    @include mainComponent;
     order: 3;
-    box-shadow: 0px 10px 13px -7px #000000,
-      0px -10px 13px -7px rgba(0, 0, 0, 0);
     margin-bottom: 4.5rem;
-    border-radius: 2px;
-    padding: 0 $component-padding $component-padding;
   }
 
   &__filler {
     height: 1.25rem;
     border-radius: 1px;
-
-    &--user {
-      @extend .list-block__filler;
-      color: white;
-      background-color: #a72615;
-      margin-top: 0.5rem;
-      margin-bottom: $component-padding;
-      margin-left: -$component-padding;
-      margin-right: -$component-padding;
-    }
-
-    &--second {
-      width: 100%;
-      @extend .list-block__filler;
-      background-color: #22333B;
-      order: 2;
-    }
-  }
-}
-
-.dashboard {
-  @include rootContainer;
-  padding: 0 $root-padding;
-
-  &__title {
-    background-color: #22333B;
-    color: white;
-    padding-top: $component-padding;
-    padding-left: $component-padding;
-    margin: 0 auto;
-    padding-bottom: 0.5rem;
-    border-radius: 1px;
-    font-weight: 700;
-    font-size: 2rem;
-
-    @include tablet {
-      font-size: 2.5rem;
-    }
-  }
-
-  &__subheading {
-    margin-top: 0.5rem;
-    padding: $root-padding $component-padding 0.5rem;
-    margin-left: -$component-padding;
-    margin-right: -$component-padding;
-    border-radius: 1px;
-    font-size: 1.35rem;
-    font-weight: 500;
-    font-family: sans-serif;
-
-    &--offer {
-      @extend .dashboard__subheading;
-      background-color: #123794;
-      color: white;
-    }
-
-    &--seeking {
-      @extend .dashboard__subheading;
-      background-color: #462749;
-      color: white;
-    }
-  }
-
-  &__swiper {
-    @include cardFrameInner;
-  }
-
-  &__user-block {
-    box-shadow: 0px 10px 13px -7px #000000,
-      0px -10px 13px -7px rgba(0, 0, 0, 0);
-    margin: 0 0 4.5rem;
-    border-radius: 2px;
-    padding: 0 $component-padding $component-padding;
-    color: #373F51;
-    font-weight: 500;
-  }
-
-  &__user-frame {
-    @include cardFrameInner;
-    display: flex;
-    gap: $component-padding;
-    align-items: stretch;
-    padding-bottom: 3rem;
-  }
-
-  &__user-metrics {
-    flex: 1;
-    background-color: #FFFFFF;
-    padding: $component-padding;
-    border-radius: 3px;
-    border-bottom: 5px solid #666;
-    box-shadow: 0px 8px 20px -8px #00000090;
-  }
-
-  &__avatar-frame {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    padding: $component-padding;
-    background-color: #FFF;
-    box-shadow: 0px 8px 20px -8px #00000090;
-    border-radius: 3px;
-    border-bottom: 5px solid #666;
-  }
-
-  &__avatar {
-    height: 100%;
-    border-radius: 50%;
+    width: 100%;
+    background-color: $site-primary;
+    order: 2;
   }
 }

@@ -1,0 +1,100 @@
+@use '../../styles/partials/variables'as*;
+@use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/colors'as*;
+
+.edit-form {
+  @include overlay;
+
+  &-block {
+    @include overlayBlock;
+  }
+
+  &__filler {
+    @include cardFiller;
+    background-color: $user-primary;
+  }
+
+  &__close-ico-wrapper {
+    @include closeIcoWrapper;
+  }
+
+  &__close-ico {
+    @include closeIco;
+  }
+
+  &__title {
+    @include overlayTitle;
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $component-padding 2%;
+  }
+
+  &__label {
+    @include formLabel;
+    width: 49%;
+
+    &--address {
+      @extend .edit-form__label;
+      width: 100%;
+    }
+
+    &--volunteer {
+      @extend .edit-form__label;
+      margin: 0;
+    }
+
+    &--error {
+      @extend .edit-form__label;
+      color: $user-primary;
+
+    }
+  }
+
+  &__field {
+    width: 100%;
+
+    &--error {
+      border: 1px solid $user-primary;
+    }
+  }
+
+  &__input-block {
+    width: 49%;
+  }
+
+  &__radio {}
+
+  &__button-block {
+    display: flex;
+    gap: $component-padding;
+  }
+
+  &__button {
+    @include button;
+    padding: $root-padding $component-padding;
+
+    &--submit {
+      @extend .edit-form__button;
+      background-color: #F1F8F3;
+      color: #227396;
+
+      &:hover {
+        background-color: #E4F1E8;
+      }
+    }
+
+    &--cancel {
+      @extend .edit-form__button;
+      background-color: $user-cta;
+      color: $user-triage;
+
+      &:hover {
+        background-color: $user-hover;
+      }
+    }
+  }
+}

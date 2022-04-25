@@ -1,0 +1,5 @@
+@use '../../styles/partials/mixins'as*;
+
+.dashboard-swiper {
+  @include swiperFrameInner;
+}

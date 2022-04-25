@@ -1,103 +1,86 @@
 @use '../../styles/partials/variables'as*;
 @use '../../styles/partials/mixins'as*;
 @use '../../styles/partials/breakpoints'as*;
+@use '../../styles/partials/colors'as*;
 
 .dashboard-nav {
-  background-color: #F2F4F3;
+  background-color: $site-primary;
   margin-left: -$root-padding;
   margin-right: -$root-padding;
-  padding: $root-padding 0;
-  border-bottom: 2px solid #9C3848;
-  margin-bottom: 3rem;
-  position: relative;
-  min-height: 2.525rem;
+  border-bottom: 2px solid $user-triage;
+  padding: calc($root-padding / 2) 0;
   min-height: 3.4rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  &__mobile {
-
-    @include nav-menu {
-      display: none;
-    }
-  }
-
-  &__block {
-    display: none;
-    padding: 0;
+  &__tablet {
     margin: 0;
+    padding: 0;
+    display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-
-    @include nav-menu {
-      display: flex;
-    }
+    gap: $root-padding;
   }
 
-  &__mobile-block {
-    display: none;
-
-    &--active {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      margin: 2.525rem 0 0;
-      padding-left: 0;
-
-    }
+  &__active {
+    margin: .7525rem 0 0;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.2rem;
   }
 
   &__label {
-    display: inline-block;
-    gap: $root-padding $component-padding;
+    @include button;
     text-align: center;
-    font-family: Raleway;
-    font-weight: 500;
-    font-size: 1rem;
     width: fit-content;
-
-    @include nav-menu {
-      margin: 0 $component-padding;
-    }
+    padding: 0.25rem 0.5rem;
+    background-color: #fee285;
+    color: black;
+    border: 2px solid $site-black;
 
     &:hover {
-      color: #9C3848;
+      color: $user-triage;
       cursor: pointer;
     }
 
     &--first {
       @extend .dashboard-nav__label;
-      color: #858d90;
-      display: none;
-
-      @include nav-menu {
-        display: inline-block;
-      }
+      color: white;
+      background-color: inherit;
+      border: none;
+      margin: 0;
 
       &:hover {
-        color: #858d90;
+        color: white;
         cursor: default;
       }
     }
 
     &--first-mobile {
       @extend .dashboard-nav__label;
-      color: #9C3848;
-      display: inline-block;
-      padding: 0;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      background-color: $site-primary;
+      color: white;
 
       &:hover {
-        color: #858d90;
-        cursor: default;
+        color: #9da2a4;
+        cursor: pointer;
       }
     }
 
     &--reset {
       @extend .dashboard-nav__label;
-      color: #9C3848;
+      color: $user-triage;
+
+      &:hover {
+        color: black;
+        cursor: pointer;
+      }
     }
   }
 }

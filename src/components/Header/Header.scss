@@ -1,10 +1,11 @@
 @use '../../styles/partials/variables'as*;
 @use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/colors'as*;
 
 .header {
   height: $nav-height;
   padding: $nav-padding $nav-padding;
-  background-color: #0A0908;
+  background-color: $site-black;
   display: flex;
   align-items: center;
   font-family: Open Sans;
@@ -49,7 +50,7 @@
   &__menu-item {
     text-decoration: none;
     color: white;
-    background-color: #22333B;
+    background-color: $site-primary;
     border-radius: 3px;
     padding: 0.5rem;
     text-align: center;
@@ -103,7 +104,7 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: #22333B;
+  background: $site-primary;
   padding: $nav-height 0 0;
   font-size: 1.15rem;
 
@@ -154,7 +155,7 @@
     justify-content: space-between;
     padding-bottom: 2.75rem;
 
-    color: #22333B;
+    color: $site-primary;
     background-color: #FFFFFF;
   }
 }

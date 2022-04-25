@@ -1,0 +1,74 @@
+@use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/variables'as*;
+@use '../../styles/partials/colors'as*;
+
+.profile {
+  @include mainComponent;
+  margin: 0 0 4.5rem;
+
+  &__subheading {
+    @include pageSubheading;
+    background-color: $user-primary;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  &__button-wrapper {
+    margin-top: 0;
+    display: flex;
+    gap: $component-padding;
+    align-items: stretch;
+    align-self: flex-start;
+  }
+
+  &__edit-button {
+    @include button;
+    color: $user-triage;
+    background-color: $user-cta;
+    width: 100%;
+
+    &:hover {
+      background-color: $user-hover;
+    }
+  }
+
+  &__frame {
+    @include frameInner;
+  }
+
+  &__card {
+    @include swiperCard;
+
+    &--avatar {
+      @include swiperAvatarCard;
+    }
+  }
+
+  &__card-title {
+    @include swiperCardTitle;
+    color: $user-primary;
+    background-color: $user-secondary;
+    border-color: $user-primary;
+  }
+
+  &__avatar {
+    @include swiperAvatar;
+  }
+
+  &__label {
+    margin-left: $root-padding;
+    @include formLabel;
+  }
+
+  &__body {
+    @include formBody;
+    margin: 0;
+  }
+
+  &__address-block {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+}

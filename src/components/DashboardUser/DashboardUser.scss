@@ -1,0 +1,64 @@
+@use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/variables'as*;
+@use '../../styles/partials/colors'as*;
+
+.dashboard-user {
+
+  &__title {
+    @include pageTitle;
+    margin: 0 auto;
+  }
+
+  &__block {
+    @include mainComponent;
+    margin: 0 0 4.5rem;
+  }
+
+  &__filler {
+    @include cardFiller;
+    color: white;
+    background-color: $user-primary;
+  }
+
+  &__frame {
+    @include frameInner;
+  }
+
+  &__avatar {
+    @include swiperAvatar;
+  }
+
+  &__card {
+    @include swiperCard;
+
+    &--avatar {
+      @include swiperAvatarCard;
+    }
+  }
+
+  &__card-title {
+    @include swiperCardTitle;
+    color: $user-primary;
+    background-color: $user-secondary;
+    border-color: $user-primary;
+  }
+
+  &__card-label {
+    margin-left: $root-padding;
+    @include formLabel;
+  }
+
+  &__card-body {
+    @include formBody;
+  }
+
+  &__card-cta {
+    @include button;
+    justify-content: center;
+    background-color: $user-cta;
+
+    &:hover {
+      background-color: $user-hover;
+    }
+  }
+}

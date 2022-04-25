@@ -1,13 +1,14 @@
 @use '../../styles/partials/mixins'as *;
+@use '../../styles/partials/colors'as *;
 
 .logout-button {
   @include button;
   width: 100%;
-  background-color: #FCF2EE;
+  background-color: $user-cta;
   display: flex;
   justify-content: center;
 
   &:hover {
-    background-color: #F9E4DC;
+    background-color: $user-hover;
   }
 }

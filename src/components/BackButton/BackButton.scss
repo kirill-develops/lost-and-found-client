@@ -1,0 +1,17 @@
+@use '../../styles/partials/variables'as*;
+
+.back-button {
+  &__wrapper {
+    background-color: #00000000;
+    margin: 0;
+    border: none;
+    padding: 0;
+    max-height: 2rem;
+    width: fit-content;
+  }
+
+  &__ico {
+    height: 2rem;
+    filter: invert(1);
+  }
+}
