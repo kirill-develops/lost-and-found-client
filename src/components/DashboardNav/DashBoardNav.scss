@@ -4,7 +4,7 @@
 @use '../../styles/partials/colors'as*;
 
 .dashboard-nav {
-  background-color: #F2F4F3;
+  background-color: $site-primary;
   margin-left: -$root-padding;
   margin-right: -$root-padding;
   border-bottom: 2px solid $user-triage;
@@ -51,13 +51,13 @@
 
     &--first {
       @extend .dashboard-nav__label;
-      color: #858d90;
+      color: white;
       background-color: inherit;
       border: none;
       margin: 0;
 
       &:hover {
-        color: #858d90;
+        color: white;
         cursor: default;
       }
     }
@@ -76,6 +76,11 @@
     &--reset {
       @extend .dashboard-nav__label;
       color: $user-triage;
+
+      &:hover {
+        color: black;
+        cursor: pointer;
+      }
     }
   }
 }

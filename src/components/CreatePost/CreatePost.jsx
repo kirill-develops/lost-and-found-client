@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable sort-imports */
 import './CreatePost.scss';
 import React, { useEffect, useReducer, useState } from 'react';
@@ -7,69 +8,60 @@ import apiUtils from '../../utils/apiUtils';
 import closeIco from '../../assets/icons/x_close.svg';
 import isProfileComplete from '../../utils/isProfileComplete';
 import LoginButton from '../LoginButton/LoginButton';
+import { dropdownCategoryOptions } from '../../utils/constants';
 
-const dropdownOptions = [
-  { value: 'housing', label: 'Housing' },
-  { value: 'jobs', label: 'Jobs' },
-  { value: 'employment_services', label: 'Employment Services' },
-  { value: 'on-boarding', label: 'On-boarding' },
-  { value: 'translations', label: 'Translations' },
-  { value: 'goods', label: 'Free Goods' },
-  { value: 'transportation', label: 'Transportation' },
-];
-
-const CreatePost = ({ isOffer, onPostCreate }) => {
-  const navigateTo = useNavigate();
+const CreatePost = ({
+  userData,
+  onPostCreate,
+}) => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [volunteer, setVolunteer] = useState(isOffer);
-  const [makePost, toggleNewPost] = useReducer(
+  const [offer, setOffer] = useState(userData.volunteer);
+  const [hasSubmitted, toggleSubmitted] = useState(false);
+  const [makePost, toggleMakePost] = useReducer(
     (checked) => !checked,
     false,
   );
 
   const handleFormSubmit = (event) => {
-    // todo form validation
     // prevent page reload
     event.preventDefault();
     // Create a postObj with state value's from each field
-    const postObj = {
-      title,
-      description,
-      category,
-      offer: volunteer,
-    };
-    apiUtils.addPost(postObj)
-      .then(() => {
-        // Re-fetch all posts
-        onPostCreate();
-        // reset the form values
-        setTitle('');
-        setCategory('');
-        setDescription('');
-        toggleNewPost((e) => !e);
+    (!title || !description || !category || !isLoggedIn || !offer) ? (
+      toggleSubmitted(true)
+    ) : (
+      apiUtils.addPost({
+        title,
+        description,
+        category,
+        offer,
       })
-      .catch((err) => {
-        console.log('Error creating a new post:', err);
-      });
+        .then(() => {
+          // Re-fetch all posts
+          onPostCreate();
+          // reset the form values
+          toggleSubmitted(false);
+          toggleMakePost();
+        })
+        .catch((err) => {
+          console.log('Error creating a new post:', err);
+        })
+    );
   };
 
   useEffect(() => {
-    // Check if user is currently logged in, so we can display a form or login button conditionally
-    apiUtils
-      .getProfile()
-      .then((res) => {
-        // checks to see if user's profile is complete
-        // if the user's profile is incomplete, send them to the profile page
-        (res.data && !isProfileComplete(res.data))
-          ? navigateTo('/profile') : setLoggedIn(true);
-        // check to see if user is a volunteer and change state accordingly
-        res.data && res.data.volunteer.toLowerCase() === 'true'
-          ? setVolunteer(true) : setVolunteer(false);
-      });
-  }, [isLoggedIn, navigateTo]);
+    // checks to see if user's profile is complete
+    // if the user's profile is incomplete, send them to the profile page
+    (userData.id && !isProfileComplete(userData))
+      ? navigate('/profile') : setLoggedIn(true);
+    // check to see if user is a volunteer and change state accordingly
+    userData.volunteer
+      && userData.volunteer.toLowerCase() === 'true'
+      ? setOffer(true) : setOffer(false);
+  }, [userData, navigate]);
 
   return makePost ? (
     <div className="post-form">
@@ -77,8 +69,8 @@ const CreatePost = ({ isOffer, onPostCreate }) => {
         <div className="post-form__block">
           <button
             type="button"
-            onClick={toggleNewPost}
-            onKeyUp={(e) => e.key === 'Escape' && toggleNewPost}
+            onClick={toggleMakePost}
+            onKeyUp={(e) => e.key === 'Escape' && toggleMakePost}
             className="post-form__close-ico-wrapper"
           >
             <img
@@ -89,9 +81,10 @@ const CreatePost = ({ isOffer, onPostCreate }) => {
           </button>
           <h3 className="post-form__title">
             {/* check to see if user is volunteer and produce proper heading  */}
-            {volunteer ? 'Create New Offer' : 'What Can We Connect You With?'}
+            {userData.volunteer
+              ? 'Create New Offer' : 'What Can We Connect You With?'}
           </h3>
-          <div className={isOffer
+          <div className={userData.volunteer
             ? 'post-form__filler--offer' : 'post-form__filler--seeking'}
           />
           <form
@@ -100,49 +93,51 @@ const CreatePost = ({ isOffer, onPostCreate }) => {
           >
             <div className="post-form__form-block">
               <div className="post-form__field">
-                <label
-                  htmlFor="title"
-                  className="post-form__label"
-                >
-                  Brief Title
+                <label className="post-form__label">
+                  BRIEF TITLE*
+                  {!title && hasSubmitted
+                    && <span className="post-form__label--error"> This field is required</span>}
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    id="title"
+                    maxLength="75"
+                    className={`post-form__field ${!title && hasSubmitted
+                      && 'post-form__field--error'}`}
+                  />
                 </label>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  id="title"
-                  maxLength="75"
-                  required
-                />
               </div>
               <div className="post-form__field">
-                <label
-                  htmlFor="category"
-                  className="post-form__label"
-                >
-                  Category
+                {/* eslint-disable-next-line jsx-a11y/label-has-for */}
+                <label className="post-form__label">
+                  CATEGORY*
+                  {!category && hasSubmitted
+                    && <span className="post-form__label--error"> This field is required</span>}
+                  <Select
+                    value={category}
+                    onChange={(e) => setCategory(e.value)}
+                    options={dropdownCategoryOptions}
+                    menuPlacement="auto"
+                    menuShouldBlockScroll
+                    className={`post-form__field ${!category && hasSubmitted
+                      && 'post-form__field--error'}`}
+                  />
                 </label>
-                <Select
-                  onChange={(e) => setCategory(e.value)}
-                  options={dropdownOptions}
-                  menuPlacement="auto"
-                  menuShouldBlockScroll
-                  required
-                />
               </div>
               <div className="post-form__field">
-                <label
-                  htmlFor="description"
-                  className="post-form__label"
-                >
-                  Description
+                <label className="post-form__label">
+                  DESCRIPTION*
+                  {!description && hasSubmitted
+                    && <span className="post-form__label--error"> This field is required</span>}
+                  <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    id="description"
+                    className={`post-form__field ${!description && hasSubmitted
+                      && 'post-form__field--error'}`}
+                  />
                 </label>
-                <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  id="description"
-                  required
-                />
               </div>
             </div>
             <div className="post-form__button-block">
@@ -154,7 +149,7 @@ const CreatePost = ({ isOffer, onPostCreate }) => {
               </button>
               <button
                 type="button"
-                onClick={toggleNewPost}
+                onClick={toggleMakePost}
                 className="post-form__button--cancel"
               >
                 CANCEL
@@ -171,7 +166,7 @@ const CreatePost = ({ isOffer, onPostCreate }) => {
           // If user is logged in, render form for creating a post
           <button
             type="button"
-            onClick={toggleNewPost}
+            onClick={toggleMakePost}
             className="create-post__button"
           >
             create post

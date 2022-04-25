@@ -32,7 +32,6 @@ const ProfilePage = ({ userData, setUserData }) => {
   useEffect(() => {
     toggleEdit();
   }, [toggleEdit]);
-  // (userData.id && !isProfileComplete(userData)) && toggleEditProfile(true) }
 
   // While the component is authenticating, do not render anything
   // (alternatively, this can be a preloader)
@@ -43,14 +42,13 @@ const ProfilePage = ({ userData, setUserData }) => {
           <BackButton />
           <h1 className="profile-page__title">Profile Page</h1>
         </div>
-
         {/* If user is logged in, render their profile information */}
         {userData.id ? (
           <Profile
             userData={userData}
+            setUserData={setUserData}
             editProfile={editProfile}
             toggleEditProfile={toggleEditProfile}
-            setUserData={setUserData}
           />
         ) : (
           // If user is not logged in, render a login button

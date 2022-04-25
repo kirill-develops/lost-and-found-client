@@ -24,9 +24,9 @@ const formatDate = (date) => (new Date(date)).toLocaleDateString('en-US');
 
 const Profile = ({
   userData,
+  setUserData,
   editProfile,
   toggleEditProfile,
-  setUserData,
 }) => (
   <div className="profile">
     <h2 className="profile__subheading">
@@ -102,13 +102,11 @@ const Profile = ({
       </div>
     </div>
     {// If user's form is not filled out or user toggles to edit form, render EditForm Component
-      editProfile
-      && (
+      editProfile && (
         <EditProfile
           userData={userData}
-          // handleFormSubmit={handleFormSubmit}
-          toggleEditProfile={toggleEditProfile}
           setUserData={setUserData}
+          toggleEditProfile={toggleEditProfile}
         />
       )
     }
