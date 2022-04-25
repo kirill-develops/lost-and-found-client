@@ -27,6 +27,7 @@ const dropdownOptions = [
 //     address: ?string,
 //     city: string,
 //     province: string,
+// userData,
 //     phone: number,
 //     volunteer: boolean,
 //     postal: string,
@@ -36,9 +37,11 @@ const dropdownOptions = [
 // }
 
 const EditProfile = ({
-  userData, toggleEditProfile, setUserData,
+  userData,
+  setUserData,
+  toggleEditProfile,
 }) => {
-  // STATE HOOKS
+  // STATE HOOKS for profile values
   const [firstName, setFirstName] = useState(userData.first_name || '');
   const [lastName, setLastName] = useState(userData.last_name || '');
   const [address, setAddress] = useState(userData.address || '');
@@ -47,40 +50,32 @@ const EditProfile = ({
   const [phone, setPhone] = useState(userData.phone || '');
   const [volunteer, setVolunteer] = useState(userData.volunteer || 'false');
   const [postalCode, setPostalCode] = useState();
-  const [hasSubmitted, toggleSubmitted] = useState(false);
   // Function to set opopsite editProfile STATE
+  const [hasSubmitted, toggleSubmitted] = useState(false);
   const toggleEdit = () => toggleEditProfile((event) => !event);
 
   // Handle the submission of the form by validating content and then doing an api PUT req
-  const handleSubmit = (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
     let user = { ...userData };
 
-    !firstName || !lastName || !city || !province || !phone || !volunteer ? (
-      toggleSubmitted((checked) => !checked)
+    (!firstName || !lastName || !city || !province || !phone || !volunteer) ? (
+      toggleSubmitted(true)
     ) : (
-      apiUtils.editProfile({
-        first_name: firstName,
-        last_name: lastName,
-        address,
-        city,
-        province,
-        phone,
-        volunteer,
+      apiUtils.editProfile(user = {
+        ...{
+          first_name: firstName,
+          last_name: lastName,
+          address,
+          city,
+          province,
+          phone,
+          volunteer,
+        },
       })
         .then(
-          user = {
-            ...{
-              first_name: firstName,
-              last_name: lastName,
-              address,
-              city,
-              province,
-              phone,
-              volunteer,
-            },
-          },
           setUserData(user),
+          toggleSubmitted(false),
           toggleEdit(),
         ).catch()
     );
@@ -109,7 +104,7 @@ const EditProfile = ({
           {/* styled color block */}
           <div className="edit-form__filler" />
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleFormSubmit}
             className="edit-form__form"
           >
             <label className="edit-form__label">
@@ -169,6 +164,7 @@ const EditProfile = ({
                   onChange={(e) => setProvince(e.value)}
                   options={dropdownOptions}
                   id="province"
+                  menuShouldBlockScroll
                   className={`edit-form__field ${!province && hasSubmitted
                     && 'edit-form__field--error'}`}
                 />
