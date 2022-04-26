@@ -36,16 +36,12 @@
   }
 
   &__form {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    @include listFlex;
     width: 100%;
   }
 
   &__form-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include listFlex;
     gap: $component-padding;
     width: 80%;
   }
@@ -113,9 +109,7 @@
 }
 
 .create-post {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include listFlex;
   width: fit-content;
   left: 50%;
   transform: translatex(-50%);

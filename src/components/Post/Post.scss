@@ -127,9 +127,7 @@
   }
 
   &__details {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    @include listFlex;
     margin-left: -$component-padding;
 
   }

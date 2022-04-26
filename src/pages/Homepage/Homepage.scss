@@ -201,10 +201,8 @@
         height: 100%;
         width: 100%;
         background-color: #ffffff96;
-        display: flex;
-        flex-direction: column;
+        @include listFlex;
         justify-content: center;
-        align-items: center;
       }
     }
   }

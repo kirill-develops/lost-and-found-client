@@ -11,10 +11,8 @@
   padding: calc($root-padding / 2) 0;
   min-height: 3.4rem;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  @include listFlex;
   justify-content: center;
-  align-items: center;
 
   &__tablet {
     margin: 0;
@@ -27,12 +25,10 @@
   }
 
   &__active {
+    @include listFlex;
+    gap: 0.2rem;
     margin: .7525rem 0 0;
     padding-left: 0;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 0.2rem;
   }
 
   &__label {

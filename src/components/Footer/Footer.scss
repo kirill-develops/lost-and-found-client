@@ -14,9 +14,7 @@
 
   &__block {
     align-self: flex-end;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    @include listFlex;
   }
 
   &__link {
