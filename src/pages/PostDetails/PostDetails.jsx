@@ -53,7 +53,7 @@ const PostDetails = () => {
     setCategory(postObj.category);
   };
 
-  let postData = { title, description, category };
+  const postData = { title, description, category };
 
   const fetchPost = useCallback(() => {
     apiUtils

@@ -150,34 +150,34 @@
 
   /* Wrapper for item list */
   &-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 2.75rem;
+    @include listFlex;
 
     color: $site-primary;
     background-color: #FFFFFF;
   }
 }
 
-/* Styling of overlay */
-.bm-overlay {
-  left: 0;
-  top: 0;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.bm-custom {
-  &__block {
+.bm {
+  &__address {
+    background-color: $site-black;
+    color: white;
+    border-radius: 3px;
+    width: 100%;
+    padding: $root-padding;
     align-self: flex-end;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    >.bm__label {
+      margin: 0;
+    }
   }
 
-  &__link {
-    text-decoration: none;
-    color: #1f1f1f;
+  /* Styling of overlay */
+  &__overlay {
+    left: 0;
+    top: 0;
   }
 
   &__list {
@@ -190,19 +190,40 @@
     gap: $root-padding
   }
 
-  &__list-item {
-    list-style: none;
-  }
-
   &__logo {
+    background-color: white;
     box-sizing: content-box;
-    padding: 0.5rem;
+    height: 1.75rem;
     border-radius: 22px;
-    height: 2rem;
-    border: 2.5px solid rgba(0, 0, 0, 0);
+    border: 2px solid $site-black;
+    padding: 0.75rem;
 
-    &:hover {
-      border: 2px solid #a7adb1;
+
+    &--github {
+      @extend .bm__logo;
+      color: $github-color;
+
+      &:hover {
+        border-color: $github-color;
+      }
+    }
+
+    &--gmail {
+      @extend .bm__logo;
+      color: $gmail-color;
+
+      &:hover {
+        border-color: $gmail-color;
+      }
+    }
+
+    &--linkedin {
+      @extend .bm__logo;
+      color: $linkedin-color;
+
+      &:hover {
+        border-color: $linkedin-color;
+      }
     }
   }
 }

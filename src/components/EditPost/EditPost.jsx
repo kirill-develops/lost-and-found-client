@@ -72,7 +72,7 @@ const EditPost = ({
             {/* check to see if user is volunteer and produce proper heading  */}
             {offer ? 'Create New Offer' : 'What Can We Connect You With?'}
           </h3>
-          <div className={postData.offer
+          <div className={offer
             ? 'post-form__filler--offer' : 'post-form__filler--seeking'}
           />
           <form

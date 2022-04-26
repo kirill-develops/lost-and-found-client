@@ -56,10 +56,6 @@
   text-decoration: none;
   font-weight: 500;
 
-  >svg {
-    width: 1.5rem;
-  }
-
   &:hover {
     cursor: pointer;
   }
@@ -89,6 +85,12 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+@mixin listFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 // all parent level components have this to create site margins

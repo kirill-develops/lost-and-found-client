@@ -2,7 +2,7 @@
 import './LoginButton.scss';
 import { useLocation } from 'react-router-dom';
 import React from 'react';
-import GoogleLogo from '../../assets/icons/google-logo-32px.svg';
+import { FcGoogle } from 'react-icons/fc';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5050';
 
@@ -14,7 +14,7 @@ const LoginButton = () => {
     // on the server side After successful authentication user will be
     // redirected back to client - side app with the cookie set
     <a className="login-button" href={`${SERVER_URL}/auth/google?${pathname}`}>
-      <img src={GoogleLogo} alt="google logo" className="" />
+      <FcGoogle size={28} />
       <span className="login-button__text">Login with Google</span>
     </a>
   );
