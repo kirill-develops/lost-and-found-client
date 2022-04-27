@@ -130,7 +130,10 @@ const EditPost = ({
                 </label>
               </div>
             </div>
-            <FormButtons clickHandler={toggleEditPost} />
+            <FormButtons
+              handleSubmit={handleFormSubmit}
+              handleCancel={toggleEditPost}
+            />
           </form>
         </div>
       </div>

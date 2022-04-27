@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable sort-imports */
 import './CreatePost.scss';
-import React, { useEffect, useReducer, useState } from 'react';
+import React, {
+  useEffect, useReducer, useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
@@ -16,11 +18,12 @@ const CreatePost = ({
   onPostCreate,
 }) => {
   const navigate = useNavigate();
+  // STATE HOOKS for Form
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const [offer, setOffer] = useState(userData.volunteer);
+
   const [hasSubmitted, toggleSubmitted] = useState(false);
   const [makePost, toggleMakePost] = useReducer(
     (checked) => !checked,
@@ -30,8 +33,9 @@ const CreatePost = ({
   const handleFormSubmit = (event) => {
     // prevent page reload
     event.preventDefault();
+    console.log(category);
     // Create a postObj with state value's from each field
-    (!title || !description || !category || !isLoggedIn || !offer) ? (
+    (!title || !description || !category || !offer) ? (
       toggleSubmitted(true)
     ) : (
       apiUtils.addPost({
@@ -56,8 +60,8 @@ const CreatePost = ({
   useEffect(() => {
     // checks to see if user's profile is complete
     // if the user's profile is incomplete, send them to the profile page
-    (userData.id && !isProfileComplete(userData))
-      ? navigate('/profile') : setLoggedIn(true);
+
+    if (userData.id && !isProfileComplete(userData)) navigate('/profile');
     // check to see if user is a volunteer and change state accordingly
     userData.volunteer
       && userData.volunteer.toLowerCase() === 'true'
@@ -116,12 +120,12 @@ const CreatePost = ({
                   {!category && hasSubmitted
                     && <span className="post-form__label--error"> This field is required</span>}
                   <Select
-                    value={category}
+                    value={category.value}
                     onChange={(e) => setCategory(e.value)}
                     options={dropdownCategoryOptions}
                     menuPlacement="auto"
                     menuShouldBlockScroll
-                    className={`post-form__field ${!category && hasSubmitted
+                    className={`post-form__field--select ${!category && hasSubmitted
                       && 'post-form__field--error'}`}
                   />
                 </label>
@@ -141,7 +145,10 @@ const CreatePost = ({
                 </label>
               </div>
             </div>
-            <FormButtons clickHandler={toggleMakePost} />
+            <FormButtons
+              handleSubmit={handleFormSubmit}
+              handleCancel={toggleMakePost}
+            />
           </form>
         </div>
       </div>
@@ -149,7 +156,7 @@ const CreatePost = ({
   ) : (
     <section className="create-post">
       {
-        isLoggedIn ? (
+        userData.id ? (
           // If user is logged in, render form for creating a post
           <button
             type="button"

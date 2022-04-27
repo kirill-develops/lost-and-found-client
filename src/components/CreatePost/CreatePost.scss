@@ -50,8 +50,13 @@
     margin-bottom: 1rem;
     width: 100%;
 
+    &--select {
+      @extend .post-form__field;
+      border-radius: 6px;
+    }
+
     &--error {
-      border: 1px solid red;
+      border: 1px solid $user-primary;
     }
   }
 
@@ -73,6 +78,10 @@
     color: #666;
     font-size: 0.9rem;
     font-weight: 500;
+
+    &--error {
+      color: $user-primary;
+    }
   }
 
   &__button-block {
