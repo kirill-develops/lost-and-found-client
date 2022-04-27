@@ -1,13 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 const DashboardMobileNav = ({ setFilterParams }) => {
   const [active, setActive] = useState(false);
   // const [filterParams, setFilterParams] = useSearchParams();
 
-  const selectMobileFilter = useCallback(() => (category) => {
-    setActive(false);
+  const selectMobileFilter = (category) => {
     setFilterParams({ filter: category });
-  }, [setFilterParams]);
+    setActive(false);
+  };
 
   return (
     <>

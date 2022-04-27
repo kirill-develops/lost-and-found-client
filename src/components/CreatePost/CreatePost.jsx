@@ -33,7 +33,6 @@ const CreatePost = ({
   const handleFormSubmit = (event) => {
     // prevent page reload
     event.preventDefault();
-    console.log(category);
     // Create a postObj with state value's from each field
     (!title || !description || !category || !offer) ? (
       toggleSubmitted(true)
@@ -60,8 +59,7 @@ const CreatePost = ({
   useEffect(() => {
     // checks to see if user's profile is complete
     // if the user's profile is incomplete, send them to the profile page
-
-    if (userData.id && !isProfileComplete(userData)) navigate('/profile');
+    if (userData.id && !isProfileComplete(userData)) navigate('/profile/edit');
     // check to see if user is a volunteer and change state accordingly
     userData.volunteer
       && userData.volunteer.toLowerCase() === 'true'
