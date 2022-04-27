@@ -8,7 +8,13 @@
     padding: 0;
     max-height: 2rem;
     width: fit-content;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateX(-25%);
+    }
   }
+
 
   &__ico {
     height: 2rem;

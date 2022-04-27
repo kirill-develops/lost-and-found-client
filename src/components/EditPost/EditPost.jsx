@@ -1,6 +1,7 @@
 /* eslint-disable sort-imports */
 import './EditPost.scss';
 import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import closeIco from '../../assets/icons/x_close.svg';
@@ -23,6 +24,7 @@ const EditPost = ({
   const [category, setCategory] = useState(menuOption);
 
   const [hasSubmitted, toggleSubmitted] = useState(false);
+  const navTo = useNavigate();
   let postObj = { ...postData };
 
   const handleFormSubmit = (event) => {
@@ -43,8 +45,8 @@ const EditPost = ({
         .then(() => {
           // Update Post Obj
           setPostData(postObj);
-          // reset the form values
-          toggleEditPost(false);
+          toggleSubmitted(false);
+          navTo('../');
         })
         .catch((err) => {
           console.log('Error creating a new post:', err);
@@ -58,8 +60,7 @@ const EditPost = ({
         <div className="post-form__block">
           <button
             type="button"
-            onClick={toggleEditPost}
-            onKeyUp={(e) => e.key === 'Escape' && toggleEditPost}
+            onClick={() => navTo(-1)}
             className="post-form__close-ico-wrapper"
           >
             <img

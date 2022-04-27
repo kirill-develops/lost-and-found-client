@@ -6,7 +6,7 @@ import React, {
 import { useSearchParams } from 'react-router-dom';
 import { filterPostOptions } from '../../utils/constants';
 import CreatePost from '../../components/CreatePost/CreatePost';
-import DashBoardNav from '../../components/DashboardNav/DashboardNav';
+import DashboardNav from '../../components/DashboardNav/DashboardNav';
 import DashbaordUser from '../../components/DashboardUser/DashbaordUser';
 import DashboardSwiper from '../../components/DashboardSwiper/DashboardSwiper';
 import apiUtils from '../../utils/apiUtils';
@@ -51,7 +51,7 @@ const Dashboard = ({ userData }) => {
 
   return (
     <section className="dashboard">
-      <DashBoardNav
+      <DashboardNav
         setFilterParams={setFilterParams}
       />
       <div className="dashboard__block">

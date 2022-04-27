@@ -2,10 +2,10 @@
 /* eslint-disable sort-imports */
 //! /* eslint-disable no-unused-vars */
 import './PostDetails.scss';
-import React, {
-  useCallback, useEffect, useReducer, useState,
-} from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+  Link, Outlet, Route, Routes, useNavigate, useParams,
+} from 'react-router-dom';
 import apiUtils from '../../utils/apiUtils';
 import TrashIco from '../../assets/icons/trash-can-outline.svg';
 import BackButton from '../../components/BackButton/BackButton';
@@ -33,27 +33,26 @@ const filterOptions = [
 const PostDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [isLoading, setLoading] = useState(true);
+  // STATE HOOKS for Post details
   const [active, setActive] = useState(0);
   const [avatarUrl, setAvatarUrl] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [usersId, setUsersId] = useState('');
   const [isCurrentUser, setCurrentUser] = useState('');
   const [offer, setOffer] = useState('');
   const [picUrl, setPicUrl] = useState('');
   const [title, setTitle] = useState('');
   const [timestamp, setTimestamp] = useState('');
-  const [usersId, setUsersId] = useState('');
-  const [isLoading, setLoading] = useState(true);
-  const [editPost, toggleEditPost] = useReducer((checked) => !checked, false);
 
+  const postData = { title, description, category };
   const setPostData = (postObj) => {
     setTitle(postObj.title);
     setDescription(postObj.description);
     setCategory(postObj.category);
   };
-
-  const postData = { title, description, category };
 
   const fetchPost = useCallback(() => {
     apiUtils
@@ -93,6 +92,20 @@ const PostDetails = () => {
     null
   ) : (
     <div className="post-details">
+      <Routes>
+        <Route
+          path="edit"
+          element={(
+            <EditPost
+              offer={offer}
+              postData={postData}
+              setPostData={setPostData}
+              id={id}
+            />
+          )}
+        />
+      </Routes>
+      <Outlet />
       <div className="post-details__block">
         <div className="post-details__title-wrapper">
           <BackButton />
@@ -106,14 +119,13 @@ const PostDetails = () => {
           </h2>
           {isCurrentUser && (
             <div className="post-details__button-wrapper">
-              <button
-                type="button"
-                onClick={toggleEditPost}
+              <Link
+                to="Edit"
                 className={offer === 1
                   ? 'post-details__edit-button--offer' : 'post-details__edit-button--seeking'}
               >
                 Edit Post
-              </button>
+              </Link>
               <button
                 type="button"
                 onClick={() => deletePost(id)}
@@ -151,15 +163,6 @@ const PostDetails = () => {
           </div>
         </div>
       </div>
-      {editPost && (
-        <EditPost
-          offer={offer}
-          postData={postData}
-          setPostData={setPostData}
-          toggleEditPost={toggleEditPost}
-          id={id}
-        />
-      )}
     </div>
   );
 };
