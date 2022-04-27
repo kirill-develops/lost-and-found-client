@@ -19,4 +19,4 @@ const FormButtons = ({ clickHandler }) => (
   </div>
 );
 
-export default FormButtons;
+export default React.memo(FormButtons);

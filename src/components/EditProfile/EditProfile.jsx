@@ -1,24 +1,30 @@
+/* eslint-disable sort-imports */
 import './EditProfile.scss';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import closeIco from '../../assets/icons/x_close.svg';
+import { dropdownProvinceOptions } from '../../utils/constants';
+import FormButtons from '../FormButtons/FormButtons';
 
-const dropdownOptions = [
-  { value: 'Alberta', label: 'Alberta' },
-  { value: 'British Columbia', label: 'British Columbia' },
-  { value: 'Manitoba', label: 'Manitoba' },
-  { value: 'New Brunswick', label: 'New Brunswick' },
-  { value: 'Newfoundland', label: 'Newfoundland' },
-  { value: 'Nova Scotia', label: 'Nova Scotia' },
-  { value: 'Ontario', label: 'Ontario' },
-  { value: 'Prince Edward Island', label: 'Prince Edward Island' },
-  { value: 'Quebec', label: 'Quebec' },
-  { value: 'Saskatchewan', label: 'Saskatchewan' },
-  { value: 'Northern Territories', label: 'Northern Territories' },
-  { value: 'Nunavut', label: 'Nunavut' },
-  { value: 'Yukon', label: 'Yukon' },
-];
+const FormComponent = ({
+  children, state, setStateFn, hasSubmitted, type = 'text', mandatory = true,
+}) => (
+  // If user attempts to submit while required field is entered, will throw up error
+  <label className="edit-form__label">
+    {children}
+    {!state && hasSubmitted && mandatory
+      && <span className="edit-form__label--error"> This field is required</span>}
+    <input
+      type={type}
+      value={state}
+      onChange={(e) => setStateFn(e.target.value)}
+      className={`edit-form__field ${!state && hasSubmitted && mandatory
+        && 'edit-form__field--error'}`}
+    />
+  </label>
+);
 
 // type userData = {
 //   userData: {
@@ -39,7 +45,6 @@ const dropdownOptions = [
 const EditProfile = ({
   userData,
   setUserData,
-  toggleEditProfile,
 }) => {
   // STATE HOOKS for profile values
   const [firstName, setFirstName] = useState(userData.first_name || '');
@@ -50,9 +55,9 @@ const EditProfile = ({
   const [phone, setPhone] = useState(userData.phone || '');
   const [volunteer, setVolunteer] = useState(userData.volunteer || 'false');
   const [postalCode, setPostalCode] = useState();
-  // Function to set opopsite editProfile STATE
   const [hasSubmitted, toggleSubmitted] = useState(false);
-  const toggleEdit = () => toggleEditProfile((event) => !event);
+
+  const navTo = useNavigate();
 
   // Handle the submission of the form by validating content and then doing an api PUT req
   const handleFormSubmit = (event) => {
@@ -76,7 +81,7 @@ const EditProfile = ({
         .then(
           setUserData(user),
           toggleSubmitted(false),
-          toggleEdit(),
+          navTo('../'),
         ).catch()
     );
   };
@@ -89,8 +94,7 @@ const EditProfile = ({
           {/* close Icon */}
           <button
             type="button"
-            onClick={toggleEdit}
-            onKeyUp={(e) => e.key === 'Escape' && toggleEdit}
+            onClick={() => navTo(-1)}
             className="edit-form__close-ico-wrapper"
           >
             <img
@@ -107,51 +111,35 @@ const EditProfile = ({
             onSubmit={handleFormSubmit}
             className="edit-form__form"
           >
-            <label className="edit-form__label">
-              FIRST NAME*
-              {!firstName && hasSubmitted
-                && <span className="edit-form__label--error"> Please enter your first name</span>}
-              <input
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                className={`edit-form__field ${!firstName && hasSubmitted
-                  && 'edit-form__field--error'}`}
-              />
-            </label>
-            <label className="edit-form__label">
-              LAST NAME*
-              {!lastName && hasSubmitted
-                && <span className="edit-form__label--error"> Please enter your last name</span>}
-              <input
-                type="text"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className={`edit-form__field ${!lastName && hasSubmitted
-                  && 'edit-form__field--error'}`}
-              />
-            </label>
-            <label className="edit-form__label--address">
-              ADDRESS
-              <input
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                className="edit-form__field"
-              />
-            </label>
-            <label className="edit-form__label">
-              CITY*
-              {!city && hasSubmitted
-                && <span className="edit-form__label--error"> A city is required</span>}
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                className={`edit-form__field ${!city && hasSubmitted
-                  && 'edit-form__field--error'}`}
-              />
-            </label>
+            <FormComponent
+              state={firstName}
+              setStateFn={setFirstName}
+              hasSubmitted={hasSubmitted}
+            >
+              First Name*
+            </FormComponent>
+            <FormComponent
+              state={lastName}
+              setStateFn={setLastName}
+              hasSubmitted={hasSubmitted}
+            >
+              Last Name*
+            </FormComponent>
+            <FormComponent
+              state={address}
+              setStateFn={setAddress}
+              hasSubmitted={hasSubmitted}
+              mandatory={false}
+            >
+              Address
+            </FormComponent>
+            <FormComponent
+              state={city}
+              setStateFn={setCity}
+              hasSubmitted={hasSubmitted}
+            >
+              City*
+            </FormComponent>
             <div className="edit-form__label">
               {/* eslint-disable-next-line jsx-a11y/label-has-for */}
               <label className="edit-form__label">
@@ -162,7 +150,7 @@ const EditProfile = ({
                   value={province}
                   placeholder={province}
                   onChange={(e) => setProvince(e.value)}
-                  options={dropdownOptions}
+                  options={dropdownProvinceOptions}
                   id="province"
                   menuShouldBlockScroll
                   className={`edit-form__field ${!province && hasSubmitted
@@ -170,27 +158,22 @@ const EditProfile = ({
                 />
               </label>
             </div>
-            <label className="edit-form__label">
+            <FormComponent
+              state={phone}
+              setStateFn={setPhone}
+              hasSubmitted={hasSubmitted}
+              type="tel"
+            >
               PHONE*
-              {!phone && hasSubmitted
-                && <span className="edit-form__label--error"> A phone number you can be reached is required</span>}
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className={`edit-form__field ${!phone && hasSubmitted
-                  && 'edit-form__field--error'}`}
-              />
-            </label>
-            <label className="edit-form__label">
-              POSTAL CODE
-              <input
-                type="text"
-                value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
-                className="edit-form__field"
-              />
-            </label>
+            </FormComponent>
+            <FormComponent
+              state={postalCode}
+              setStateFn={setPostalCode}
+              hasSubmitted={hasSubmitted}
+              mandatory={false}
+            >
+              Postal Code
+            </FormComponent>
             <div className="edit-form__input-block">
               <h3 className="edit-form__label--volunteer">
                 VOLUNTEER
@@ -216,21 +199,7 @@ const EditProfile = ({
                 />
               </label>
             </div>
-            <div className="edit-form__button-block">
-              <button
-                type="submit"
-                className="edit-form__button--submit"
-              >
-                SUBMIT
-              </button>
-              <button
-                type="button"
-                onClick={toggleEdit}
-                className="edit-form__button--cancel"
-              >
-                CANCEL
-              </button>
-            </div>
+            <FormButtons clickHandler={() => navTo('../')} />
           </form>
         </div>
       </div>

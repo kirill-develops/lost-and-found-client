@@ -1,7 +1,7 @@
 /* eslint-disable sort-imports */
 import './Profile.scss';
+import { Link, Outlet } from 'react-router-dom';
 import React from 'react';
-import EditProfile from '../EditProfile/EditProfile';
 import LogoutButton from '../LogoutButton/LogoutButton';
 
 // type userData = {
@@ -22,13 +22,9 @@ import LogoutButton from '../LogoutButton/LogoutButton';
 // Return date formatted as 'month/day/year'
 const formatDate = (date) => (new Date(date)).toLocaleDateString('en-US');
 
-const Profile = ({
-  userData,
-  setUserData,
-  editProfile,
-  toggleEditProfile,
-}) => (
+const Profile = ({ userData }) => (
   <div className="profile">
+    <Outlet />
     <h2 className="profile__subheading">
       <span>
         Hello,
@@ -38,13 +34,12 @@ const Profile = ({
         {userData.last_name}
       </span>
       <div className="profile__button-wrapper">
-        <button
-          type="button"
-          onClick={() => toggleEditProfile((e) => !e)}
+        <Link
+          to="Edit"
           className="profile__edit-button"
         >
           Edit Form
-        </button>
+        </Link>
         {/* Render a logout button */}
         <LogoutButton />
       </div>
@@ -101,15 +96,6 @@ const Profile = ({
         <h3 className="profile__label">New Messages: </h3>
       </div>
     </div>
-    {// If user's form is not filled out or user toggles to edit form, render EditForm Component
-      editProfile && (
-        <EditProfile
-          userData={userData}
-          setUserData={setUserData}
-          toggleEditProfile={toggleEditProfile}
-        />
-      )
-    }
   </div>
 );
 

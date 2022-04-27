@@ -24,6 +24,7 @@
 
   &__edit-button {
     @include button;
+    white-space: nowrap;
     color: $user-triage;
     background-color: $user-cta;
     width: 100%;

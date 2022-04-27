@@ -30,17 +30,14 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-end;
     gap: $component-padding 2%;
   }
 
   &__label {
     @include formLabel;
+    text-transform: uppercase;
     width: 49%;
-
-    &--address {
-      @extend .edit-form__label;
-      width: 100%;
-    }
 
     &--volunteer {
       @extend .edit-form__label;
@@ -50,6 +47,7 @@
     &--error {
       @extend .edit-form__label;
       color: $user-primary;
+      text-transform: initial;
 
     }
   }
@@ -67,34 +65,4 @@
   }
 
   &__radio {}
-
-  &__button-block {
-    display: flex;
-    gap: $component-padding;
-  }
-
-  &__button {
-    @include button;
-    padding: $root-padding $component-padding;
-
-    &--submit {
-      @extend .edit-form__button;
-      background-color: #F1F8F3;
-      color: #227396;
-
-      &:hover {
-        background-color: #E4F1E8;
-      }
-    }
-
-    &--cancel {
-      @extend .edit-form__button;
-      background-color: $user-cta;
-      color: $user-triage;
-
-      &:hover {
-        background-color: $user-hover;
-      }
-    }
-  }
 }
