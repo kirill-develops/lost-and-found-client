@@ -1,10 +1,11 @@
 /* eslint-disable sort-imports */
 import './EditPost.scss';
-import React, { useCallback, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import closeIco from '../../assets/icons/x_close.svg';
 import { dropdownCategoryOptions } from '../../utils/constants';
+import FormButtons from '../FormButtons/FormButtons';
 
 const EditPost = ({
   offer,
@@ -15,12 +16,11 @@ const EditPost = ({
 }) => {
   const [title, setTitle] = useState(postData.title || '');
   const [description, setDescription] = useState(postData.description || '');
-  const menuOption = useCallback(() => dropdownCategoryOptions
-    .find((option) => option.value === postData.category).label, [postData.category]);
-
-  const [category, setCategory] = useState({
-    value: menuOption,
-  });
+  // determine the user's category selection by matching it to a an arr of objs with
+  // {values, labels}
+  const menuOption = useMemo(() => dropdownCategoryOptions
+    .find((option) => option.value === postData.category), [postData.category]);
+  const [category, setCategory] = useState(menuOption);
 
   const [hasSubmitted, toggleSubmitted] = useState(false);
   let postObj = { ...postData };
@@ -104,7 +104,7 @@ const EditPost = ({
                     && <span className="post-form__label--error"> This field is required</span>}
                   <Select
                     value={category}
-                    defaultInputValue={category.value}
+                    defaultInputValue={menuOption.label}
                     onChange={(e) => setCategory(e)}
                     options={dropdownCategoryOptions}
                     menuPlacement="auto"
@@ -129,21 +129,7 @@ const EditPost = ({
                 </label>
               </div>
             </div>
-            <div className="post-form__button-block">
-              <button
-                type="submit"
-                className="post-form__button--submit"
-              >
-                SUBMIT
-              </button>
-              <button
-                type="button"
-                onClick={toggleEditPost}
-                className="post-form__button--cancel"
-              >
-                CANCEL
-              </button>
-            </div>
+            <FormButtons clickHandler={toggleEditPost} />
           </form>
         </div>
       </div>
