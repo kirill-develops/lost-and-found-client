@@ -174,12 +174,11 @@ const EditProfile = ({
             >
               Postal Code
             </FormComponent>
-            <div className="edit-form__input-block">
-              <h3 className="edit-form__label--volunteer">
+            <fieldset className="edit-form__input-block">
+              <legend className="edit-form__label--volunteer">
                 VOLUNTEER
-              </h3>
+              </legend>
               <label className="edit-form__label">
-                YES
                 <input
                   type="radio"
                   value="true"
@@ -187,9 +186,9 @@ const EditProfile = ({
                   onChange={(e) => setVolunteer(e.target.value)}
                   className="edit-form__radio"
                 />
+                YES
               </label>
               <label className="edit-form__label">
-                NO
                 <input
                   type="radio"
                   value="false"
@@ -197,9 +196,13 @@ const EditProfile = ({
                   onChange={(e) => setVolunteer(e.target.value)}
                   className="edit-form__radio"
                 />
+                NO
               </label>
-            </div>
-            <FormButtons clickHandler={() => navTo('../')} />
+            </fieldset>
+            <FormButtons
+              handleSubmit={handleFormSubmit}
+              handleCancel={() => navTo('../')}
+            />
           </form>
         </div>
       </div>

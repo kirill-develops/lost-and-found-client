@@ -218,8 +218,8 @@
   background-color: #0000007c;
   backdrop-filter: blur(4px);
   width: 100vw;
-  height: 150%;
-  position: absolute;
+  height: 100vh;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 10000;
