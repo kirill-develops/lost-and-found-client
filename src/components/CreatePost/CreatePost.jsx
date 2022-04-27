@@ -9,6 +9,7 @@ import closeIco from '../../assets/icons/x_close.svg';
 import isProfileComplete from '../../utils/isProfileComplete';
 import LoginButton from '../LoginButton/LoginButton';
 import { dropdownCategoryOptions } from '../../utils/constants';
+import FormButtons from '../FormButtons/FormButtons';
 
 const CreatePost = ({
   userData,
@@ -140,21 +141,7 @@ const CreatePost = ({
                 </label>
               </div>
             </div>
-            <div className="post-form__button-block">
-              <button
-                type="submit"
-                className="post-form__button--submit"
-              >
-                SUBMIT
-              </button>
-              <button
-                type="button"
-                onClick={toggleMakePost}
-                className="post-form__button--cancel"
-              >
-                CANCEL
-              </button>
-            </div>
+            <FormButtons clickHandler={toggleMakePost} />
           </form>
         </div>
       </div>
