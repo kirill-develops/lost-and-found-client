@@ -1,0 +1,35 @@
+@use '../../styles/partials/variables'as*;
+@use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/colors'as*;
+
+.form-button {
+
+  &__block {
+    align-self: flex-end;
+    display: flex;
+    gap: $component-padding;
+  }
+
+  @include button;
+  padding: $root-padding $component-padding;
+
+  &--submit {
+    @extend .form-button;
+    background-color: #F1F8F3;
+    color: #227396;
+
+    &:hover {
+      background-color: #E4F1E8;
+    }
+  }
+
+  &--cancel {
+    @extend .form-button;
+    background-color: $user-cta;
+    color: $user-triage;
+
+    &:hover {
+      background-color: $user-hover;
+    }
+  }
+}
