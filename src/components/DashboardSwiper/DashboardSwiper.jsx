@@ -41,7 +41,8 @@ const DashboardSwiper = ({ postData, filterBy }) => (
   >
     {useMemo(
       () => postData
-        .filter((post) => (filterBy ? post.category === filterBy : post))
+        .filter((post) => (filterBy.get('filter')
+          ? post.category === filterBy.get('filter') : post))
         .map((post) => (
           <SwiperSlide key={post.post_id}>
             <Post post={post} />

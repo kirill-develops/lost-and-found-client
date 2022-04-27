@@ -7,6 +7,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import AuthFailPage from './pages/AuthFailPage/AuthFailPage';
 import apiUtils from './utils/apiUtils';
 import Dashboard from './pages/Dashboard/Dashboard';
+import EditProfile from './components/EditProfile/EditProfile';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import HomePage from './pages/Homepage/Homepage';
@@ -80,10 +81,18 @@ const App = () => {
                 <ProfilePage
                   userData={userData}
                   getUser={getUser}
-                  setUserData={setUserData}
                 />
               )}
             >
+              <Route
+                path="edit"
+                element={(
+                  <EditProfile
+                    userData={userData}
+                    setUserData={setUserData}
+                  />
+                )}
+              />
               <Route
                 path=":id"
                 element={<ProfilePage />}

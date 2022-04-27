@@ -1,13 +1,15 @@
+/* eslint-disable sort-imports */
 import './Dashboard.scss';
 import React, {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { filterPostOptions } from '../../utils/constants';
 import CreatePost from '../../components/CreatePost/CreatePost';
 import DashBoardNav from '../../components/DashboardNav/DashboardNav';
 import DashbaordUser from '../../components/DashboardUser/DashbaordUser';
 import DashboardSwiper from '../../components/DashboardSwiper/DashboardSwiper';
 import apiUtils from '../../utils/apiUtils';
-import { filterPostOptions } from '../../utils/constants';
 
 // type userData = {
 //   userData: {
@@ -27,7 +29,7 @@ import { filterPostOptions } from '../../utils/constants';
 const Dashboard = ({ userData }) => {
   const [offersData, setOffersData] = useState([]);
   const [seekingData, setSeekingData] = useState([]);
-  const [filterBy, setFilterBy] = useState('');
+  const [filterParams, setFilterParams] = useSearchParams();
 
   // Fetch posts from the DB
   const fetchPosts = useCallback(() => {
@@ -50,7 +52,7 @@ const Dashboard = ({ userData }) => {
   return (
     <section className="dashboard">
       <DashBoardNav
-        setFilterBy={setFilterBy}
+        setFilterParams={setFilterParams}
       />
       <div className="dashboard__block">
         {/* if the user is logged in show their user metrics */}
@@ -67,12 +69,10 @@ const Dashboard = ({ userData }) => {
         />
         {/* Dynamic Heading showing which posts, in the case they are filtered */}
         <h2 className="dashboard__title">
-          {useMemo(
-            () => filterPostOptions.find(
-              (option) => option.value === filterBy,
-            ).label,
-            [filterBy],
-          )}
+          {useMemo(() => filterPostOptions
+            .find((option) => option.value === (filterParams
+              .get('filter') || ''))
+            .label, [filterParams])}
           {' '}
           Posts
         </h2>
@@ -83,7 +83,7 @@ const Dashboard = ({ userData }) => {
             <h3 className="dashboard__subheading--offer">Offering a Hand</h3>
             <DashboardSwiper
               postData={offersData}
-              filterBy={filterBy}
+              filterBy={filterParams}
             />
           </div>
           {/* <div className='list-block__fill'></div> */}
@@ -94,7 +94,7 @@ const Dashboard = ({ userData }) => {
             <h3 className="dashboard__subheading--seeking">Seeking a Hand</h3>
             <DashboardSwiper
               postData={seekingData}
-              filterBy={filterBy}
+              filterBy={filterParams}
             />
           </div>
         </div>

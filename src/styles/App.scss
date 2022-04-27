@@ -25,20 +25,15 @@ code {
 *::before,
 *::after {
   transition: 0.3s;
-  text-rendering: optimizeLegibility;
-  line-height: 1.4;
   box-sizing: border-box;
+  text-rendering: optimizeLegibility;
   font-family: Raleway,
     Open Sans,
     Helvetica Neue,
     Helvetica,
     Arial,
     sans-serif;
-}
-
-a:hover,
-a:active {
-  color: #3B413C;
+  line-height: 1.4;
 }
 
 h1 {

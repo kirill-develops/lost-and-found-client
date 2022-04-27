@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-const DashboardMobileNav = ({ setFilterBy }) => {
+const DashboardMobileNav = ({ setFilterParams }) => {
   const [active, setActive] = useState(false);
+  // const [filterParams, setFilterParams] = useSearchParams();
 
-  const selectMobileFilter = (category) => {
+  const selectMobileFilter = useCallback(() => (category) => {
     setActive(false);
-    setFilterBy(category);
-  };
+    setFilterParams({ filter: category });
+  }, [setFilterParams]);
 
   return (
     <>
@@ -23,6 +24,7 @@ const DashboardMobileNav = ({ setFilterBy }) => {
             type="button"
             onClick={() => selectMobileFilter('housing')}
             className="dashboard-nav__label"
+          // className={ ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
           >
             Housing
           </button>
