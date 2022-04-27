@@ -2,9 +2,9 @@
 // ! /* eslint-disable react/prop-types */
 import './ProfilePage.scss';
 import React from 'react';
-import LoginButton from '../../components/LoginButton/LoginButton';
+import LoginButton from '../../components/buttons/LoginButton/LoginButton';
 import Profile from '../../components/Profile/Profile';
-import BackButton from '../../components/BackButton/BackButton';
+import BackButton from '../../components/buttons/BackButton/BackButton';
 
 // type userData = {
 //   userData: {

@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { push as Menu } from 'react-burger-menu';
 import { SiGmail, SiGithub, SiLinkedin } from 'react-icons/si';
-import LoginButton from '../LoginButton/LoginButton';
+import LoginButton from '../buttons/LoginButton/LoginButton';
 import Logo from '../../assets/images/Asset_36.svg';
-import LogoutButton from '../LogoutButton/LogoutButton';
+import LogoutButton from '../buttons/LogoutButton/LogoutButton';
 
 const Header = ({ userName }) => {
   const [menu, setMenu] = useState(false);

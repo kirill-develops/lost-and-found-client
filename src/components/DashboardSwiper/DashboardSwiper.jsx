@@ -7,7 +7,7 @@ import './DashboardSwiper.scss';
 import { Keyboard, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import React, { useMemo } from 'react';
-import Post from '../Post/Post';
+import PostCard from '../PostCard/PostCard';
 
 const breakpoints = {
   // when window width is >= 320px
@@ -45,7 +45,7 @@ const DashboardSwiper = ({ postData, filterBy }) => (
           ? post.category === filterBy.get('filter') : post))
         .map((post) => (
           <SwiperSlide key={post.post_id}>
-            <Post post={post} />
+            <PostCard post={post} />
           </SwiperSlide>
         )),
       [postData, filterBy],

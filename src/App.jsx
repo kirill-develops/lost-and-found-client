@@ -13,7 +13,6 @@ import Header from './components/Header/Header';
 import HomePage from './pages/Homepage/Homepage';
 import PostDetails from './pages/PostDetails/PostDetails';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
-import EditPost from './components/EditPost/EditPost';
 
 const App = () => {
   // Keep track of four things in state:

@@ -2,7 +2,7 @@
 import './BackButton.scss';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import BackIco from '../../assets/icons/back_StyleRound.svg';
+import BackIco from '../../../assets/icons/back_StyleRound.svg';
 
 const BackButton = () => {
   const navigate = useNavigate();

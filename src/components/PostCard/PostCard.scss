@@ -2,7 +2,7 @@
 @use '../../styles/partials/mixins'as*;
 @use '../../styles/partials/colors'as*;
 
-.post {
+.post-card {
   @include swiperCard;
   margin-bottom: 2rem;
 
@@ -30,14 +30,14 @@
     align-items: flex-start;
 
     &--offer {
-      @extend .post__title-block;
+      @extend .post-card__title-block;
       background-color: $offer-secondary;
       color: $offer-primary;
       border-color: $offer-primary;
     }
 
     &--seeking {
-      @extend .post__title-block;
+      @extend .post-card__title-block;
       background-color: $seeking-secondary;
       color: $seeking-primary;
       border-color: $seeking-primary;
@@ -68,7 +68,7 @@
     margin: 0;
 
     &--offer {
-      @extend .post__users;
+      @extend .post-card__users;
       background-color: $offer-cta;
       color: $offer-primary;
 
@@ -79,7 +79,7 @@
     }
 
     &--seeking {
-      @extend .post__users;
+      @extend .post-card__users;
       background-color: $seeking-cta;
       color: $seeking-primary;
 
@@ -101,12 +101,12 @@
     align-items: center;
 
     &--offer {
-      @extend .post__author;
+      @extend .post-card__author;
       border-color: $offer-secondary;
     }
 
     &--seeking {
-      @extend .post__author;
+      @extend .post-card__author;
       border-color: $seeking-secondary;
     }
   }
@@ -152,12 +152,12 @@
     margin: 0 auto;
 
     &--offer {
-      @extend .post__city;
+      @extend .post-card__city;
       color: $offer-primary;
     }
 
     &--seeking {
-      @extend .post__city;
+      @extend .post-card__city;
       color: $seeking-primary;
     }
   }

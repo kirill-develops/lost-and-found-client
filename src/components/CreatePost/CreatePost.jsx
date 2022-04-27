@@ -7,9 +7,9 @@ import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import closeIco from '../../assets/icons/x_close.svg';
 import isProfileComplete from '../../utils/isProfileComplete';
-import LoginButton from '../LoginButton/LoginButton';
+import LoginButton from '../buttons/LoginButton/LoginButton';
 import { dropdownCategoryOptions } from '../../utils/constants';
-import FormButtons from '../FormButtons/FormButtons';
+import FormButtons from '../buttons/FormButtons/FormButtons';
 
 const CreatePost = ({
   userData,

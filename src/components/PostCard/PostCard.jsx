@@ -1,4 +1,4 @@
-import './Post.scss';
+import './PostCard.scss';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
@@ -12,7 +12,7 @@ const categoryArr = [
   ['transportation', 'Transportation'],
 ];
 
-const Post = ({ post }) => {
+const PostCard = ({ post }) => {
   // convert post.category to nicely formated font
   const category = categoryArr.find((selection) => selection[0] === post.category);
 
@@ -20,51 +20,51 @@ const Post = ({ post }) => {
   const formatTimestamp = (timestamp) => (new Date(timestamp)).toLocaleString('en-US');
 
   return (
-    <article className="post">
-      <Link to={`/post/${post.post_id}`} className="post__link">
-        <div className={post.offer === 1 ? 'post__title-block--offer' : 'post__title-block--seeking'}>
-          <h2 className="post__title">{category[1]}</h2>
+    <article className="post-card">
+      <Link to={`/post/${post.post_id}`} className="post-card__link">
+        <div className={post.offer === 1 ? 'post-card__title-block--offer' : 'post-card__title-block--seeking'}>
+          <h2 className="post-card__title">{category[1]}</h2>
           {/* Show a "Your Post" label for posts that have been created by currently user */}
           {post.isCurrentUser && (
-            <div className="post__button-wrapper">
-              <h4 className={post.offer === 1 ? 'post__users--offer' : 'post__users--seeking'}>
+            <div className="post-card__button-wrapper">
+              <h4 className={post.offer === 1 ? 'post-card__users--offer' : 'post-card__users--seeking'}>
                 Your Post
               </h4>
             </div>
           )}
         </div>
-        <div className="post__block">
-          <div className={post.offer === 1 ? 'post__author--offer' : 'post__author--seeking'}>
+        <div className="post-card__block">
+          <div className={post.offer === 1 ? 'post-card__author--offer' : 'post-card__author--seeking'}>
             <img
-              className="post__avatar"
+              className="post-card__avatar"
               src={post.avatar_url}
               alt={`${post.first_name} avatar`}
             />
             <div>
-              <h3 className="post__username">
+              <h3 className="post-card__username">
                 {post.first_name}
                 {' '}
                 {post.last_name}
               </h3>
-              <p className="post__published">
+              <p className="post-card__published">
                 posted:
                 {' '}
                 {formatTimestamp(post.updated_at)}
               </p>
             </div>
           </div>
-          <div className="post__details">
-            <h3 className="post__subheading">
+          <div className="post-card__details">
+            <h3 className="post-card__subheading">
               {post.title}
             </h3>
-            <p className={post.offer === 1 ? 'post__city--offer' : 'post__city--seeking'}>
+            <p className={post.offer === 1 ? 'post-card__city--offer' : 'post-card__city--seeking'}>
               {post.city}
               ,
             </p>
-            <p className={post.offer === 1 ? 'post__city--offer' : 'post__city--seeking'}>
+            <p className={post.offer === 1 ? 'post-card__city--offer' : 'post-card__city--seeking'}>
               {post.province}
             </p>
-            <p className="post__body">
+            <p className="post-card__body">
               {post.description}
             </p>
           </div>
@@ -74,4 +74,4 @@ const Post = ({ post }) => {
   );
 };
 
-export default React.memo(Post);
+export default React.memo(PostCard);

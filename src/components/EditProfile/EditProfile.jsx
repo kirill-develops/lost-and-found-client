@@ -6,7 +6,7 @@ import Select from 'react-select';
 import apiUtils from '../../utils/apiUtils';
 import closeIco from '../../assets/icons/x_close.svg';
 import { dropdownProvinceOptions } from '../../utils/constants';
-import FormButtons from '../FormButtons/FormButtons';
+import FormButtons from '../buttons/FormButtons/FormButtons';
 
 const FormComponent = ({
   children, state, setStateFn, hasSubmitted, type = 'text', mandatory = true,

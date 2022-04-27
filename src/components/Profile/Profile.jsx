@@ -2,7 +2,7 @@
 import './Profile.scss';
 import { Link, Outlet } from 'react-router-dom';
 import React from 'react';
-import LogoutButton from '../LogoutButton/LogoutButton';
+import LogoutButton from '../buttons/LogoutButton/LogoutButton';
 
 // type userData = {
 //   userData: {

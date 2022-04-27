@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import apiUtils from '../../utils/apiUtils';
 import TrashIco from '../../assets/icons/trash-can-outline.svg';
-import BackButton from '../../components/BackButton/BackButton';
+import BackButton from '../../components/buttons/BackButton/BackButton';
 import EditPost from '../../components/EditPost/EditPost';
 
 const filterOptions = [
