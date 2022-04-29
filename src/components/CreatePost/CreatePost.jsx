@@ -17,24 +17,33 @@ const CreatePost = ({
   userData,
   onPostCreate,
 }) => {
+  // initiate Navigation Hook
   const navigate = useNavigate();
+  // deconstructing variable from userData for readability
+  const { volunteer: isVolunteer } = userData;
+
   // STATE HOOKS for Form
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [offer, setOffer] = useState(userData.volunteer);
+  const [offer, toggleOffer] = useReducer(
+    (checked) => !checked,
+    isVolunteer,
+  );
+  console.log(offer);
 
   const [hasSubmitted, toggleSubmitted] = useState(false);
   const [makePost, toggleMakePost] = useReducer(
     (checked) => !checked,
     false,
   );
+  console.log(category);
 
   const handleFormSubmit = (event) => {
     // prevent page reload
     event.preventDefault();
     // Create a postObj with state value's from each field
-    (!title || !description || !category || !offer) ? (
+    (!title || !description || !category || offer === undefined) ? (
       toggleSubmitted(true)
     ) : (
       apiUtils.addPost({
@@ -60,10 +69,6 @@ const CreatePost = ({
     // checks to see if user's profile is complete
     // if the user's profile is incomplete, send them to the profile page
     if (userData.id && !isProfileComplete(userData)) navigate('/profile/edit');
-    // check to see if user is a volunteer and change state accordingly
-    userData.volunteer
-      && userData.volunteer.toLowerCase() === 'true'
-      ? setOffer(true) : setOffer(false);
   }, [userData, navigate]);
 
   return makePost ? (
@@ -82,12 +87,23 @@ const CreatePost = ({
               className="post-form__close-ico"
             />
           </button>
-          <h3 className="post-form__title">
-            {/* check to see if user is volunteer and produce proper heading  */}
-            {userData.volunteer
-              ? 'Create New Offer' : 'What Can We Connect You With?'}
-          </h3>
-          <div className={userData.volunteer
+          <div className="post-form__title-block">
+            <h3 className="post-form__title">
+              {/* check to see if user is volunteer and produce proper heading  */}
+              {offer
+                ? 'Create New Offer' : 'What Can We Connect You With?'}
+            </h3>
+            <button
+              type="button"
+              onClick={toggleOffer}
+              className={offer
+                ? 'post-form__button--seeking' : 'post-form__button--offer'}
+            >
+              {offer
+                ? 'Seeking' : 'Offer'}
+            </button>
+          </div>
+          <div className={offer
             ? 'post-form__filler--offer' : 'post-form__filler--seeking'}
           />
           <form
@@ -118,9 +134,11 @@ const CreatePost = ({
                   {!category && hasSubmitted
                     && <span className="post-form__label--error"> This field is required</span>}
                   <Select
-                    value={category.value}
+                    // value={category.label}
                     onChange={(e) => setCategory(e.value)}
                     options={dropdownCategoryOptions}
+                    blurInputOnSelect
+                    captureMenuScroll
                     menuPlacement="auto"
                     menuShouldBlockScroll
                     className={`post-form__field--select ${!category && hasSubmitted

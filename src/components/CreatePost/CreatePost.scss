@@ -14,12 +14,12 @@
 
     &--offer {
       @extend .post-form__filler;
-      background-color: #123794;
+      background-color: $offer-primary;
     }
 
     &--seeking {
       @extend .post-form__filler;
-      background-color: #462749;
+      background-color: $seeking-primary;
     }
   }
 
@@ -31,8 +31,19 @@
     @include closeIco;
   }
 
-  &__title {
+  &__title-block {
     @include overlayTitle;
+    padding-right: calc($component-padding * 2);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  &__title {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
   }
 
   &__form {
@@ -94,6 +105,34 @@
   &__button {
     @include button;
     padding: $root-padding $component-padding;
+
+    &--seeking {
+      @extend .post-form__button;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      background-color: $seeking-hover;
+      border: 1px solid $site-primary;
+
+      &:hover {
+        color: white;
+        background-color: $seeking-primary;
+        border-color: $seeking-hover;
+      }
+    }
+
+    &--offer {
+      @extend .post-form__button;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      background-color: $offer-hover;
+      border: 1px solid $site-primary;
+
+      &:hover {
+        color: white;
+        background-color: $offer-primary;
+        border-color: $offer-hover;
+      }
+    }
 
     &--submit {
       @extend .post-form__button;
