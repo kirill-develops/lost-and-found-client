@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const DashboardMobileNav = ({ setFilterParams }) => {
+const DashboardMobileNav = ({ filterParams, setFilterParams }) => {
   const [active, setActive] = useState(false);
   // const [filterParams, setFilterParams] = useSearchParams();
 
@@ -8,6 +8,10 @@ const DashboardMobileNav = ({ setFilterParams }) => {
     setFilterParams({ filter: category });
     setActive(false);
   };
+
+  const isActive = (type) => (
+    type === filterParams.get('filter') ?? ''
+  );
 
   return (
     <>
@@ -23,50 +27,49 @@ const DashboardMobileNav = ({ setFilterParams }) => {
           <button
             type="button"
             onClick={() => selectMobileFilter('housing')}
-            className="dashboard-nav__label"
-          // className={ ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
+            className={isActive('housing') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
           >
             Housing
           </button>
           <button
             type="button"
             onClick={() => selectMobileFilter('jobs')}
-            className="dashboard-nav__label"
+            className={isActive('jobs') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
           >
             Jobs
           </button>
           <button
             type="button"
             onClick={() => selectMobileFilter('employment_services')}
-            className="dashboard-nav__label"
+            className={isActive('employment_services') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
           >
             Employment Services
           </button>
           <button
             type="button"
             onClick={() => selectMobileFilter('on-boarding')}
-            className="dashboard-nav__label"
+            className={isActive('on-boarding') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
           >
             On-Boarding
           </button>
           <button
             type="button"
             onClick={() => selectMobileFilter('translations')}
-            className="dashboard-nav__label"
+            className={isActive('translations') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
           >
             Translations
           </button>
           <button
             type="button"
             onClick={() => selectMobileFilter('goods')}
-            className="dashboard-nav__label"
+            className={isActive('goods') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
           >
             Free Goods
           </button>
           <button
             type="button"
             onClick={() => selectMobileFilter('transportation')}
-            className="dashboard-nav__label"
+            className={isActive('transportation') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
           >
             Transportation
           </button>

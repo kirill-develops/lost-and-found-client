@@ -69,6 +69,17 @@
       }
     }
 
+    &--active {
+      @extend .dashboard-nav__label;
+      background-color: $site-primary;
+      color: white;
+
+      &:hover {
+        color: white;
+        cursor: initial;
+      }
+    }
+
     &--reset {
       @extend .dashboard-nav__label;
       color: $user-triage;

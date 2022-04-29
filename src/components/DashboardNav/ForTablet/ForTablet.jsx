@@ -1,11 +1,15 @@
 import React from 'react';
 
-const DashboardTabletNav = ({ setFilterParams }) => {
+const DashboardTabletNav = ({ filterParams, setFilterParams }) => {
   const handleClick = (category) => {
     setFilterParams({
       filter: category,
     });
   };
+
+  const isActive = (type) => (
+    type === filterParams.get('filter') ?? ''
+  );
 
   return (
     <nav className="dashboard-nav__tablet">
@@ -15,49 +19,49 @@ const DashboardTabletNav = ({ setFilterParams }) => {
       <button
         type="button"
         onClick={() => handleClick('housing')}
-        className="dashboard-nav__label"
+        className={isActive('housing') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
       >
         Housing
       </button>
       <button
         type="button"
         onClick={() => handleClick('jobs')}
-        className="dashboard-nav__label"
+        className={isActive('jobs') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
       >
         Jobs
       </button>
       <button
         type="button"
         onClick={() => handleClick('employment_services')}
-        className="dashboard-nav__label"
+        className={isActive('employment_services') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
       >
         Employment Services
       </button>
       <button
         type="button"
         onClick={() => handleClick('on-boarding')}
-        className="dashboard-nav__label"
+        className={isActive('on-boarding') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
       >
         On-Boarding
       </button>
       <button
         type="button"
         onClick={() => handleClick('translations')}
-        className="dashboard-nav__label"
+        className={isActive('translations') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
       >
         Translations
       </button>
       <button
         type="button"
         onClick={() => handleClick('goods')}
-        className="dashboard-nav__label"
+        className={isActive('goods') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
       >
         Free Goods
       </button>
       <button
         type="button"
         onClick={() => handleClick('transportation')}
-        className="dashboard-nav__label"
+        className={isActive('transportation') ? 'dashboard-nav__label--active' : 'dashboard-nav__label'}
       >
         Transportation
       </button>

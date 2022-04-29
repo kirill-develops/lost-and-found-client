@@ -52,6 +52,7 @@ const Dashboard = ({ userData }) => {
   return (
     <section className="dashboard">
       <DashboardNav
+        filterParams={filterParams}
         setFilterParams={setFilterParams}
       />
       <div className="dashboard__block">
