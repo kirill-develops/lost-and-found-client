@@ -2,25 +2,17 @@
 /* eslint-disable sort-imports */
 //! /* eslint-disable no-unused-vars */
 import './PostDetails.scss';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useReducer, useState,
+} from 'react';
 import {
   Link, Outlet, Route, Routes, useNavigate, useParams,
 } from 'react-router-dom';
+import { filterPostOptions } from '../../utils/constants';
 import apiUtils from '../../utils/apiUtils';
 import TrashIco from '../../assets/icons/trash-can-outline.svg';
 import BackButton from '../../components/buttons/BackButton/BackButton';
 import EditPost from '../../components/EditPost/EditPost';
-
-const filterOptions = [
-  { value: 'housing', label: 'Housing' },
-  { value: 'jobs', label: 'Jobs' },
-  { value: 'employment_services', label: 'Employment Services' },
-  { value: 'on-boarding', label: 'On-boarding' },
-  { value: 'translations', label: 'Translations' },
-  { value: 'goods', label: 'Free Goods' },
-  { value: 'transportation', label: 'Transportation' },
-  { value: '', label: 'All' },
-];
 
 // type matchType = {
 //   match: {
@@ -97,7 +89,8 @@ const PostDetails = () => {
           path="edit"
           element={(
             <EditPost
-              offer={offer}
+              isOffer={offer}
+              setOffer={setOffer}
               postData={postData}
               setPostData={setPostData}
               id={id}
@@ -108,14 +101,17 @@ const PostDetails = () => {
       <Outlet />
       <div className="post-details__block">
         <div className="post-details__title-wrapper">
-          <BackButton />
+          <BackButton
+            to="../dashboard"
+          />
           <h1 className="post-details__title">{title}</h1>
         </div>
         <div className={offer
           ? 'post-details__subheading-block--offer' : 'post-details__subheading-block--seeking'}
         >
           <h2 className="post-details__subheading">
-            {filterOptions.find((filter) => filter.value === category).label}
+            {filterPostOptions
+              .find((filter) => filter.value === category).label}
           </h2>
           {isCurrentUser && (
             <div className="post-details__button-wrapper">

@@ -9,23 +9,28 @@ import { dropdownCategoryOptions } from '../../utils/constants';
 import FormButtons from '../buttons/FormButtons/FormButtons';
 
 const EditPost = ({
-  offer,
+  isOffer,
+  setOffer,
   postData,
   setPostData,
-  toggleEditPost,
   id,
 }) => {
+  // duplicates dataSet
+  let postObj = { ...postData };
+  // Navigation Hook
+  const navTo = useNavigate();
+  // STATE HOOKS for form
   const [title, setTitle] = useState(postData.title || '');
   const [description, setDescription] = useState(postData.description || '');
-  // determine the user's category selection by matching it to a an arr of objs with
-  // {values, labels}
+  // determine the user's category selection by matching it to a an arr of objs
+  // with {values, labels}
   const menuOption = useMemo(() => dropdownCategoryOptions
     .find((option) => option.value === postData.category), [postData.category]);
   const [category, setCategory] = useState(menuOption);
-
+  // function to return opisite value of current Offer status
+  const toggleOffer = () => setOffer((checked) => !checked);
+  // checker to see if user has attempted to submit and failed
   const [hasSubmitted, toggleSubmitted] = useState(false);
-  const navTo = useNavigate();
-  let postObj = { ...postData };
 
   const handleFormSubmit = (event) => {
     // prevent page reload
@@ -39,14 +44,14 @@ const EditPost = ({
           title,
           description,
           category: category.value,
-          offer,
+          offer: isOffer,
         },
       })
         .then(() => {
           // Update Post Obj
           setPostData(postObj);
           toggleSubmitted(false);
-          navTo('../');
+          navTo(-1);
         })
         .catch((err) => {
           console.log('Error creating a new post:', err);
@@ -55,84 +60,96 @@ const EditPost = ({
   };
 
   return (
-    <div className="post-form">
+    <div className="edit-post">
       <div className="slide-inelliptic-bottom-bck">
-        <div className="post-form__block">
+        <div className="edit-post__block">
           <button
             type="button"
             onClick={() => navTo(-1)}
-            className="post-form__close-ico-wrapper"
+            className="edit-post__close-ico-wrapper"
           >
             <img
               src={closeIco}
               alt="close icon"
-              className="post-form__close-ico"
+              className="edit-post__close-ico"
             />
           </button>
-          <h3 className="post-form__title">
-            {/* check to see if user is volunteer and produce proper heading  */}
-            {offer ? 'Create New Offer' : 'What Can We Connect You With?'}
-          </h3>
-          <div className={offer
-            ? 'post-form__filler--offer' : 'post-form__filler--seeking'}
+          <div className="edit-post__title-block">
+            <h3 className="edit-post__title">
+              {/* check to see if user is volunteer and produce proper heading  */}
+              {isOffer
+                ? 'Update Offer' : 'Update what you\'re Seeking'}
+            </h3>
+            <button
+              type="button"
+              onClick={toggleOffer}
+              className={isOffer
+                ? 'edit-post__button--seeking' : 'edit-post__button--offer'}
+            >
+              {isOffer
+                ? 'Seeking' : 'Offer'}
+            </button>
+          </div>
+          <div className={isOffer
+            ? 'edit-post__filler--offer' : 'edit-post__filler--seeking'}
           />
           <form
             onSubmit={handleFormSubmit}
-            className="post-form__form"
+            className="edit-post__form"
           >
-            <div className="post-form__form-block">
-              <div className="post-form__field">
-                <label className="post-form__label">
+            <div className="edit-post__form-block">
+              <div className="edit-post__field">
+                <label className="edit-post__label">
                   BRIEF TITLE*
                   {!title && hasSubmitted
-                    && <span className="post-form__label--error"> This field is required</span>}
+                    && <span className="edit-post__label--error"> This field is required</span>}
                   <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     id="title"
                     maxLength="75"
-                    className={`post-form__field ${!title && hasSubmitted
-                      && 'post-form__field--error'}`}
+                    className={`edit-post__field ${!title && hasSubmitted
+                      && 'edit-post__field--error'}`}
                   />
                 </label>
               </div>
-              <div className="post-form__field">
+              <div className="edit-post__field">
                 {/* eslint-disable-next-line jsx-a11y/label-has-for */}
-                <label className="post-form__label">
+                <label className="edit-post__label">
                   CATEGORY*
                   {!category && hasSubmitted
-                    && <span className="post-form__label--error"> This field is required</span>}
+                    && <span className="edit-post__label--error"> This field is required</span>}
                   <Select
-                    value={category}
-                    defaultInputValue={menuOption.label}
                     onChange={(e) => setCategory(e)}
                     options={dropdownCategoryOptions}
+                    blurInputOnSelect
+                    captureMenuScroll
                     menuPlacement="auto"
                     menuShouldBlockScroll
-                    className={`post-form__field ${!category && hasSubmitted
-                      && 'post-form__field--error'}`}
+                    className={`edit-post__field ${!category && hasSubmitted
+                      && 'edit-post__field--error'}`}
                   />
                 </label>
               </div>
-              <div className="post-form__field">
-                <label className="post-form__label">
+              <div className="edit-post__field">
+                <label className="edit-post__label">
                   DESCRIPTION*
                   {!description && hasSubmitted
-                    && <span className="post-form__label--error"> This field is required</span>}
+                    && <span className="edit-post__label--error"> This field is required</span>}
                   <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     id="description"
-                    className={`post-form__field ${!description && hasSubmitted
-                      && 'post-form__field--error'}`}
+                    className={`edit-post__field ${!description && hasSubmitted
+                      && 'edit-post__field--error'}`}
                   />
                 </label>
               </div>
             </div>
             <FormButtons
               handleSubmit={handleFormSubmit}
-              handleCancel={toggleEditPost}
+              handleCancel={() => navTo(-1)}
             />
           </form>
         </div>

@@ -1,0 +1,157 @@
+@use '../../styles/partials/mixins'as *;
+@use '../../styles/partials/variables'as *;
+@use '../../styles/partials/colors'as *;
+
+.edit-post {
+  @include overlay;
+
+  &__block {
+    @include overlayBlock;
+  }
+
+  &__filler {
+    @include cardFiller;
+
+    &--offer {
+      @extend .edit-post__filler;
+      background-color: $offer-primary;
+    }
+
+    &--seeking {
+      @extend .edit-post__filler;
+      background-color: $seeking-primary;
+    }
+  }
+
+  &__close-ico-wrapper {
+    @include closeIcoWrapper;
+  }
+
+  &__close-ico {
+    @include closeIco;
+  }
+
+  &__title-block {
+    @include overlayTitle;
+    padding-right: calc($component-padding * 2);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  &__title {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+  }
+
+  &__form {
+    @include listFlex;
+    width: 100%;
+  }
+
+  &__form-block {
+    @include listFlex;
+    gap: $component-padding;
+    width: 80%;
+  }
+
+  &__field {
+    margin-bottom: 1rem;
+    width: 100%;
+
+    &--select {
+      @extend .edit-post__field;
+      border-radius: 6px;
+    }
+
+    &--error {
+      border: 1px solid $user-primary;
+    }
+  }
+
+  #title,
+  #description {
+    width: 100%;
+  }
+
+  #description {
+    height: 6rem;
+    resize: none;
+
+  }
+
+  &__label {
+    width: 100%;
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    &--error {
+      color: $user-primary;
+    }
+  }
+
+  &__button-block {
+    display: flex;
+    flex-wrap: nowrap;
+    align-self: flex-end;
+    gap: $component-padding;
+  }
+
+  &__button {
+    @include button;
+    padding: $root-padding $component-padding;
+
+    &--seeking {
+      @extend .edit-post__button;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      background-color: $seeking-hover;
+      border: 1px solid $site-primary;
+
+      &:hover {
+        color: white;
+        background-color: $seeking-primary;
+        border-color: $seeking-hover;
+      }
+    }
+
+    &--offer {
+      @extend .edit-post__button;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      background-color: $offer-hover;
+      border: 1px solid $site-primary;
+
+      &:hover {
+        color: white;
+        background-color: $offer-primary;
+        border-color: $offer-hover;
+      }
+    }
+
+    &--submit {
+      @extend .edit-post__button;
+      background-color: #F1F8F3;
+      color: #227396;
+
+      &:hover {
+        background-color: #E4F1E8;
+      }
+    }
+
+    &--cancel {
+      @extend .edit-post__button;
+      color: $user-triage;
+      background-color: $user-cta;
+
+      &:hover {
+        background-color: $user-hover;
+      }
+    }
+  }
+}
