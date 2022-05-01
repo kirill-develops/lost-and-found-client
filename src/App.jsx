@@ -59,9 +59,7 @@ const App = () => {
 
   // While the component is authenticating, do not render anything
   // (alternatively, this can be a preloader)
-  return isAuthenticating ? (
-    null
-  ) : (
+  return (!isAuthenticating && !isLoading) ? (
     <BrowserRouter>
       <div className="app" id="menu-outer">
         <Header
@@ -76,7 +74,6 @@ const App = () => {
                   userData={userData}
                   offersData={offersData}
                   seekingData={seekingData}
-                  isLoading={isLoading}
                   toggleFetchPosts={toggleFetchPosts}
                 />
               )}
@@ -129,7 +126,7 @@ const App = () => {
         </div>
       </div>
     </BrowserRouter>
-  );
+  ) : (null);
 };
 
 export default React.memo(App);

@@ -34,6 +34,7 @@ const Profile = ({ userData }) => {
 
   return (
     <div className="profile">
+
       <Outlet />
       <h2 className="profile__subheading">
         <span>

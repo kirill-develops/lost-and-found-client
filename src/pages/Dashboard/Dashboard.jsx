@@ -27,7 +27,6 @@ const Dashboard = ({
   userData,
   offersData,
   seekingData,
-  isLoading,
   toggleFetchPosts,
 }) => {
   const [filterParams, setFilterParams] = useSearchParams();
@@ -38,7 +37,7 @@ const Dashboard = ({
         .get('filter') || '')).label
   ), [filterParams]);
 
-  return isLoading ? null : (
+  return (
     <section className="dashboard">
       <DashboardNav
         filterParams={filterParams}
