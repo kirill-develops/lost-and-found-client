@@ -2,7 +2,9 @@
 /* eslint-disable sort-imports */
 import './styles/App.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useReducer, useState,
+} from 'react';
 
 import AuthFailPage from './pages/AuthFailPage/AuthFailPage';
 import apiUtils from './utils/apiUtils';
@@ -13,6 +15,7 @@ import Header from './components/Header/Header';
 import HomePage from './pages/Homepage/Homepage';
 import PostDetails from './pages/PostDetails/PostDetails';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+import useFetchPosts from './utils/useFetchPosts';
 
 const App = () => {
   // Keep track of four things in state:
@@ -23,6 +26,9 @@ const App = () => {
   const [isAuthenticating, setAuthenticating] = useState(true);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
+
+  const [fetch, toggleFetchPosts] = useReducer((checked) => !checked, true);
+  const [offersData, seekingData, isLoading] = useFetchPosts(fetch);
 
   const getUser = useCallback(() => {
     apiUtils
@@ -68,12 +74,20 @@ const App = () => {
               element={(
                 <Dashboard
                   userData={userData}
+                  offersData={offersData}
+                  seekingData={seekingData}
+                  isLoading={isLoading}
+                  toggleFetchPosts={toggleFetchPosts}
                 />
               )}
             />
             <Route
               path="/post/:id/*"
-              element={<PostDetails />}
+              element={(
+                <PostDetails
+                  toggleFetchPosts={toggleFetchPosts}
+                />
+              )}
             />
             <Route
               path="/profile"

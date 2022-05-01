@@ -22,7 +22,7 @@ import EditPost from '../../components/EditPost/EditPost';
 //   }
 // }
 
-const PostDetails = () => {
+const PostDetails = ({ toggleFetchPosts }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [isLoading, setLoading] = useState(true);
@@ -72,7 +72,7 @@ const PostDetails = () => {
   const deletePost = (byId) => {
     apiUtils
       .deletePostById(byId)
-      .then(navigate(-1))
+      .then(() => { toggleFetchPosts(); navigate(-1); })
       .catch();
   };
 
@@ -94,6 +94,7 @@ const PostDetails = () => {
               postData={postData}
               setPostData={setPostData}
               id={id}
+              toggleFetchPosts={toggleFetchPosts}
             />
           )}
         />

@@ -1,15 +1,12 @@
 /* eslint-disable sort-imports */
 import './Dashboard.scss';
-import React, {
-  useCallback, useEffect, useMemo, useState,
-} from 'react';
+import React, { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { filterPostOptions } from '../../utils/constants';
 import CreatePost from '../../components/CreatePost/CreatePost';
 import DashboardNav from '../../components/DashboardNav/DashboardNav';
 import DashbaordUser from '../../components/DashboardUser/DashbaordUser';
 import DashboardSwiper from '../../components/DashboardSwiper/DashboardSwiper';
-import apiUtils from '../../utils/apiUtils';
 
 // type userData = {
 //   userData: {
@@ -26,30 +23,22 @@ import apiUtils from '../../utils/apiUtils';
 //   }
 // }
 
-const Dashboard = ({ userData }) => {
-  const [offersData, setOffersData] = useState([]);
-  const [seekingData, setSeekingData] = useState([]);
+const Dashboard = ({
+  userData,
+  offersData,
+  seekingData,
+  isLoading,
+  toggleFetchPosts,
+}) => {
   const [filterParams, setFilterParams] = useSearchParams();
 
-  // Fetch posts from the DB
-  const fetchPosts = useCallback(() => {
-    apiUtils
-      .getAllPosts()
-      .then((posts) => {
-        // Update state with fetched posts
-        setOffersData(posts.data.filter((post) => post.offer === 1));
-        setSeekingData(posts.data.filter((post) => post.offer === 0));
-      })
-      .catch((err) => {
-        console.log('Error fetching posts:', err);
-      });
-  }, []);
+  const filterOption = useMemo(() => (
+    filterPostOptions
+      .find((option) => option.value === (filterParams
+        .get('filter') || '')).label
+  ), [filterParams]);
 
-  useEffect(() => {
-    fetchPosts();
-  }, [fetchPosts]);
-
-  return (
+  return isLoading ? null : (
     <section className="dashboard">
       <DashboardNav
         filterParams={filterParams}
@@ -66,14 +55,11 @@ const Dashboard = ({ userData }) => {
           Note the passed prop that allows it to re-fetch the posts after new one is created */}
         <CreatePost
           userData={userData}
-          onPostCreate={fetchPosts}
+          toggleFetchPosts={toggleFetchPosts}
         />
         {/* Dynamic Heading showing which posts, in the case they are filtered */}
         <h2 className="dashboard__title">
-          {useMemo(() => filterPostOptions
-            .find((option) => option.value === (filterParams
-              .get('filter') || ''))
-            .label, [filterParams])}
+          {filterOption}
           {' '}
           Posts
         </h2>

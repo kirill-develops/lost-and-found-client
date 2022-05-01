@@ -14,6 +14,7 @@ const EditPost = ({
   postData,
   setPostData,
   id,
+  toggleFetchPosts,
 }) => {
   // duplicates dataSet
   let postObj = { ...postData };
@@ -50,6 +51,7 @@ const EditPost = ({
         .then(() => {
           // Update Post Obj
           setPostData(postObj);
+          toggleFetchPosts();
           toggleSubmitted(false);
           navTo(-1);
         })

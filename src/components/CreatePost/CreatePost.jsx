@@ -15,29 +15,33 @@ import FormButtons from '../buttons/FormButtons/FormButtons';
 
 const CreatePost = ({
   userData,
-  onPostCreate,
+  toggleFetchPosts,
 }) => {
   // initiate Navigation Hook
   const navigate = useNavigate();
+
   // deconstructing variable from userData for readability
-  const { volunteer: isVolunteer } = userData;
+  const { volunteer } = userData;
 
   // STATE HOOKS for Form
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [offer, toggleOffer] = useReducer(
-    (checked) => !checked,
-    isVolunteer,
-  );
-  console.log(offer);
-
+  const [offer, toggleOffer] = useReducer((checked) => !checked, volunteer === 'true');
+  // checks to see if user has attempted submitting form with invalid inputs
   const [hasSubmitted, toggleSubmitted] = useState(false);
-  const [makePost, toggleMakePost] = useReducer(
-    (checked) => !checked,
-    false,
-  );
-  console.log(category);
+
+  const clearState = () => {
+    setTitle('');
+    setDescription('');
+    setCategory('');
+    toggleSubmitted(false);
+  };
+
+  const [makePost, toggleMakePost] = useReducer((checked) => {
+    clearState();
+    return !checked;
+  }, false);
 
   const handleFormSubmit = (event) => {
     // prevent page reload
@@ -54,9 +58,8 @@ const CreatePost = ({
       })
         .then(() => {
           // Re-fetch all posts
-          onPostCreate();
+          toggleFetchPosts();
           // reset the form values
-          toggleSubmitted(false);
           toggleMakePost();
         })
         .catch((err) => {
