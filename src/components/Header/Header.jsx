@@ -86,6 +86,8 @@ const Header = ({ userName }) => {
                 <section className="bm__list">
                   <a
                     href="https://github.com/kirill-develops/"
+                    target="_blank"
+                    rel="noreferrer"
                     className="bm__logo--github"
                   >
                     <SiGithub size={28} />
@@ -98,6 +100,8 @@ const Header = ({ userName }) => {
                   </a>
                   <a
                     href="https://www.linkedin.com/in/kirill-tchentsov/"
+                    target="_blank"
+                    rel="noreferrer"
                     className="bm__logo--linkedin"
                   >
                     <SiLinkedin size={28} />
