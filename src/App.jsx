@@ -15,6 +15,7 @@ import Header from './components/Header/Header';
 import HomePage from './pages/Homepage/Homepage';
 import PostDetails from './pages/PostDetails/PostDetails';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+import UserPage from './pages/UserPage/UserPage';
 import useFetchPosts from './utils/useFetchPosts';
 
 const App = () => {
@@ -104,11 +105,11 @@ const App = () => {
                   />
                 )}
               />
-              <Route
-                path=":id"
-                element={<ProfilePage />}
-              />
             </Route>
+            <Route
+              path="/profile/:id"
+              element={(<UserPage isLoggedIn={isLoggedIn} />)}
+            />
             <Route
               path="/auth-fail"
               element={<AuthFailPage />}

@@ -1,0 +1,93 @@
+@use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/variables'as*;
+@use '../../styles/partials/colors'as*;
+
+.user-page {
+  @include rootContainer;
+  background-color: #FFFFFF;
+  height: 100%;
+  min-height: $root-min-height;
+  padding: $component-padding;
+  z-index: 10;
+
+  &__title-wrapper {
+    @include pageTitle;
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {}
+}
+
+.user {
+  @include mainComponent;
+  margin: 0 0 4.5rem;
+
+  &__subheading {
+    @include pageSubheading;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    &--offer {
+      @extend .user__subheading;
+      background-color: $offer-primary;
+    }
+
+    &--seeking {
+      @extend .user__subheading;
+      background-color: $seeking-primary;
+    }
+  }
+
+  &__frame {
+    @include frameInner;
+  }
+
+  &__card {
+    @include swiperCard;
+
+    &--avatar {
+      @include swiperAvatarCard;
+    }
+  }
+
+  &__card-title {
+    @include swiperCardTitle;
+
+    &--offer {
+      @extend .user__card-title;
+      background-color: $offer-secondary;
+      color: $offer-primary;
+      border-color: $offer-primary;
+    }
+
+    &--seeking {
+      @extend .user__card-title;
+      background-color: $seeking-secondary;
+      color: $seeking-primary;
+      border-color: $seeking-primary;
+    }
+  }
+
+  &__avatar {
+    @include swiperAvatar;
+  }
+
+  &__label {
+    margin-left: $root-padding;
+    @include formLabel;
+  }
+
+  &__body {
+    @include formBody;
+    margin: 0;
+  }
+
+  &__address-block {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+}

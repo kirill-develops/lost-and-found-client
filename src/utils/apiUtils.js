@@ -16,6 +16,13 @@ const editProfileConfig = (profileObj) => ({
   data: profileObj,
 });
 
+const getAProfile = (id) => ({
+  baseURL: SERVER_URL,
+  method: 'get',
+  url: `/auth/profile/${id}`,
+  withCredentials: true,
+});
+
 const getAllPosts = {
   baseURL: SERVER_URL,
   method: 'get',
@@ -60,6 +67,7 @@ const apiUtils = {
   // Note that we need to use `withCredentials` in order to pass the cookie to a server
   getProfile: () => axios(getProfile),
   editProfile: (profileObj) => axios(editProfileConfig(profileObj)),
+  getProfileById: (userId) => axios(getAProfile(userId)),
 
   getAllPosts: () => axios(getAllPosts),
   getPostById: (postId) => axios(getOnePost(postId)),

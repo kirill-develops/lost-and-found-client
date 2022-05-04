@@ -140,7 +140,7 @@ const PostDetails = ({ toggleFetchPosts }) => {
         </div>
         <div className="post-details__frame">
           <Link
-            to={`../user/${usersId}`}
+            to={`../profile/${usersId}`}
             className="post-details__card--avatar"
           >
             <img
