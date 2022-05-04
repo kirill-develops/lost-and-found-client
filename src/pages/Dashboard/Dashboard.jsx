@@ -63,7 +63,7 @@ const Dashboard = ({
           Posts
         </h2>
         <div className="list-block">
-          <div className={`${userData.volunteer
+          <div className={`${userData.volunteer === 1
             ? 'list-block__second' : 'list-block__first'}`}
           >
             <h3 className="dashboard__subheading--offer">Offering a Hand</h3>
@@ -74,7 +74,7 @@ const Dashboard = ({
           </div>
           {/* <div className='list-block__fill'></div> */}
           <div className="list-block__filler" />
-          <div className={` ${userData.volunteer
+          <div className={` ${userData.volunteer === 1
             ? 'list-block__first' : 'list-block__second'}`}
           >
             <h3 className="dashboard__subheading--seeking">Seeking a Hand</h3>

@@ -2,7 +2,7 @@
 // the mandatory form fields filled out
 const isProfileComplete = (user) => (
   !(
-    (!user.city || !user.phone || !user.province || !user.volunteer)
+    (!user.city || !user.phone || !user.province || user.volunteer === undefined)
   )
 );
 

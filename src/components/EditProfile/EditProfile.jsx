@@ -53,10 +53,11 @@ const EditProfile = ({
   const [city, setCity] = useState(userData.city || '');
   const [province, setProvince] = useState(userData.province || '');
   const [phone, setPhone] = useState(userData.phone || '');
-  const [volunteer, setVolunteer] = useState(userData.volunteer || 'false');
-  const [postalCode, setPostalCode] = useState();
+  const [volunteer, setVolunteer] = useState((userData.volunteer === 1
+    && true) || false);
+  const [postalCode, setPostalCode] = useState(userData.postal_code || '');
   const [hasSubmitted, toggleSubmitted] = useState(false);
-
+  console.log(userData.volunteer);
   const navTo = useNavigate();
 
   // Handle the submission of the form by validating content and then doing an api PUT req
@@ -64,7 +65,7 @@ const EditProfile = ({
     event.preventDefault();
     let user = { ...userData };
 
-    (!firstName || !lastName || !city || !province || !phone || !volunteer) ? (
+    (!firstName || !lastName || !city || !province || !phone) ? (
       toggleSubmitted(true)
     ) : (
       apiUtils.editProfile(user = {
@@ -181,9 +182,8 @@ const EditProfile = ({
               <label className="edit-form__label">
                 <input
                   type="radio"
-                  value="true"
-                  checked={volunteer === 'true'}
-                  onChange={(e) => setVolunteer(e.target.value)}
+                  checked={volunteer === true}
+                  onChange={() => setVolunteer(true)}
                   className="edit-form__radio"
                 />
                 YES
@@ -191,9 +191,8 @@ const EditProfile = ({
               <label className="edit-form__label">
                 <input
                   type="radio"
-                  value="false"
-                  checked={volunteer === 'false'}
-                  onChange={(e) => setVolunteer(e.target.value)}
+                  checked={volunteer === false}
+                  onChange={() => setVolunteer(false)}
                   className="edit-form__radio"
                 />
                 NO
