@@ -1,0 +1,93 @@
+@use '../../styles/partials/variables'as*;
+@use '../../styles/partials/mixins'as*;
+@use '../../styles/partials/breakpoints'as*;
+@use '../../styles/partials/colors'as*;
+
+.dashboard-nav {
+  background-color: $site-primary;
+  margin-left: -$root-padding;
+  margin-right: -$root-padding;
+  border-bottom: 2px solid $user-triage;
+  padding: calc($root-padding / 2) 0;
+  min-height: 3.4rem;
+  position: relative;
+  @include listFlex;
+  justify-content: center;
+
+  &__tablet {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: $root-padding;
+  }
+
+  &__active {
+    @include listFlex;
+    gap: 0.2rem;
+    margin: .7525rem 0 0;
+    padding-left: 0;
+  }
+
+  &__label {
+    @include button;
+    text-align: center;
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
+    background-color: #fee285;
+    color: black;
+    border: 2px solid $site-black;
+
+    &:hover {
+      color: $user-triage;
+      cursor: pointer;
+    }
+
+    &--first {
+      @extend .dashboard-nav__label;
+      color: white;
+      background-color: inherit;
+      border: none;
+      margin: 0;
+
+      &:hover {
+        color: white;
+        cursor: default;
+      }
+    }
+
+    &--first-mobile {
+      @extend .dashboard-nav__label;
+      background-color: $site-primary;
+      color: white;
+
+      &:hover {
+        color: #9da2a4;
+        cursor: pointer;
+      }
+    }
+
+    &--active {
+      @extend .dashboard-nav__label;
+      background-color: $site-primary;
+      color: white;
+
+      &:hover {
+        color: white;
+        cursor: initial;
+      }
+    }
+
+    &--reset {
+      @extend .dashboard-nav__label;
+      color: $user-triage;
+
+      &:hover {
+        color: black;
+        cursor: pointer;
+      }
+    }
+  }
+}
