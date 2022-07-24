@@ -1,6 +1,6 @@
 {
   "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "A Web site to find support in your neighbourhood",
   "icons": [
     {
       "src": "favicon.svg",
