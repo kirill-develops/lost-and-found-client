@@ -14,18 +14,11 @@ import TrashIco from '../../assets/icons/trash-can-outline.svg';
 import BackButton from '../../components/buttons/BackButton/BackButton';
 import EditPost from '../../components/EditPost/EditPost';
 
-// type matchType = {
-//   match: {
-//     params: {
-//       id: string
-//     }
-//   }
-// }
-
 const PostDetails = ({ toggleFetchPosts }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [isLoading, setLoading] = useState(true);
+
   // STATE HOOKS for Post details
   const [active, setActive] = useState(0);
   const [avatarUrl, setAvatarUrl] = useState('');

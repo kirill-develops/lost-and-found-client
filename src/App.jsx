@@ -3,20 +3,21 @@
 import './styles/App.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, {
-  useCallback, useEffect, useReducer, useState,
+  useCallback, useEffect, useReducer, useState, lazy, Suspense,
 } from 'react';
 
-import AuthFailPage from './pages/AuthFailPage/AuthFailPage';
 import apiUtils from './utils/apiUtils';
-import Dashboard from './pages/Dashboard/Dashboard';
-import EditProfile from './components/EditProfile/EditProfile';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
-import HomePage from './pages/Homepage/Homepage';
-import PostDetails from './pages/PostDetails/PostDetails';
-import ProfilePage from './pages/ProfilePage/ProfilePage';
-import UserPage from './pages/UserPage/UserPage';
 import useFetchPosts from './utils/useFetchPosts';
+
+const AuthFailPage = lazy(() => import('./pages/AuthFailPage/AuthFailPage'));
+const Dashboard = lazy(() => import('./pages/Dashboard/Dashboard'));
+const EditProfile = lazy(() => import('./components/EditProfile/EditProfile'));
+const Footer = lazy(() => import('./components/Footer/Footer'));
+const Header = lazy(() => import('./components/Header/Header'));
+const HomePage = lazy(() => import('./pages/Homepage/Homepage'));
+const PostDetails = lazy(() => import('./pages/PostDetails/PostDetails'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage/ProfilePage'));
+const UserPage = lazy(() => import('./pages/UserPage/UserPage'));
 
 const App = () => {
   // Keep track of four things in state:
@@ -62,70 +63,70 @@ const App = () => {
   // (alternatively, this can be a preloader)
   return (!isAuthenticating && !isLoading) ? (
     <BrowserRouter>
-      <div className="app" id="menu-outer">
-        <Header
-          userName={userData.first_name}
-        />
-        <div className="menu-wrapper" id="menu-wrapper">
-          <Routes>
-            <Route
-              path="/dashboard"
-              element={(
-                <Dashboard
-                  userData={userData}
-                  offersData={offersData}
-                  seekingData={seekingData}
-                  toggleFetchPosts={toggleFetchPosts}
-                />
-              )}
-            />
-            <Route
-              path="/post/:id/*"
-              element={(
-                <PostDetails
-                  toggleFetchPosts={toggleFetchPosts}
-                />
-              )}
-            />
-            <Route
-              path="/profile"
-              element={(
-                <ProfilePage
-                  userData={userData}
-                  getUser={getUser}
-                />
-              )}
-            >
+      <Suspense fallback={<div />}>
+        <div className="app" id="menu-outer">
+          <Header userName={userData.first_name} />
+          <div className="menu-wrapper" id="menu-wrapper">
+            <Routes>
               <Route
-                path="edit"
+                path="/dashboard"
                 element={(
-                  <EditProfile
+                  <Dashboard
                     userData={userData}
-                    setUserData={setUserData}
+                    offersData={offersData}
+                    seekingData={seekingData}
+                    toggleFetchPosts={toggleFetchPosts}
                   />
                 )}
               />
-            </Route>
-            <Route
-              path="/profile/:id"
-              element={(<UserPage isLoggedIn={isLoggedIn} />)}
-            />
-            <Route
-              path="/auth-fail"
-              element={<AuthFailPage />}
-            />
-            <Route
-              path="/"
-              element={(
-                <HomePage
-                  isLoggedIn={isLoggedIn}
+              <Route
+                path="/post/:id/*"
+                element={(
+                  <PostDetails
+                    toggleFetchPosts={toggleFetchPosts}
+                  />
+                )}
+              />
+              <Route
+                path="/profile"
+                element={(
+                  <ProfilePage
+                    userData={userData}
+                    getUser={getUser}
+                  />
+                )}
+              >
+                <Route
+                  path="edit"
+                  element={(
+                    <EditProfile
+                      userData={userData}
+                      setUserData={setUserData}
+                    />
+                  )}
                 />
-              )}
-            />
-          </Routes>
-          <Footer />
+              </Route>
+              <Route
+                path="/profile/:id"
+                element={(<UserPage isLoggedIn={isLoggedIn} />)}
+              />
+              <Route
+                path="/auth-fail"
+                element={<AuthFailPage />}
+              />
+              <Route
+                path="/"
+                element={(
+                  <HomePage
+                    isLoggedIn={isLoggedIn}
+                  />
+                )}
+              />
+            </Routes>
+            <Footer />
+          </div>
         </div>
-      </div>
+      </Suspense>
     </BrowserRouter>
   ) : (null);
 };
