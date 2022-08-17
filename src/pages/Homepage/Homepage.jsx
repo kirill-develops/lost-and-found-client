@@ -1,23 +1,20 @@
 /* eslint-disable sort-imports */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable max-len */
-import 'swiper/scss';
-import 'swiper/scss/pagination';
-import 'swiper/scss/navigation';
 import './Homepage.scss';
-import { Keyboard, Navigation, Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import ContactOverlay from '../../components/ContactOverlay/ContactOverlay';
-import FistBump from '../../assets/images/fist_bump.jpg';
-import HandsPhoto from '../../assets/images/helping_out.jpg';
-import Logo from '../../assets/images/Asset_37.svg';
+import HomepageSwiper from '../../components/HomepageSwiper/HomepageSwiper';
+import useMediaQuery from '../../utils/useMediaQuery';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5050';
 
 const HomePage = ({ isLoggedIn }) => {
   const [contact, setContact] = useState(false);
+  const isDashNavMobile = useMediaQuery('(max-width:48rem)');
+
+  const setContactTo = useCallback(() => { setContact(); }, [setContact]);
 
   return (
     <section className="homepage">
@@ -27,88 +24,8 @@ const HomePage = ({ isLoggedIn }) => {
           <h2 className="homepage__subheader">Because no one should face their toughest challenges alone</h2>
         </div>
       </div>
-      <div className="homepage__swiper-block">
-        <div className="homepage__swiper-inner-block">
-          <div className="homepage__swiper-block--highlight1" />
-          <div className="homepage__swiper-block--highlight2" />
-          <div
-            // onClick={() => setContact(!contact)}
-            className="homepage__swiper-block--highlight3"
-          />
-          <Swiper
-            keyboard={{ enabled: true }}
-            rewind
-            grabCursor
-            pagination={{ type: 'progressbar' }}
-            navigation
-            modules={[Pagination, Navigation, Keyboard]}
-            className="homepage__swiper"
-          >
 
-            <SwiperSlide className="swiper">
-              <img
-                src={FistBump}
-                alt="fist bump"
-                className="swiper__img"
-              />
-              <div className="swiper__block--slide1">
-                <img
-                  src={Logo}
-                  alt="Lost & Found Logo"
-                  className="swiper__img--logo"
-                />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide className="swiper">
-              <div className="swiper__block--slide2">
-                <h2 className="swiper__title--slide2">
-                  With a pay it forward mentality, our once in need become drivers of this initiative and in today&apos;s technological boom, it&apos;s never been easier to pool resources.
-                </h2>
-              </div>
-              <img
-                src={HandsPhoto}
-                alt="Helping out"
-                className="swiper__img"
-              />
-            </SwiperSlide>
-            <SwiperSlide className="swiper">
-              <iframe
-                height="100%"
-                width="100%"
-                src="https://www.youtube-nocookie.com/embed/ap8aTm73baI"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </SwiperSlide>
-            <SwiperSlide className="swiper--slide4">
-              <div className="swiper__block--slide4">
-                <div className="swiper__block--slide4-overlay">
-                  <h2 className="swiper__title--slide4">
-                    We&apos;re Happy you&apos;re here,
-                  </h2>
-                  <h2 className="swiper__title--slide4">
-                    no matter the circumstances :)
-                  </h2>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="swiper">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube-nocookie.com/embed/UE89_hkMoBU"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </SwiperSlide>
-          </Swiper>
-        </div>
-      </div>
+      {!isDashNavMobile && <HomepageSwiper />}
 
       <div className="homepage__intro">
         <div className="homepage__intro-block">
@@ -153,13 +70,12 @@ const HomePage = ({ isLoggedIn }) => {
           </div>
         </div>
       </div>
-      {contact === true
-        && (
-          <ContactOverlay
-            setContact={setContact}
-            contactState={contact}
-          />
-        )}
+      {contact === true && (
+        <ContactOverlay
+          setContact={setContactTo}
+          contactState={contact}
+        />
+      )}
     </section>
   );
 };
