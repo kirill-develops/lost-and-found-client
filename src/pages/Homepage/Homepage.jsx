@@ -3,7 +3,7 @@
 /* eslint-disable max-len */
 import './Homepage.scss';
 import { Link } from 'react-router-dom';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import ContactOverlay from '../../components/ContactOverlay/ContactOverlay';
 import HomepageSwiper from '../../components/HomepageSwiper/HomepageSwiper';
 import useMediaQuery from '../../utils/useMediaQuery';
@@ -13,8 +13,6 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5050';
 const HomePage = ({ isLoggedIn }) => {
   const [contact, setContact] = useState(false);
   const isDashNavMobile = useMediaQuery('(max-width:48rem)');
-
-  const setContactTo = useCallback(() => { setContact(); }, [setContact]);
 
   return (
     <section className="homepage">
@@ -72,7 +70,7 @@ const HomePage = ({ isLoggedIn }) => {
       </div>
       {contact === true && (
         <ContactOverlay
-          setContact={setContactTo}
+          setContact={setContact}
           contactState={contact}
         />
       )}
