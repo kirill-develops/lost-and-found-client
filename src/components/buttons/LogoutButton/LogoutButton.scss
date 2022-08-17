@@ -1,5 +1,7 @@
-@use '../../../styles/partials/mixins'as *;
+@use '../../../styles/partials/breakpoints'as *;
 @use '../../../styles/partials/colors'as *;
+@use '../../../styles/partials/mixins'as *;
+@use '../../../styles/partials/variables'as *;
 
 .logout-button {
   @include button;
@@ -7,6 +9,11 @@
   background-color: $user-cta;
   display: flex;
   justify-content: center;
+  height: $nav-mobile-height;
+
+  @include tablet {
+    height: $nav-tablet-height;
+  }
 
   &:hover {
     background-color: $user-hover;

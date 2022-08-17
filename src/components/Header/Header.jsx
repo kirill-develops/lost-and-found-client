@@ -20,15 +20,8 @@ const Header = ({ userName }) => {
   return (
     <section className="header">
       <div className="header__block">
-        <Link
-          to="/"
-          className="header__link"
-        >
-          <img
-            src={Logo}
-            alt="Lost & FOUND logo"
-            className="header__logo"
-          />
+        <Link to="/" className="header__link">
+          <img src={Logo} alt="Lost & FOUND logo" className="header__logo" />
         </Link>
         <div className="header__menu-block">
           {userName ? (
@@ -59,22 +52,13 @@ const Header = ({ userName }) => {
                     {!userName
                       ? <LoginButton /> : <LogoutButton />}
                   </div>
-                  <Link
-                    to="/"
-                    {...menuLinkProps}
-                  >
+                  <Link to="/" {...menuLinkProps}>
                     HOME
                   </Link>
-                  <Link
-                    to="/dashboard"
-                    {...menuLinkProps}
-                  >
+                  <Link to="/dashboard" {...menuLinkProps}>
                     DASHBOARD
                   </Link>
-                  <Link
-                    to="/profile"
-                    {...menuLinkProps}
-                  >
+                  <Link to="/profile" {...menuLinkProps}>
                     PROFILE
                   </Link>
                   <p className="bm-item">MAP (Coming Soon)</p>

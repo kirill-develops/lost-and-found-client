@@ -43,7 +43,7 @@ const App = () => {
         },
       )
       .catch(
-        (err) => (err.response.status === 401 ? (
+        (err) => (err.response?.status === 401 ? (
           // Update the state: done authenticating, user is not logged in
           setAuthenticating(false),
           setLoggedIn(false)

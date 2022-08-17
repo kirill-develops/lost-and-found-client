@@ -1,4 +1,5 @@
 @use '../../styles/partials/variables'as*;
+@use '../../styles/partials/breakpoints'as*;
 @use '../../styles/partials/mixins'as*;
 @use '../../styles/partials/colors'as*;
 
@@ -24,7 +25,11 @@
   }
 
   &__logo {
-    height: $nav-component-height;
+    height: $nav-mobile-height;
+
+    @include tablet {
+      height: $nav-tablet-height;
+    }
   }
 
   &__icon {
@@ -42,9 +47,13 @@
     display: inline-block;
     position: relative;
     width: 4.25rem;
-    height: $nav-component-height;
     border: 2px solid white;
     border-radius: 3px;
+    height: $nav-mobile-height;
+
+    @include tablet {
+      height: $nav-tablet-height;
+    }
   }
 
   &__menu-item {
